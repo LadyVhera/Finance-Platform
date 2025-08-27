@@ -389,23 +389,31 @@
             $(document).ready(function() {
 
                 // Sidebar menu expand/collapse
-                $('#mynavi li.active').addClass('open').children('ul').show();
-                $('#mynavi li.has-sub>a').on('click', function() {
-                    $(this).removeAttr('href');
-                    var element = $(this).parent('li');
-                    if (element.hasClass('open')) {
-                        element.removeClass('open');
-                        element.find('li').removeClass('open');
-                        element.find('ul').slideUp(200);
+                $("#mynavi li.has-sub > a").on("click", function (e) {
+                  const $li = $(this).parent("li");
+                  const hasSub = $li.children("ul").length > 0;
+                  const href = $(this).attr("href") || "";
+                  const isToggler =
+                    href === "#" ||
+                    href === "" ||
+                    $(this).data("toggle") === "submenu";
+
+                  if (hasSub && isToggler) {
+                    e.preventDefault(); // toggle only
+                    if ($li.hasClass("open")) {
+                      $li.removeClass("open").children("ul").slideUp(200);
                     } else {
-                        element.addClass('open');
-                        element.children('ul').slideDown(200);
-                        element.siblings('li').children('ul').slideUp(200);
-                        element.siblings('li').removeClass('open');
-                        element.siblings('li').find('li').removeClass('open');
-                        element.siblings('li').find('ul').slideUp(200);
+                      $li.addClass("open").children("ul").slideDown(200);
+                      $li
+                        .siblings("li")
+                        .removeClass("open")
+                        .children("ul")
+                        .slideUp(200);
                     }
+                  }
+                  // else: it's a real link (like /register). Let it navigate.
                 });
+
 
                 // 🔽 Close cd-dropdown when link is clicked
                 $('.cd-dropdown-content a').on('click', function() {
@@ -567,20 +575,22 @@ $(window).scroll(function() {
 
 $(document).ready(function() {
     // Click handler
-    $('.wd_single_index_menu ul li a').on('click', function(e) {
+    $(".wd_single_index_menu ul li a").on("click", function (e) {
+      const href = $(this).attr("href") || "";
+      const $target = $('[data-section-scroll="' + href + '"]');
+
+      // Only hijack clicks for actual in-page targets
+      if ((href.startsWith("#") && href.length > 1) || $target.length) {
         e.preventDefault();
+        $(".wd_single_index_menu ul li").removeClass("active");
+        $(this).parent().addClass("active");
 
-        $('.wd_single_index_menu ul li').removeClass('active');
-        $(this).parent().addClass('active');
-
-        var target = $('[data-section-scroll="' + $(this).attr('href') + '"]');
-        if (target.length) {
-            var targetHeight = target.offset().top - 80;
-            $('html, body').animate({
-                scrollTop: targetHeight
-            }, 1000);
-        }
+        const top = ($target.length ? $target : $(href)).offset().top - 80;
+        $("html, body").animate({ scrollTop: top }, 1000);
+      }
+      // else: allow normal navigation (e.g., /register)
     });
+
 
     // Scroll handler
     $(window).on('scroll', function() {

@@ -1,5 +1,12 @@
 @charset "UTF-8";
-
+/*!
+ * =============================================================
+ * dropify v0.2.1 - Override your input files with style.
+ * https://github.com/JeremyFagis/dropify
+ *
+ * (c) 2025 - Jeremy FAGIS <jeremy@fagis.fr> (http://fagis.fr)
+ * =============================================================
+ */
 
 @font-face {
     font-family: dropify;

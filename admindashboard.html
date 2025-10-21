@@ -113,6 +113,80 @@
             padding: 14px;
             overflow: auto
         }
+/* Topbar upgrades */
+.topbar {
+  position: sticky; top: 0; z-index: 10;
+  background: rgba(12, 18, 36, .6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,.06);
+  padding: 10px 14px;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(2,10,26,.25);
+}
+.topbar::after{
+  content:""; display:block; height:2px; border-radius:999px; margin-top:8px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  opacity:.45;
+}
+
+/* Accent dot */
+.topdot{
+  width:10px; height:10px; border-radius:999px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  box-shadow: 0 0 16px rgba(0,224,255,.55);
+}
+
+/* Search */
+.searchbar{
+  width:min(760px, 90%); display:flex; align-items:center; gap:10px;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: 12px; padding: 8px 12px;
+}
+.searchbar i{ color: var(--muted); }
+.searchbar input{
+  flex:1; background: transparent; border:0; outline:0; color: var(--ink);
+}
+.searchbar .shortcut{
+  background: rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.16);
+  border-bottom-width:2px; padding: 2px 6px; border-radius: 6px; font-size: 10px; color:#dbe7ff;
+}
+
+/* Icon buttons */
+.iconbtn{
+  width:36px; height:36px; display:grid; place-items:center;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: 10px; color:#e6f0ff;
+  transition: transform .18s ease, box-shadow .28s ease, background .28s ease;
+}
+.iconbtn:hover{ transform: translateY(-2px); box-shadow: 0 10px 28px rgba(0,224,255,.15); }
+.iconbtn .dot{
+  position:absolute; top:4px; right:4px; width:8px; height:8px; border-radius:999px;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  display:none;
+}
+
+/* Avatar button */
+.avatarbtn{
+  display:flex; align-items:center; gap:6px;
+  background: rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius: 999px; padding: 2px 6px; color:#e6f0ff;
+}
+.avatar{
+  width:36px; height:36px; border-radius:50%; object-fit:cover;
+  border:2px solid rgba(255,255,255,.18)
+}
+
+/* Small separators */
+.sep{ opacity:.5 }
+
+/* Mobile */
+@media (max-width: 991.98px){
+  .topbar::after{ display:none; } /* cleaner on mobile */
+  .searchbar{ display:none; }
+}
 
         .brand {
             display: flex;
@@ -309,20 +383,102 @@
         <!-- MAIN -->
         <main class="content">
             <!-- TOPBAR -->
-            <div class="topbar d-flex justify-content-between align-items-center mb-3">
+        <div class="topbar d-flex align-items-center justify-content-between gap-3 mb-3">
+            <!-- Left: sidebar toggle + brand/breadcrumb -->
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-outline-light btn-sm d-lg-none" id="btnToggleSidebar" aria-label="Toggle sidebar">
+                    <i class="bi bi-list"></i>
+                </button>
+        
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-light btn-sm d-lg-none" id="btnToggleSidebar"><i
-                            class="bi bi-list"></i></button>
-                    <div class="fw-semibold">Welcome, <span id="adminNameTop">Administrator</span> 🔐</div>
-                </div>
-                <div class="d-flex align-items-center gap-3">
-                    <span class="badge-soft px-2 py-1 small" id="roleBadge">Role: Super Admin</span>
-                    <img class="avatar"
-                        src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=160&auto=format&fit=crop"
-                        alt="admin"
-                        style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.18)">
+                    <div class="topdot" aria-hidden="true"></div>
+                    <div>
+                        <div class="fw-semibold lh-1">
+                            Welcome, <span id="adminNameTop">Administrator</span> 🔐
+                        </div>
+                        <div class="muted small d-flex align-items-center gap-2">
+                            <span id="roleBadge" class="pill">Role: Super Admin</span>
+                            <span class="sep">•</span>
+                            <span class="muted small" id="crumbs">
+                                <i class="bi bi-speedometer2 me-1"></i>Dashboard
+                            </span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        
+            <!-- Center: command/search -->
+            <div class="d-none d-md-flex flex-grow-1 justify-content-center">
+                <div class="searchbar">
+                    <i class="bi bi-search"></i>
+                    <input id="globalSearch" type="search" placeholder="Search users, requests, tickets…  (Press Ctrl + K)" />
+                    <kbd class="shortcut">Ctrl K</kbd>
+                </div>
+            </div>
+        
+            <!-- Right: quick actions -->
+            <div class="d-flex align-items-center gap-2">
+                <button class="btn btn-outline-light btn-sm d-none d-md-inline-flex" id="btnNew">
+                    <i class="bi bi-plus-lg me-1"></i>New
+                </button>
+        
+                <button class="iconbtn" id="btnTheme" title="Toggle theme">
+                    <i class="bi bi-brightness-high"></i>
+                </button>
+        
+                <div class="position-relative">
+                    <button class="iconbtn" id="btnBell" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-bell"></i>
+                        <span class="dot" id="bellDot"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark p-0 overflow-hidden" style="min-width:320px">
+                        <li class="px-3 py-2 fw-semibold">Notifications</li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li>
+                            <div class="list-group list-group-flush">
+                                <a class="list-group-item list-group-item-action bg-transparent text-light small">
+                                    <i class="bi bi-shield-check me-2"></i> 3 new KYC submissions
+                                    <div class="muted">2m ago</div>
+                                </a>
+                                <a class="list-group-item list-group-item-action bg-transparent text-light small">
+                                    <i class="bi bi-people me-2"></i> 5 new referrals today
+                                    <div class="muted">1h ago</div>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+        
+                <div class="dropdown">
+                    <button class="avatarbtn" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img id="adminAvatar" class="avatar"
+                            src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?q=80&w=160&auto=format&fit=crop"
+                            alt="admin">
+                        <i class="bi bi-chevron-down small muted ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
+                        <li class="dropdown-header">
+                            <div class="fw-semibold" id="ddName">Administrator</div>
+                            <div class="muted small" id="ddEmail">admin@example.com</div>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#" id="openProfile">Profile</a></li>
+                        <li><a class="dropdown-item" href="#" id="openSettings">Settings</a></li>
+                        <li><a class="dropdown-item" href="#" id="openMessages">Messages</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#" id="btnLogoutTop"><i
+                                    class="bi bi-box-arrow-right me-2"></i>Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
 
             <div class="tab-content">
                 <!-- OVERVIEW -->

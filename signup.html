@@ -19,13 +19,13 @@
 
 <body data-bs-spy="scroll" data-bs-target="#mainNav" data-bs-offset="100" tabindex="0">
     <!-- NAV -->
-    <nav id="mainNav" class="navbar navbar-expand-lg sticky-top">
+    <nav id="mainNav" class="navbar navbar-expand-lg ">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center gap-2" href="#home">
                 <div class="logo">TPT</div>
                 <div>
                     <div style="font-weight:700;color:#fff">TPT</div>
-                    <small class="text-secondary">Together for the People</small>
+                    <small class="muted">Together for the People</small>
                 </div>
             </a>
             <button class="navbar-toggler btn btn-sm btn-ghost text-white border-0" type="button"
@@ -58,7 +58,7 @@
                     <h1 class="display-5 fw-bold mb-3">
                         People helping people — <span class="title-gradient">no promises, just proof.</span>
                     </h1>
-                    <p class="lead text-secondary mb-4">A modern mutual-aid platform where Mexicans support Mexicans
+                    <p class="lead muted mb-4">A modern mutual-aid platform where Mexicans support Mexicans
                         through
                         verified, need-based assistance. Clear rules. Open reports. Real outcomes.</p>
                     <div class="d-flex flex-wrap gap-3">
@@ -72,15 +72,14 @@
                 </div>
                 <div class="col-lg-5 mt-4 mt-lg-0" data-aos="zoom-in">
                     <div class="glass p-3">
-                        <img class="w-100 rounded"
-                            src="./asserts/images/black-family-enjoying-summer-together-backyard.jpg" alt="community">
+                        <img class="w-100 rounded" src="./asserts/images/people-office-work-day.jpg" alt="community">
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Login MODAL -->
+    <!-- - Login MODAL -->
     <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -88,7 +87,6 @@
                     <h5 class="modal-title">
                         <i class="bi bi-box-arrow-in-right me-2"></i>Log in
                     </h5>
-                    <!-- ✳️ Custom Close Button — replaces Bootstrap's default -->
                     <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
                         aria-label="Close">
                         <i class="bi bi-x-lg"></i>
@@ -99,11 +97,11 @@
                     <form id="loginForm">
                         <div class="mb-3">
                             <label class="form-label">Email</label>
-                            <input type="email" class="form-control" required>
+                            <input type="email" class="form-control" id="loginEmail" required>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Password</label>
-                            <input type="password" class="form-control" required>
+                            <input type="password" class="form-control" id="loginPassword" required>
                         </div>
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <div class="form-check">
@@ -129,6 +127,8 @@
     </div>
 
 
+
+
     <!-- Forgot Password MODAL -->
     <div class="modal fade auth-modal" id="forgotModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -144,7 +144,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="small text-secondary mb-3">Enter the email linked to your account and we’ll send you a
+                    <div class="small muted mb-3">Enter the email linked to your account and we’ll send you a
                         reset link.
                     </div>
 
@@ -195,7 +195,7 @@
                 </div>
 
                 <div class="modal-body">
-                    <div class="small text-secondary mb-3">Enter and confirm a strong password for your account.</div>
+                    <div class="small muted mb-3">Enter and confirm a strong password for your account.</div>
 
                     <!-- alerts -->
                     <div class="alert alert-success d-none" id="rpAlertSuccess">
@@ -229,7 +229,7 @@
                                 Back to Log in
                             </button>
                         </div>
-                        <div class="text-secondarytext-secondary mt-2">Use 12+ characters with letters, numbers, and
+                        <div class="mutedmuted mt-2">Use 12+ characters with letters, numbers, and
                             symbols.
                         </div>
                     </form>
@@ -274,7 +274,7 @@
                             </div>
 
                             <div class="col-12">
-                                <div class="text-secondary mb-2">
+                                <div class="muted mb-2">
                                     By registering you accept the rules and terms of TPT.
                                     Participation involves risk.
                                 </div>
@@ -338,19 +338,19 @@
             <div class="row g-4 align-items-center">
                 <div class="col-lg-7">
                     <h2 class="section-title">About TPT</h2>
-                    <p class="text-secondary">TPT is a platform built by Mexicans for Mexicans to reduce immediate
+                    <p class="muted">TPT is a platform built by Mexicans for Mexicans to reduce immediate
                         suffering and
                         create pathways to stability. We connect people who need help with community members who can
                         provide it — with public rules, careful verification, and clear reporting.</p>
-                    <p class="text-secondary">We are not an investment program, a pyramid scheme, or an automatic
+                    <p class="muted">We are not an investment program, a pyramid scheme, or an automatic
                         income; we are
                         a community of people helping people — honestly and transparently.</p>
-                    <a class="btn btn-outline-light mt-2" href="#governance">View governance & safeguards</a>
+                    <a class="btn btn-outline-light mt-2" href="./aboutus.html">View governance & safeguards</a>
                 </div>
                 <div class="col-lg-5">
                     <div class="cardx p-4 h-100 d-flex flex-column justify-content-center">
                         <h5>Founder — James Andrade McAllister</h5>
-                        <p class="text-secondary mb-0">An economist and farmer focused on practical ways to lift people
+                        <p class="muted mb-0">An economist and farmer focused on practical ways to lift people
                             from
                             scarcity. James helped thousands in early projects before expanding TPT internationally. His
                             mission: make help fast, legal and accountable.</p>
@@ -368,7 +368,7 @@
                     <div class="cardx p-4 h-100 feature">
                         <i class="bi bi-heart-pulse fs-2"></i>
                         <h5 class="mt-3">People First</h5>
-                        <p class="text-secondary">We center dignity — not profit. Every policy aims to protect
+                        <p class="muted">We center dignity — not profit. Every policy aims to protect
                             recipients and
                             donors alike.</p>
                     </div>
@@ -377,7 +377,7 @@
                     <div class="cardx p-4 h-100 feature">
                         <i class="bi bi-file-earmark-text fs-2"></i>
                         <h5 class="mt-3">Transparent Rules</h5>
-                        <p class="text-secondary">Published verification criteria, dual-approval checks and public
+                        <p class="muted">Published verification criteria, dual-approval checks and public
                             reporting
                             protect the system and its members.</p>
                     </div>
@@ -386,7 +386,7 @@
                     <div class="cardx p-4 h-100 feature">
                         <i class="bi bi-people-fill fs-2"></i>
                         <h5 class="mt-3">Community Governance</h5>
-                        <p class="text-secondary">Members vote on major changes; independent reviews and audits are
+                        <p class="muted">Members vote on major changes; independent reviews and audits are
                             published
                             regularly.</p>
                     </div>
@@ -400,28 +400,28 @@
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-5">
                 <h2 class="section-title">How It Works</h2>
-                <p class="text-secondary">A simple, humane, transparent process for real impact.</p>
+                <p class="muted">A simple, humane, transparent process for real impact.</p>
             </div>
             <div class="row g-4 text-center">
                 <div class="col-md-4" data-aos="fade-up">
                     <div class="cardx p-4">
                         <i class="bi bi-pencil-square display-5 text-info mb-3"></i>
                         <h5>Create Request</h5>
-                        <p class="text-secondary">Submit your verified need to the platform with supporting details.</p>
+                        <p class="muted">Submit your verified need to the platform with supporting details.</p>
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
                     <div class="cardx p-4">
                         <i class="bi bi-check2-circle display-5 text-success mb-3"></i>
                         <h5>Community Verification</h5>
-                        <p class="text-secondary">Peers confirm validity before public display and assistance.</p>
+                        <p class="muted">Peers confirm validity before public display and assistance.</p>
                     </div>
                 </div>
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
                     <div class="cardx p-4">
                         <i class="bi bi-gift display-5 text-warning mb-3"></i>
                         <h5>Receive Help</h5>
-                        <p class="text-secondary">Support is transferred directly and securely — receipts confirmed.</p>
+                        <p class="muted">Support is transferred directly and securely — receipts confirmed.</p>
                     </div>
                 </div>
             </div>
@@ -433,7 +433,7 @@
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-4">
                 <h2 class="section-title">Gallery & Stories</h2>
-                <p class="text-secondary">Privacy-safe snapshots from requests and outcomes across categories.</p>
+                <p class="muted">Privacy-safe snapshots from requests and outcomes across categories.</p>
             </div>
 
             <!-- Filters -->
@@ -566,7 +566,7 @@
                     <img id="tptLbImg" alt="" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px;">
                     <div class="mt-3">
                         <span class="badge-soft px-3 py-2 me-2" id="tptLbTag">Category</span>
-                        <span class="text-secondary" id="tptLbCap">Caption</span>
+                        <span class="muted" id="tptLbCap">Caption</span>
                     </div>
                 </div>
             </div>
@@ -580,7 +580,7 @@
                 <h2 class="section-title">
                     <i class=" text-warning me-2"></i>Internal Unit & Bonuses
                 </h2>
-                <p class="text-secondary mx-auto" style="max-width: 700px;">
+                <p class="muted mx-auto" style="max-width: 700px;">
                     TPT uses a conditional internal unit called <strong>FELICIDAD</strong>
                     to record contributions and recognitions (illustrative only).
                 </p>
@@ -594,7 +594,7 @@
                             <i class="bi bi-person-plus-fill text-info fs-1"></i>
                         </div>
                         <h5 class="fw-bold">Registration Bonus</h5>
-                        <p class="text-secondary">
+                        <p class="muted">
                             Welcome credits for first-time participants (demo ranges listed on the policy page).
                         </p>
                     </div>
@@ -607,7 +607,7 @@
                             <i class="bi bi-camera-video-fill text-danger fs-1"></i>
                         </div>
                         <h5 class="fw-bold">Video Testimonial Bonus</h5>
-                        <p class="text-secondary">
+                        <p class="muted">
                             Share a short video to help build trust — small bonuses may apply for professional
                             testimonials.
                         </p>
@@ -621,7 +621,7 @@
                             <i class="bi bi-people-fill text-success fs-1"></i>
                         </div>
                         <h5 class="fw-bold">Referral (Community) Bonus</h5>
-                        <p class="text-secondary">
+                        <p class="muted">
                             Encourage others to join. Rules and caps are public so incentives don't turn into schemes.
                         </p>
                     </div>
@@ -634,7 +634,7 @@
                             <i class="bi bi-mortarboard-fill text-primary fs-1"></i>
                         </div>
                         <h5 class="fw-bold">Ranks & TPT School</h5>
-                        <p class="text-secondary">
+                        <p class="muted">
                             TPT School trains members to onboard others responsibly and explains policies clearly.
                         </p>
                     </div>
@@ -647,7 +647,7 @@
                             <i class="bi bi-shield-exclamation text-warning fs-1"></i>
                         </div>
                         <h5 class="fw-bold">Rules & Risks</h5>
-                        <p class="text-secondary">
+                        <p class="muted">
                             Only adults may participate. Help should be delivered within 72 hours and repeated accounts
                             are prohibited. Participation carries risk — start small and read policies.
                         </p>
@@ -661,7 +661,7 @@
                             <i class="bi bi-award-fill text-pink fs-1"></i>
                         </div>
                         <h5 class="fw-bold">Loyalty & Consistency Bonus</h5>
-                        <p class="text-secondary">
+                        <p class="muted">
                             Members who consistently contribute or volunteer over time may receive recognition and
                             special
                             badges of honor.
@@ -680,21 +680,21 @@
                     <div class="cardx p-4 p-lg-5 h-100">
                         <span class="badge-soft px-3 py-2">Governance</span>
                         <h3 class="mt-3">Community governance & safeguards</h3>
-                        <ul class="text-secondary">
+                        <ul class="muted">
                             <li>Published charter for roles, term limits, decisions.</li>
                             <li>Eligibility & priority framework.</li>
                             <li>Dual approvals, conflict-of-interest policy.</li>
                             <li>Member voting on major changes.</li>
                         </ul>
-                        <button class="btn btn-ghost" data-bs-toggle="offcanvas" data-bs-target="#policiesCanvas"><i
-                                class="bi bi-file-text me-2"></i>View policies</button>
+                        <button class="btn btn-ghost" href="./aboutus.html" data-bs-toggle="offcanvas"
+                            data-bs-target="#policiesCanvas"><i class="bi bi-file-text me-2"></i>View policies</button>
                     </div>
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="cardx p-4 p-lg-5 h-100">
                         <span class="badge-soft px-3 py-2">Transparency</span>
                         <h3 class="mt-3">What we publish (privacy-safe)</h3>
-                        <ul class="text-secondary">
+                        <ul class="muted">
                             <li>Aggregated inflows/outflows by category.</li>
                             <li>Fulfillment rates & typical review times.</li>
                             <li>Quarterly financial summaries & independent reviews.</li>
@@ -713,7 +713,7 @@
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-4">
                 <h2 class="section-title">Voices from the community</h2>
-                <p class="text-secondary">Stories from people whose lives were touched by timely help.</p>
+                <p class="muted">Stories from people whose lives were touched by timely help.</p>
             </div>
 
             <div class="row g-3">
@@ -725,10 +725,10 @@
                                 alt="Marcus">
                             <div>
                                 <div class="fw-bold">Marcus M.</div>
-                                <div class="text-secondary small">Construction worker</div>
+                                <div class="muted small">Construction worker</div>
                             </div>
                         </div>
-                        <p class="text-secondary">“Thanks to TPT I could pay for an urgent operation. The community
+                        <p class="muted">“Thanks to TPT I could pay for an urgent operation. The community
                             responded
                             fast and with dignity.”</p>
                     </div>
@@ -742,10 +742,10 @@
                                 alt="Lucas">
                             <div>
                                 <div class="fw-bold">Lucas H.</div>
-                                <div class="text-secondary small">Jiquipilco</div>
+                                <div class="muted small">Jiquipilco</div>
                             </div>
                         </div>
-                        <p class="text-secondary">“It’s not an investment; it’s people helping people. Clear rules made
+                        <p class="muted">“It’s not an investment; it’s people helping people. Clear rules made
                             me
                             comfortable to participate.”</p>
                     </div>
@@ -759,10 +759,10 @@
                                 alt="Anon">
                             <div>
                                 <div class="fw-bold">Anonymous</div>
-                                <div class="text-secondary small">Participant</div>
+                                <div class="muted small">Participant</div>
                             </div>
                         </div>
-                        <p class="text-secondary">“The follow-up and receipts gave me confidence that help was delivered
+                        <p class="muted">“The follow-up and receipts gave me confidence that help was delivered
                             as
                             promised.”</p>
                     </div>
@@ -778,7 +778,7 @@
                 <div class="row align-items-center g-4">
                     <div class="col-lg-8">
                         <h3 class="mb-2">Ready to participate?</h3>
-                        <p class="text-secondary mb-0">Join as a donor, volunteer, or request assistance. Together we
+                        <p class="muted mb-0">Join as a donor, volunteer, or request assistance. Together we
                             route help
                             where it matters—clearly and lawfully.</p>
                     </div>
@@ -796,13 +796,13 @@
         <div class="container" data-aos="fade-up">
             <div class="text-center mb-4">
                 <h2 class="section-title">FAQ</h2>
-                <p class="text-secondary">Quick answers to common questions.</p>
+                <p class="muted">Quick answers to common questions.</p>
             </div>
             <div class="row g-3">
                 <div class="col-md-6" data-aos="fade-up">
                     <div class="cardx p-4">
                         <h5>Is this an investment?</h5>
-                        <p class="text-secondary">No — contributions are gifts to meet verified needs. There are no
+                        <p class="muted">No — contributions are gifts to meet verified needs. There are no
                             guaranteed
                             returns.</p>
                     </div>
@@ -810,7 +810,7 @@
                 <div class="col-md-6" data-aos="fade-up">
                     <div class="cardx p-4">
                         <h5>How are requests verified?</h5>
-                        <p class="text-secondary">Applicants submit documents; reviewers validate details according to
+                        <p class="muted">Applicants submit documents; reviewers validate details according to
                             public
                             criteria.</p>
                     </div>
@@ -818,7 +818,7 @@
                 <div class="col-md-6" data-aos="fade-up">
                     <div class="cardx p-4">
                         <h5>Are there fees?</h5>
-                        <p class="text-secondary">Only payment processor fees and small compliance costs. Full
+                        <p class="muted">Only payment processor fees and small compliance costs. Full
                             breakdowns are
                             published in reports.</p>
                     </div>
@@ -826,7 +826,7 @@
                 <div class="col-md-6" data-aos="fade-up">
                     <div class="cardx p-4">
                         <h5>Can I choose who I support?</h5>
-                        <p class="text-secondary">Yes — you can support specific requests or donate to pooled categories
+                        <p class="muted">Yes — you can support specific requests or donate to pooled categories
                             like
                             medical or education funds.</p>
                     </div>
@@ -841,31 +841,31 @@
             <div class="row g-4">
                 <div class="col-lg-4">
                     <div class="fw-bold mb-2"><i class="bi bi-heart-fill text-danger me-2"></i>TPT México</div>
-                    <p class="text-secondary small mb-2">Mutual aid, not investment. Transparent policies and reporting.
+                    <p class="muted small mb-2">Mutual aid, not investment. Transparent policies and reporting.
                         People
                         over profit.</p>
                     <div class="d-flex gap-3">
-                        <a class="text-secondary" href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
-                        <a class="text-secondary" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
-                        <a class="text-secondary" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                        <a class="muted" href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a class="muted" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a class="muted" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
                     </div>
                 </div>
                 <div class="col-6 col-lg-2">
                     <div class="fw-semibold mb-2">Explore</div>
                     <ul class="list-unstyled m-0">
-                        <li class="mb-2"><a class="text-secondary" href="#about">About</a></li>
-                        <li class="mb-2"><a class="text-secondary" href="#how">How it Works</a></li>
-                        <li class="mb-2"><a class="text-secondary" href="#bonuses">Bonuses</a></li>
-                        <li class="mb-0"><a class="text-secondary" href="#faq">FAQ</a></li>
+                        <li class="mb-2"><a class="muted" href="#about">About</a></li>
+                        <li class="mb-2"><a class="muted" href="#how">How it Works</a></li>
+                        <li class="mb-2"><a class="muted" href="#bonuses">Bonuses</a></li>
+                        <li class="mb-0"><a class="muted" href="#faq">FAQ</a></li>
                     </ul>
                 </div>
                 <div class="col-6 col-lg-2">
                     <div class="fw-semibold mb-2">Legal</div>
                     <ul class="list-unstyled m-0">
-                        <li class="mb-2"><a class="text-secondary" href="#" data-bs-toggle="offcanvas"
+                        <li class="mb-2"><a class="muted" href="#" data-bs-toggle="offcanvas"
                                 data-bs-target="#policiesCanvas">Policies</a></li>
-                        <li class="mb-2"><a class="text-secondary" href="#">Privacy</a></li>
-                        <li class="mb-0"><a class="text-secondary" href="#">Terms</a></li>
+                        <li class="mb-2"><a class="muted" href="#">Privacy</a></li>
+                        <li class="mb-0"><a class="muted" href="#">Terms</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4">
@@ -878,8 +878,8 @@
                 </div>
             </div>
             <div class="d-flex justify-content-between align-items-center mt-4">
-                <small class="text-secondary">© <span id="year"></span> TPT México.</small>
-                <a href="#home" class="text-secondary">Back to top</a>
+                <small class="muted">© <span id="year"></span> TPT México.</small>
+                <a href="#home" class="muted">Back to top</a>
             </div>
         </div>
     </footer>
@@ -950,7 +950,7 @@
                                         <div class="d-flex justify-content-between align-items-center mb-3">
                                             <div class="form-check">
                                                 <input id="rememberMe" class="form-check-input" type="checkbox">
-                                                <label class="form-check-label text-secondary">Remember me</label>
+                                                <label class="form-check-label muted">Remember me</label>
                                             </div>
                                             <a href="#" id="forgotLink" class="small">Forgot password?</a>
                                         </div>
@@ -981,7 +981,7 @@
                                             <label class="form-label">Password</label>
                                             <input id="suPassword" type="password" class="form-control" minlength="8"
                                                 required>
-                                            <div class="text-secondarytext-secondary">Choose at least 8 characters.
+                                            <div class="mutedmuted">Choose at least 8 characters.
                                             </div>
                                             <div class="invalid-feedback">Pick a secure password.</div>
                                         </div>
@@ -1006,7 +1006,7 @@
                                 </div>
                             </div>
 
-                            <div class="text-center text-secondary small mt-3">By joining, you agree to follow our
+                            <div class="text-center muted small mt-3">By joining, you agree to follow our
                                 published
                                 policies and community rules.</div>
                         </div>
@@ -1033,7 +1033,7 @@
                         <div class="col-md-4">
                             <div class="cardx p-4 h-100 rounded-4 shadow-sm">
                                 <div class="stat fw-bold fs-3 text-success" id="kpi1">₱0</div>
-                                <div class="text-secondary small text-uppercase">Total Donations This Month</div>
+                                <div class="muted small text-uppercase">Total Donations This Month</div>
                                 <div class="progress mt-3" style="height: 6px;">
                                     <div class="progress-bar bg-success" style="width: 70%;"></div>
                                 </div>
@@ -1043,7 +1043,7 @@
                         <div class="col-md-4">
                             <div class="cardx p-4 h-100 rounded-4 shadow-sm">
                                 <div class="stat fw-bold fs-3 text-danger" id="kpi2">₱0</div>
-                                <div class="text-secondary small text-uppercase">Funds Distributed</div>
+                                <div class="muted small text-uppercase">Funds Distributed</div>
                                 <div class="progress mt-3" style="height: 6px;">
                                     <div class="progress-bar bg-danger" style="width: 60%;"></div>
                                 </div>
@@ -1053,7 +1053,7 @@
                         <div class="col-md-4">
                             <div class="cardx p-4 h-100 rounded-4 shadow-sm">
                                 <div class="stat fw-bold fs-3 text-primary" id="kpi3">0%</div>
-                                <div class="text-secondary small text-uppercase">Fulfillment Rate</div>
+                                <div class="muted small text-uppercase">Fulfillment Rate</div>
                                 <div class="progress mt-3" style="height: 6px;">
                                     <div class="progress-bar bg-primary" style="width: 80%;"></div>
                                 </div>
@@ -1075,6 +1075,24 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            try {
+                if (window.AOS && typeof AOS.init === 'function') {
+                    AOS.init({ once: true, duration: 600, offset: 80 });
+                }
+            } catch (e) {
+                console.error('AOS init failed:', e);
+            }
+            // Hard fallback: force-show everything that AOS might have hidden
+            document.querySelectorAll('[data-aos]').forEach(function (el) {
+                el.style.opacity = '1';
+                el.style.transform = 'none';
+            });
+        });
+    </script>
+
+
     <script src="generalscript.js"></script>
 </body>
 

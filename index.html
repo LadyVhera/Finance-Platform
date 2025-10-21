@@ -49,289 +49,100 @@
         </div>
     </nav>
 
-    <!-- Hero -->
-    <header id="home" class="hero">
+    <header id="home" class="hero hero-pro">
         <div class="container position-relative">
             <div class="row align-items-center">
+                <!-- Copy block -->
+
                 <div class="col-lg-7" data-aos="fade-up">
+                    <!-- Micro headline -->
                     <span class="badge badge-soft fw-semibold mb-3">Community • Transparency • Dignity</span>
+
                     <h1 class="display-5 fw-bold mb-3">
-                        People helping people — <span class="title-gradient">no promises, just proof.</span>
+                        People helping people — <span class="title-gradient txt-underline">no promises - just proof.</span>
                     </h1>
-                    <p class="lead muted mb-4">A modern mutual-aid platform where Mexicans support Mexicans
-                        through
-                        verified, need-based assistance. Clear rules. Open reports. Real outcomes.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <button class="btn btn-brand" data-bs-toggle="modal" data-bs-target="#requestModal">
-                            <i class="bi bi-pencil-square me-2"></i>Create Request
-                        </button>
-                        <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#registerModal">
-                            <i class="bi bi-person-plus me-2"></i>Join Community
-                        </button>
-                    </div>
+
+                    <!-- <h1 class="display-4 fw-abold hero-head mb-3">
+                        People helping people, <span class="txt-flare">zero promises</span> — only <span
+                            class="txt-underline">proof</span>.
+                    </h1> -->
+    <p class="lead muted mb-4">A modern mutual-aid platform where Mexicans support Mexicans
+        through
+        verified, need-based assistance. Clear rules. Open reports. <span class="txt-flare">Real outcomes.</span></p>
+                  
+    
+                    <!-- CTAs -->
+                <div class="d-flex flex-wrap gap-3">
+                    <button class="btn btn-brand" data-bs-toggle="modal" data-bs-target="#requestModal">
+                        <i class="bi bi-pencil-square me-2"></i>Create Request
+                    </button>
+                    <button class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#registerModal">
+                        <i class="bi bi-person-plus me-2"></i>Join Community
+                    </button>
                 </div>
-                <div class="col-lg-5 mt-4 mt-lg-0" data-aos="zoom-in">
-                    <div class="glass p-3">
-                        <img class="w-100 rounded"
-                            src="./asserts/images/people-office-work-day.jpg" alt="community">
+    
+                    <!-- Trust strip -->
+                    <div class="trust mt-4">
+                        <div class="avatars">
+                            <img class="avatar" src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=80&q=60"
+                                alt="">
+                            <img class="avatar" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?w=80&q=60"
+                                alt="">
+                            <img class="avatar" src="https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?w=80&q=60"
+                                alt="">
+                            <span class="avatar more">+2k</span>
+                        </div>
+                        <div class="rating">
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
+                            <span class="small muted ms-2">4.8/5 recent help events</span>
+                        </div>
+                    </div>
+                    
+                </div>
+    
+                <!-- Visual block -->
+                <div class="col-lg-5 mt-5 mt-lg-0 position-relative" data-aos="zoom-in">
+                    <div class="hero-art glass">
+                        <img class="w-100 rounded" src="./asserts/images/people-office-work-day.jpg" alt="Community">
+                        <!-- Glow blobs -->
+                        <span class="blob b1"></span>
+                        <span class="blob b2"></span>
+                        <span class="blob b3"></span>
+    
+                        <!-- Floating chips -->
+                        <div class="chip chip-top">
+                            <i class="bi bi-activity"></i>
+                            <div>
+                                <div class="kpi">₱128,400</div>
+                                <div class="tiny muted">Help sent this month</div>
+                            </div>
+                        </div>
+                        <div class="chip chip-mid">
+                            <i class="bi bi-patch-check"></i>
+                            <div>
+                                <div class="kpi">97%</div>
+                                <div class="tiny muted">Requests verified</div>
+                            </div>
+                        </div>
+                        <div class="chip chip-btm">
+                            <i class="bi bi-heart"></i>
+                            <div>
+                                <div class="kpi">12,341</div>
+                                <div class="tiny muted">Members</div>
+                            </div>
+                        </div>
+    
+                        <!-- Orbit badge -->
+                        <div class="orbit">
+                            <span class="planet"></span>
+                            <span class="satellite"></span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </header>
-
-   <!-- - Login MODAL --> 
-<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header border-0 d-flex justify-content-between align-items-center">
-                <h5 class="modal-title">
-                    <i class="bi bi-box-arrow-in-right me-2"></i>Log in
-                </h5>
-                <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
-                    aria-label="Close">
-                    <i class="bi bi-x-lg"></i>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <form id="loginForm">
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" class="form-control" id="loginEmail" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" id="loginPassword" required>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="rememberMe">
-                            <label class="form-check-label" for="rememberMe">Remember me</label>
-                        </div>
-                        <button type="button" class="btn btn-link p-0 text-decoration-none" data-bs-toggle="modal"
-                            data-bs-target="#forgotModal" data-bs-dismiss="modal" style="color:#cfe6ff">Forgot
-                            password?</button>
-                    </div>
-
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-brand" type="submit">Log in</button>
-                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
-                            data-bs-target="#registerModal" data-bs-dismiss="modal">
-                            Create Account
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
-    <!-- Forgot Password MODAL -->
-    <div class="modal fade auth-modal" id="forgotModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title">
-                        <i class="bi bi-envelope-paper me-2"></i>Forgot password
-                    </h5>
-                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
-                        aria-label="Close">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="small muted mb-3">Enter the email linked to your account and we’ll send you a
-                        reset link.
-                    </div>
-
-                    <!-- alerts -->
-                    <div class="alert alert-success d-none" id="fpAlertSuccess">
-                        <i class="bi bi-check-circle me-1"></i>
-                        If an account exists for that email, a reset link has been sent.
-                    </div>
-                    <div class="alert alert-danger d-none" id="fpAlertError">
-                        <i class="bi bi-exclamation-octagon me-1"></i>
-                        Could not send reset email. Please try again.
-                    </div>
-
-                    <form id="forgotForm" novalidate>
-                        <div class="mb-3">
-                            <label class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="fpEmail" placeholder="you@example.com"
-                                required>
-                            <div class="invalid-feedback">Please enter a valid email.</div>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-brand" type="submit">
-                                <i class="bi bi-send me-1"></i>Send reset link
-                            </button>
-                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
-                                data-bs-target="#loginModal" data-bs-dismiss="modal">
-                                Back to Log in
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Reset Password MODAL -->
-    <div class="modal fade auth-modal" id="resetModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title">
-                        <i class="bi bi-shield-lock me-2"></i>Set a new password
-                    </h5>
-                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
-                        aria-label="Close">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <div class="small muted mb-3">Enter and confirm a strong password for your account.</div>
-
-                    <!-- alerts -->
-                    <div class="alert alert-success d-none" id="rpAlertSuccess">
-                        <i class="bi bi-check2-circle me-1"></i>
-                        Password updated. You can now sign in.
-                    </div>
-                    <div class="alert alert-danger d-none" id="rpAlertError">
-                        <i class="bi bi-exclamation-octagon me-1"></i>
-                        Reset failed. Your link may have expired. Request a new one.
-                    </div>
-
-                    <form id="resetForm" novalidate>
-                        <div class="mb-3">
-                            <label class="form-label">New password</label>
-                            <input type="password" class="form-control" id="rpNew" minlength="8" placeholder="••••••••"
-                                required>
-                            <div class="invalid-feedback">Minimum 8 characters.</div>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Confirm new password</label>
-                            <input type="password" class="form-control" id="rpNew2" placeholder="Re-enter password"
-                                required>
-                            <div class="invalid-feedback">Passwords must match.</div>
-                        </div>
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-brand" type="submit">
-                                <i class="bi bi-check2-circle me-1"></i>Reset password
-                            </button>
-                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
-                                data-bs-target="#loginModal" data-bs-dismiss="modal">
-                                Back to Log in
-                            </button>
-                        </div>
-                        <div class="mutedmuted mt-2">Use 12+ characters with letters, numbers, and
-                            symbols.
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sign Up MODAL -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title">
-                        <i class="bi bi-person-plus me-2"></i>Sign up — Create Account
-                    </h5>
-                    <!-- ✳️ Custom Close Button — replaces Bootstrap's default -->
-                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
-                        aria-label="Close">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-
-                <div class="modal-body">
-                    <form id="registerForm">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Full name</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Email</label>
-                                <input type="email" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" required>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Bank account (IBAN / CLABE)</label>
-                                <input type="text" class="form-control" required>
-                            </div>
-
-                            <div class="col-12">
-                                <div class="muted mb-2">
-                                    By registering you accept the rules and terms of TPT.
-                                    Participation involves risk.
-                                </div>
-                                <div class="d-grid gap-2 d-md-flex">
-                                    <button class="btn btn-brand" type="submit">Create account</button>
-                                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
-                                        data-bs-target="#loginModal" data-bs-dismiss="modal">
-                                        Already have an account?
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CREATE REQUEST MODAL -->
-    <div class="modal fade" id="requestModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
-                    <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Create Request</h5>
-                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
-                        aria-label="Close">
-                        <i class="bi bi-x-lg"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="requestForm">
-                        <div class="mb-3">
-                            <label class="form-label">Title</label>
-                            <input class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Amount (MXN)</label>
-                            <input type="number" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Bank details</label>
-                            <textarea class="form-control" rows="2" required></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label">Reason / Description</label>
-                            <textarea class="form-control" rows="4" required></textarea>
-                        </div>
-                        <div class="d-grid gap-2 d-md-flex">
-                            <button class="btn btn-brand" type="submit">Publish request</button>
-                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- ABOUT -->
     <section id="about" class="section py-5">
@@ -451,7 +262,7 @@
                 <figure class="tpt-g-item" data-category="medical" data-title="Post-surgery support"
                     data-caption="Bills covered within 48 hours.">
                     <img class="tpt-g-img"
-                        src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"
+                        src="./asserts/images/black-family-enjoying-summer-together-backyard.jpg"
                         alt="Medical support">
                     <figcaption class="tpt-g-overlay">
                         <span class="tpt-chip">Medical</span>
@@ -462,7 +273,7 @@
                 <figure class="tpt-g-item" data-category="medical" data-title="Medication fund"
                     data-caption="Chronic care subsidized by donors.">
                     <img class="tpt-g-img"
-                        src="https://images.unsplash.com/photo-1582719478250-c2af2c1a72df?q=80&w=1200&auto=format&fit=crop"
+                        src="./asserts/images/parents-watching-their-child-resting-hospital-bed-with-gentle-touch.jpg"
                         alt="Medication">
                     <figcaption class="tpt-g-overlay">
                         <span class="tpt-chip">Medical</span>
@@ -481,6 +292,16 @@
                         <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                     </figcaption>
                 </figure>
+<figure class="tpt-g-item" data-category="housing" data-title="Emergency rent"
+    data-caption="Bridge funding prevented eviction.">
+    <img class="tpt-g-img"
+        src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop"
+        alt="Housing assistance">
+    <figcaption class="tpt-g-overlay">
+        <span class="tpt-chip">Housing</span>
+        <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
+    </figcaption>
+</figure>
 
                 <figure class="tpt-g-item" data-category="education" data-title="Scholarship laptops"
                     data-caption="Five students received refurbished devices.">
@@ -494,17 +315,7 @@
                 </figure>
 
                 <!-- Housing -->
-                <figure class="tpt-g-item" data-category="housing" data-title="Emergency rent"
-                    data-caption="Bridge funding prevented eviction.">
-                    <img class="tpt-g-img"
-                        src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1600&auto=format&fit=crop"
-                        alt="Housing assistance">
-                    <figcaption class="tpt-g-overlay">
-                        <span class="tpt-chip">Housing</span>
-                        <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
-                    </figcaption>
-                </figure>
-
+               
                 <figure class="tpt-g-item" data-category="housing" data-title="Repairs after flooding"
                     data-caption="Rapid response for roofing and essentials.">
                     <img class="tpt-g-img"
@@ -755,9 +566,9 @@
                 <div class="col-md-4" data-aos="fade-up" data-aos-delay="210">
                     <div class="cardx p-4 h-100">
                         <div class="d-flex gap-3 align-items-center mb-2">
-                            <img class="testimonial-figure"
-                                src="https://images.unsplash.com/photo-1545996124-0b2f7a5c6b03?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=8c9f3a1a4fdf3c2"
-                                alt="Anon">
+                        <img class="testimonial-figure"
+                            src="https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80"
+                            alt="Participant portrait">
                             <div>
                                 <div class="fw-bold">Anonymous</div>
                                 <div class="muted small">Participant</div>
@@ -885,24 +696,289 @@
         </div>
     </footer>
 
-    <!-- Policies Offcanvas -->
-    <div class="offcanvas offcanvas-end text-bg-dark" id="policiesCanvas" tabindex="-1" style="background:#0b1220">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Policies & Safeguards</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <ul class="small">
-                <li><strong>No investment products</strong>; contributions are gifts.</li>
-                <li><strong>No referral or multi-level payouts</strong>.</li>
-                <li><strong>Contribution caps</strong> and cooling-off periods.</li>
-                <li><strong>Dual approvals</strong> and anti-fraud checks.</li>
-                <li><strong>Privacy</strong>: anonymized public listings; consent required.</li>
-                <li><strong>Reporting</strong>: quarterly summaries; independent reviews.</li>
-            </ul>
+<!-- - Login MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Log in
+                </h5>
+                <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal" style="color:#00e0ff;">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-brand" type="submit">Log in</button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                            data-bs-target="#registerModal" data-bs-dismiss="modal">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</div>
+
+<!-- Forgot Password MODAL -->
+<div class="modal fade auth-modal" id="forgotModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title">
+                    <i class="bi bi-envelope-paper me-2"></i>Forgot password
+                </h5>
+                <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="small muted mb-3">Enter the email linked to your account and we’ll send you a
+                    reset link.
+                </div>
+
+                <!-- alerts -->
+                <div class="alert alert-success d-none" id="fpAlertSuccess">
+                    <i class="bi bi-check-circle me-1"></i>
+                    If an account exists for that email, a reset link has been sent.
+                </div>
+                <div class="alert alert-danger d-none" id="fpAlertError">
+                    <i class="bi bi-exclamation-octagon me-1"></i>
+                    Could not send reset email. Please try again.
+                </div>
+
+                <form id="forgotForm" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="fpEmail" placeholder="you@example.com" required>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-brand" type="submit">
+                            <i class="bi bi-send me-1"></i>Send reset link
+                        </button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                            data-bs-target="#loginModal" data-bs-dismiss="modal">
+                            Back to Log in
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Reset Password MODAL -->
+    <div class="modal fade auth-modal" id="resetModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title">
+                        <i class="bi bi-shield-lock me-2"></i>Set a new password
+                    </h5>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+    
+                <div class="modal-body">
+                    <div class="small muted mb-3">Enter and confirm a strong password for your account.</div>
+    
+                    <!-- alerts -->
+                    <div class="alert alert-success d-none" id="rpAlertSuccess">
+                        <i class="bi bi-check2-circle me-1"></i>
+                        Password updated. You can now sign in.
+                    </div>
+                    <div class="alert alert-danger d-none" id="rpAlertError">
+                        <i class="bi bi-exclamation-octagon me-1"></i>
+                        Reset failed. Your link may have expired. Request a new one.
+                    </div>
+    
+                    <form id="resetForm" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label">New password</label>
+                            <input type="password" class="form-control" id="rpNew" minlength="8" placeholder="••••••••"
+                                required>
+                            <div class="invalid-feedback">Minimum 8 characters.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm new password</label>
+                            <input type="password" class="form-control" id="rpNew2" placeholder="Re-enter password"
+                                required>
+                            <div class="invalid-feedback">Passwords must match.</div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-brand" type="submit">
+                                <i class="bi bi-check2-circle me-1"></i>Reset password
+                            </button>
+                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#loginModal" data-bs-dismiss="modal">
+                                Back to Log in
+                            </button>
+                        </div>
+                        <div class="mutedmuted mt-2">Use 12+ characters with letters, numbers, and
+                            symbols.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sign Up MODAL -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title">
+                        <i class="bi bi-person-plus me-2"></i>Sign up — Create Account
+                    </h5>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+    
+                <div class="modal-body">
+                    <form id="registerForm" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="suName">Full name</label>
+                                <input id="suName" type="text" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="suEmail">Email</label>
+                                <input id="suEmail" type="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="suPassword">Password</label>
+                                <input id="suPassword" type="password" class="form-control" minlength="6" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="suIban">Bank account (IBAN / CLABE)</label>
+                                <input id="suIban" type="text" class="form-control" required>
+                            </div>
+    
+                            <div class="col-12">
+                                <div class="muted mb-2">
+                                    By registering you accept the rules and terms of TPT. Participation involves risk.
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex">
+                                    <button class="btn btn-brand" type="submit">Create account</button>
+                                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal" data-bs-dismiss="modal">
+                                        Already have an account?
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- CREATE REQUEST MODAL -->
+    <div class="modal fade" id="requestModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Create Request</h5>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="requestForm">
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Amount (MXN)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bank details</label>
+                            <textarea class="form-control" rows="2" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Reason / Description</label>
+                            <textarea class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button class="btn btn-brand" type="submit">Publish request</button>
+                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- POLICIES & SAFEGUARDS -->
+<div class="offcanvas offcanvas-end policy-canvas" id="policiesCanvas" tabindex="-1">
+    <div class="offcanvas-header border-0">
+        <div>
+            <h5 class="offcanvas-title fw-bold">
+                <i class="bi bi-shield-check me-2 text-accent"></i>Policies & Safeguards
+            </h5>
+            <div class="small muted">Transparency • Protection • Accountability</div>
+        </div>
+        <!-- ✳️ Custom Close Button -->
+        <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="offcanvas"
+            aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+
+    <div class="offcanvas-body pt-0">
+        <div class="policy-list-wrap">
+            <ul class="policy-list">
+                <li><strong>No investment products</strong>; all contributions are gifts.</li>
+                <li><strong>No referral or multi-level payouts</strong> — we reject pyramid models.</li>
+                <li><strong>Contribution caps</strong> with cooling-off periods to protect donors.</li>
+                <li><strong>Dual approvals</strong> and layered anti-fraud verification.</li>
+                <li><strong>Privacy-first</strong> approach: anonymized public listings, explicit consent required.</li>
+                <li><strong>Transparent reporting</strong>: quarterly summaries, open ledgers, independent reviews.</li>
+            </ul>
+
+            <div class="policy-note mt-4">
+                <i class="bi bi-info-circle me-2 text-accent1"></i>
+                <span class="small muted">These policies evolve through community votes and audits.</span>
+            </div>
+        </div>
+    </div>
+</div>
 
     <!-- AUTH MODAL (Sign In / Sign Up) -->
     <div class="modal fade auth-modal" id="authModal" tabindex="-1" aria-hidden="true">
@@ -1026,7 +1102,10 @@
                         <i class="bi bi-bar-chart-line-fill text-primary me-2"></i>
                         TPT Transparency Dashboard — Sample Overview
                     </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <button type="button" class=" btn-close   btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
 
                 <div class="modal-body">

@@ -13,15 +13,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="style copy.css">
     <style>
-        
-        /* HERO */
-        /* .hero {
-            position: relative;
-            min-height: 68vh;
-            display: flex;
-            align-items: center;
-            padding-top: 88px
-        } */
 
         .hero .bg {
             position: absolute;
@@ -83,21 +74,10 @@
             padding: 60px 0
         }
 
-        /* h2.section-title {
-            color: #fff;
-            margin-bottom: 12px
-        } */
 
         .muted {
             color: var(--muted)
         }
-
-        /* .divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, var(--accent1), transparent);
-            margin: 18px 0;
-            border-radius: 4px
-        } */
 
         /* timeline */
         .timeline {
@@ -187,55 +167,41 @@
             z-index: 999
         }
 
-        @media (max-width:768px) {
-            .hero-title {
-                font-size: 1.6rem
-            }
+      @media (max-width:768px) {
+  .hero-title { font-size: 1.6rem }
 
-            @media (max-width: 992px) {
-                .hero {
-                    text-align: center;
-                    padding-top: 110px;
-                }
+  @media (max-width: 992px) {
+    .hero { text-align: center; padding-top: 110px; }
+    .hero .btn { width: 100%; margin-bottom: 10px; }
+    .hero .hero-title { font-size: clamp(1.6rem, 5vw, 2.4rem); }
+    .glass { padding: 16px; }
+  }
 
-                .hero .btn {
-                    width: 100%;
-                    margin-bottom: 10px;
-                }
+  @media (max-width: 576px) {
+    body { font-size: 0.95rem; }
+    .counter { font-size: 1.4rem; }
+    .hero-lead { font-size: 0.95rem; }
+    footer .row { text-align: center; }
+    footer .col-md-3, footer .col-md-6 { margin-bottom: 20px; }
+  }
+}
 
-                .hero .hero-title {
-                    font-size: clamp(1.6rem, 5vw, 2.4rem);
-                }
+.stats{
+  display:flex;
+  gap: 24px 32px;       /* row gap, column gap */
+  flex-wrap:wrap;       /* wrap nicely on small screens */
+  align-items:flex-start;
+}
+.stats > div{
+  min-width: 140px;     /* keeps each stat tidy */
+  display:flex;
+  flex-direction:column;
+}
+@media (max-width: 576px){
+  .stats{ justify-content:center; }
+}
 
-                .glass {
-                    padding: 16px;
-                }
-            }
 
-            @media (max-width: 576px) {
-                body {
-                    font-size: 0.95rem;
-                }
-
-                .counter {
-                    font-size: 1.4rem;
-                }
-
-                .hero-lead {
-                    font-size: 0.95rem;
-                }
-
-                footer .row {
-                    text-align: center;
-                }
-
-                footer .col-md-3,
-                footer .col-md-6 {
-                    margin-bottom: 20px;
-                }
-            }
-
-        }
     </style>
 </head>
 
@@ -272,45 +238,49 @@
     </nav>
 
     <!-- HERO -->
-    <header class="hero">
-        <div class="bg" aria-hidden="true"></div>
-        <div class="gradient" aria-hidden="true"></div>
-        <div class="container hero-content">
-            <div class="row align-items-center">
-                <div class="col-lg-7" data-aos="fade-right">
-                    <h1 class="hero-title">About TPT — Community, Dignity, Action</h1>
-                    <p class="hero-lead">A platform by Mexicans for Mexicans — building a community-led alternative to
-                        reduce suffering and restore financial dignity.</p>
-                    <div class="mt-4 d-flex gap-2">
-                        <a class="btn glow-btn btn-lg" href="#how">How to get help</a>
-                        <a class="btn btn-outline-light btn-lg" href="#governance">Governance</a>
-                        <button class="btn btn-link text-white" data-bs-toggle="modal"
-                            data-bs-target="#founderModal">Founder</button>
-                    </div>
-                    <div class="mt-4 d-flex gap-4">
-                        <div>
-                            <div class="counter" data-count="200000000">0</div>
-                            <div class="muted small">Participants (claimed)</div>
-                        </div>
-                        <div>
-                            <div class="counter" data-count="118">0</div>
-                            <div class="muted small">Countries</div>
-                        </div>
-                        <div>
-                            <div class="counter" data-count="30">0</div>
-                            <div class="muted small">% Felicidad growth (claimed)</div>
-                        </div>
-                    </div>
+<header class="hero">
+    <div class="bg" aria-hidden="true"></div>
+    <div class="gradient" aria-hidden="true"></div>
+
+    <div class="container hero-content">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-7" data-aos="fade-right">
+                <h1 class="hero-title">About TPT — Community, Dignity, Action</h1>
+                <p class="hero-lead">A platform by Mexicans for Mexicans — building a community-led alternative to
+                    reduce suffering and restore financial dignity.</p>
+
+                <div class="mt-4 d-flex flex-wrap gap-2 hero-ctas">
+                    <a class="btn glow-btn btn-lg" href="#how">How to get help</a>
+                    <a class="btn btn-outline-light btn-lg" href="#governance">Governance</a>
+                    <button class="btn btn-link text-white" data-bs-toggle="modal"
+                        data-bs-target="#founderModal">Founder</button>
                 </div>
-                <div class="col-lg-5 d-none d-lg-block" data-aos="zoom-in">
-                    <div class="glass p-0">
-                        <img src="./asserts/images/black-family-enjoying-summer-together-backyard.jpg" alt="community"
-                            style="width:100%;height:420px;object-fit:cover;border-radius:12px">
+
+                <div class="mt-4 stats">
+                    <div>
+                        <div class="counter" data-count="200000000">0</div>
+                        <div class="muted small">Participants (claimed)</div>
+                    </div>
+                    <div>
+                        <div class="counter" data-count="118">0</div>
+                        <div class="muted small">Countries</div>
+                    </div>
+                    <div>
+                        <div class="counter" data-count="30">0</div>
+                        <div class="muted small">% Felicidad growth (claimed)</div>
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-5" data-aos="zoom-in">
+                <div class="glass p-0 hero-figure">
+                    <img src="./asserts/images/black-family-enjoying-summer-together-backyard.jpg" alt="community">
+                </div>
+            </div>
         </div>
-    </header>
+    </div>
+</header>
+
 
     <main>
         <section id="about" class="section" data-aos="fade-up">
@@ -344,7 +314,7 @@
                                 alt="founder"
                                 style="width:120px;height:120px;object-fit:cover;border-radius:14px;margin-bottom:12px">
                             <p class="muted small mb-1">James Andrade McAllister</p>
-                            <p class="small text-muted">Economist &amp; farmer focused on practical poverty relief. Over
+                            <p class="small text-secondary">Economist &amp; farmer focused on practical poverty relief. Over
                                 11,000 assisted in early projects.</p>
                             <button class="btn btn-sm btn-outline-light mt-2" data-bs-toggle="modal"
                                 data-bs-target="#founderModal">Read full bio</button>
@@ -492,14 +462,14 @@
             </div>
         </section>
 
-        <!-- GALLERY (photo grid) -->
+        <!-- Gallery -->
         <section id="gallery" class="section py-5">
             <div class="container" data-aos="fade-up">
                 <div class="text-center mb-4">
-                    <h2 class="section-title">Our work in photos</h2>
-                    <p class="muted">Representative moments from requests and outcomes.</p>
+                    <h2 class="section-title">Gallery & Stories</h2>
+                    <p class="muted">Privacy-safe snapshots from requests and outcomes across categories.</p>
                 </div>
-
+        
                 <!-- Filters -->
                 <div class="d-flex gap-2 justify-content-center mb-4" id="tptGalleryFilters">
                     <button class="btn btn-outline-light btn-sm active" data-filter="all">All</button>
@@ -507,32 +477,30 @@
                     <button class="btn btn-outline-light btn-sm" data-filter="education">Education</button>
                     <button class="btn btn-outline-light btn-sm" data-filter="housing">Housing</button>
                 </div>
-
+        
                 <!-- Grid (add as many items as you like; JS shows only 6) -->
                 <div class="tpt-gallery-grid" id="tptGalleryGrid">
                     <!-- Medical -->
-                    <figure class="tpt-g-item" data-category="medical" data-title="Post-surgery support"
-                        data-caption="Bills covered within 48 hours.">
-                        <img class="tpt-g-img"
-                            src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=1200&auto=format&fit=crop"
-                            alt="Medical support">
-                        <figcaption class="tpt-g-overlay">
-                            <span class="tpt-chip">Medical</span>
-                            <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
-                        </figcaption>
-                    </figure>
-
+                  
                     <figure class="tpt-g-item" data-category="medical" data-title="Medication fund"
                         data-caption="Chronic care subsidized by donors.">
                         <img class="tpt-g-img"
-                            src="https://images.unsplash.com/photo-1582719478250-c2af2c1a72df?q=80&w=1200&auto=format&fit=crop"
+                            src="./asserts/images/parents-watching-their-child-resting-hospital-bed-with-gentle-touch.jpg"
                             alt="Medication">
                         <figcaption class="tpt-g-overlay">
                             <span class="tpt-chip">Medical</span>
                             <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                         </figcaption>
                     </figure>
-
+        
+                    <figure class="tpt-g-item" data-category="medical" data-title="Post-surgery support"
+                        data-caption="Bills covered within 48 hours.">
+                        <img class="tpt-g-img" src="./asserts/images/medium-shot-smiley-woman-outdoors.jpg" alt="Medical support">
+                        <figcaption class="tpt-g-overlay">
+                            <span class="tpt-chip">Medical</span>
+                            <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
+                        </figcaption>
+                    </figure>
                     <!-- Education -->
                     <figure class="tpt-g-item" data-category="education" data-title="Tuition & books"
                         data-caption="A semester funded for a nursing student.">
@@ -544,19 +512,6 @@
                             <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                         </figcaption>
                     </figure>
-
-                    <figure class="tpt-g-item" data-category="education" data-title="Scholarship laptops"
-                        data-caption="Five students received refurbished devices.">
-                        <img class="tpt-g-img"
-                            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop"
-                            alt="Laptop program">
-                        <figcaption class="tpt-g-overlay">
-                            <span class="tpt-chip">Education</span>
-                            <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
-                        </figcaption>
-                    </figure>
-
-                    <!-- Housing -->
                     <figure class="tpt-g-item" data-category="housing" data-title="Emergency rent"
                         data-caption="Bridge funding prevented eviction.">
                         <img class="tpt-g-img"
@@ -567,7 +522,20 @@
                             <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                         </figcaption>
                     </figure>
-
+        
+                    <figure class="tpt-g-item" data-category="education" data-title="Scholarship laptops"
+                        data-caption="Five students received refurbished devices.">
+                        <img class="tpt-g-img"
+                            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1200&auto=format&fit=crop"
+                            alt="Laptop program">
+                        <figcaption class="tpt-g-overlay">
+                            <span class="tpt-chip">Education</span>
+                            <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
+                        </figcaption>
+                    </figure>
+        
+                    <!-- Housing -->
+        
                     <figure class="tpt-g-item" data-category="housing" data-title="Repairs after flooding"
                         data-caption="Rapid response for roofing and essentials.">
                         <img class="tpt-g-img"
@@ -578,7 +546,7 @@
                             <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                         </figcaption>
                     </figure>
-
+        
                     <!-- Extra items -->
                     <figure class="tpt-g-item" data-category="medical" data-title="Clinic transport"
                         data-caption="Transport covered for follow-ups.">
@@ -590,7 +558,7 @@
                             <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                         </figcaption>
                     </figure>
-
+        
                     <figure class="tpt-g-item" data-category="education" data-title="Exam fees"
                         data-caption="Final exams covered for three students.">
                         <img class="tpt-g-img"
@@ -601,7 +569,7 @@
                             <button class="btn btn-brand btn-sm" data-open="lightbox">View</button>
                         </figcaption>
                     </figure>
-
+        
                     <figure class="tpt-g-item" data-category="housing" data-title="Community shelter"
                         data-caption="Short-term shelter during repairs.">
                         <img class="tpt-g-img"
@@ -615,6 +583,7 @@
                 </div>
             </div>
         </section>
+
 
         <!-- FAQ  -->
         <section id="faq" class="section py-5">
@@ -706,195 +675,461 @@
             </div>
         </footer>
 
-        <!-- Policies Offcanvas -->
-        <div class="offcanvas offcanvas-end text-bg-dark" id="policiesCanvas" tabindex="-1" style="background:#0b1220">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title">Policies & Safeguards</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"
-                    aria-label="Close"></button>
+       <!-- - Login MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>Log in
+                </h5>
+                <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
             </div>
-            <div class="offcanvas-body">
-                <ul class="small">
-                    <li><strong>No investment products</strong>; contributions are gifts.</li>
-                    <li><strong>No referral or multi-level payouts</strong>.</li>
-                    <li><strong>Contribution caps</strong> and cooling-off periods.</li>
-                    <li><strong>Dual approvals</strong> and anti-fraud checks.</li>
-                    <li><strong>Privacy</strong>: anonymized public listings; consent required.</li>
-                    <li><strong>Reporting</strong>: quarterly summaries; independent reviews.</li>
-                </ul>
+
+            <div class="modal-body">
+                <form id="loginForm">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="loginEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-control" id="loginPassword" required>
+                    </div>
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal" style="color:#00e0ff;">
+                            Forgot password?
+                        </a>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-brand" type="submit">Log in</button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                            data-bs-target="#registerModal" data-bs-dismiss="modal">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- AUTH MODAL (Sign In / Sign Up) -->
-        <div class="modal fade auth-modal" id="authModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-md modal-dialog-centered">
-                <div class="modal-content p-0">
-                    <div class="row g-0">
-                        <!-- left visual column for larger screens -->
-                        <div class="col-md-5 d-none d-md-block"
-                            style="background-image:linear-gradient(180deg, rgba(102,224,255,.06), rgba(167,243,208,.03)), url('https://images.unsplash.com/photo-1520975911606-2c12c2e1e4c2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=93d2d21d1e5c6f1'); background-size:cover; border-top-left-radius:14px; border-bottom-left-radius:14px;">
+<!-- Forgot Password MODAL -->
+<div class="modal fade auth-modal" id="forgotModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                <h5 class="modal-title">
+                    <i class="bi bi-envelope-paper me-2"></i>Forgot password
+                </h5>
+                <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                    aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="small muted mb-3">Enter the email linked to your account and we’ll send you a
+                    reset link.
+                </div>
+
+                <!-- alerts -->
+                <div class="alert alert-success d-none" id="fpAlertSuccess">
+                    <i class="bi bi-check-circle me-1"></i>
+                    If an account exists for that email, a reset link has been sent.
+                </div>
+                <div class="alert alert-danger d-none" id="fpAlertError">
+                    <i class="bi bi-exclamation-octagon me-1"></i>
+                    Could not send reset email. Please try again.
+                </div>
+
+                <form id="forgotForm" novalidate>
+                    <div class="mb-3">
+                        <label class="form-label">Email address</label>
+                        <input type="email" class="form-control" id="fpEmail" placeholder="you@example.com" required>
+                        <div class="invalid-feedback">Please enter a valid email.</div>
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-brand" type="submit">
+                            <i class="bi bi-send me-1"></i>Send reset link
+                        </button>
+                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                            data-bs-target="#loginModal" data-bs-dismiss="modal">
+                            Back to Log in
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Reset Password MODAL -->
+    <div class="modal fade auth-modal" id="resetModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title">
+                        <i class="bi bi-shield-lock me-2"></i>Set a new password
+                    </h5>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+    
+                <div class="modal-body">
+                    <div class="small muted mb-3">Enter and confirm a strong password for your account.</div>
+    
+                    <!-- alerts -->
+                    <div class="alert alert-success d-none" id="rpAlertSuccess">
+                        <i class="bi bi-check2-circle me-1"></i>
+                        Password updated. You can now sign in.
+                    </div>
+                    <div class="alert alert-danger d-none" id="rpAlertError">
+                        <i class="bi bi-exclamation-octagon me-1"></i>
+                        Reset failed. Your link may have expired. Request a new one.
+                    </div>
+    
+                    <form id="resetForm" novalidate>
+                        <div class="mb-3">
+                            <label class="form-label">New password</label>
+                            <input type="password" class="form-control" id="rpNew" minlength="8" placeholder="••••••••"
+                                required>
+                            <div class="invalid-feedback">Minimum 8 characters.</div>
                         </div>
-                        <div class="col-md-7">
-                            <div class="p-4">
-                                <div class="d-flex align-items-center justify-content-between mb-3">
-                                    <h5 class="m-0">Welcome to TPT</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-
-                                <ul class="nav nav-tabs auth-tabs mb-3" role="tablist">
-                                    <li class="nav-item" role="presentation"><button class="nav-link active"
-                                            id="signin-tab" data-bs-toggle="tab" data-bs-target="#signin" type="button"
-                                            role="tab">Sign
-                                            In</button></li>
-                                    <li class="nav-item" role="presentation"><button class="nav-link" id="signup-tab"
-                                            data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab">Sign
-                                            Up</button></li>
-                                </ul>
-
-                                <div class="tab-content">
-                                    <!-- Sign In -->
-                                    <div class="tab-pane fade show active" id="signin" role="tabpanel">
-                                        <form id="signInForm" class="needs-validation" novalidate>
-                                            <div class="mb-3">
-                                                <label class="form-label">Email</label>
-                                                <input id="signInEmail" type="email" class="form-control" required>
-                                                <div class="invalid-feedback">Please enter your email.</div>
-                                            </div>
-                                            <div class="mb-3 position-relative">
-                                                <label class="form-label">Password</label>
-                                                <input id="signInPassword" type="password" class="form-control"
-                                                    required>
-                                                <button type="button" class="btn btn-sm btn-outline-light"
-                                                    id="toggleSignInPwd"
-                                                    style="position:absolute;right:8px;top:28px;">Show</button>
-                                                <div class="invalid-feedback">Enter your password.</div>
-                                            </div>
-
-                                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                                <div class="form-check">
-                                                    <input id="rememberMe" class="form-check-input" type="checkbox">
-                                                    <label class="form-check-label muted">Remember me</label>
-                                                </div>
-                                                <a href="#" id="forgotLink" class="small">Forgot password?</a>
-                                            </div>
-
-                                            <div class="d-grid gap-2">
-                                                <button class="btn btn-brand" type="submit"><i
-                                                        class="bi bi-box-arrow-in-right me-2"></i>Sign In</button>
-                                                <button class="btn btn-outline-light" type="button" id="toSignUp">Create
-                                                    an
-                                                    account</button>
-                                            </div>
-                                        </form>
-                                    </div>
-
-                                    <!-- Sign Up -->
-                                    <div class="tab-pane fade" id="signup" role="tabpanel">
-                                        <form id="signUpForm" class="needs-validation" novalidate>
-                                            <div class="mb-3">
-                                                <label class="form-label">Full name</label>
-                                                <input id="suName" type="text" class="form-control" required>
-                                                <div class="invalid-feedback">Your full name, please.</div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Email</label>
-                                                <input id="suEmail" type="email" class="form-control" required>
-                                                <div class="invalid-feedback">Enter a valid email.</div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">Password</label>
-                                                <input id="suPassword" type="password" class="form-control"
-                                                    minlength="8" required>
-                                                <div class="form-text muted">Choose at least 8 characters.</div>
-                                                <div class="invalid-feedback">Pick a secure password.</div>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label class="form-label">I am here to</label>
-                                                <select id="suRole" class="form-select" required>
-                                                    <option value="" disabled selected>Choose…</option>
-                                                    <option>Request help</option>
-                                                    <option>Provide help</option>
-                                                    <option>Volunteer</option>
-                                                </select>
-                                                <div class="invalid-feedback">Select an option.</div>
-                                            </div>
-
-                                            <div class="d-grid gap-2">
-                                                <button class="btn btn-brand" type="submit"><i
-                                                        class="bi bi-person-plus me-2"></i>Create account</button>
-                                                <button class="btn btn-outline-light" type="button" id="toSignIn">Back
-                                                    to
-                                                    sign in</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-
-                                <div class="text-center muted small mt-3">By joining, you agree to follow our published
-                                    policies and community rules.</div>
+                        <div class="mb-3">
+                            <label class="form-label">Confirm new password</label>
+                            <input type="password" class="form-control" id="rpNew2" placeholder="Re-enter password"
+                                required>
+                            <div class="invalid-feedback">Passwords must match.</div>
+                        </div>
+                        <div class="d-grid gap-2">
+                            <button class="btn btn-brand" type="submit">
+                                <i class="bi bi-check2-circle me-1"></i>Reset password
+                            </button>
+                            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                data-bs-target="#loginModal" data-bs-dismiss="modal">
+                                Back to Log in
+                            </button>
+                        </div>
+                        <div class="mutedmuted mt-2">Use 12+ characters with letters, numbers, and
+                            symbols.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sign Up MODAL -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title">
+                        <i class="bi bi-person-plus me-2"></i>Sign up — Create Account
+                    </h5>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+    
+                <div class="modal-body">
+                    <form id="registerForm" class="needs-validation" novalidate>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label" for="suName">Full name</label>
+                                <input id="suName" type="text" class="form-control" required>
                             </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="suEmail">Email</label>
+                                <input id="suEmail" type="email" class="form-control" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="suPassword">Password</label>
+                                <input id="suPassword" type="password" class="form-control" minlength="6" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="suIban">Bank account (IBAN / CLABE)</label>
+                                <input id="suIban" type="text" class="form-control" required>
+                            </div>
+    
+                            <div class="col-12">
+                                <div class="muted mb-2">
+                                    By registering you accept the rules and terms of TPT. Participation involves risk.
+                                </div>
+                                <div class="d-grid gap-2 d-md-flex">
+                                    <button class="btn btn-brand" type="submit">Create account</button>
+                                    <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
+                                        data-bs-target="#loginModal" data-bs-dismiss="modal">
+                                        Already have an account?
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+    
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- CREATE REQUEST MODAL -->
+    <div class="modal fade" id="requestModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 d-flex justify-content-between align-items-center">
+                    <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Create Request</h5>
+                    <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal"
+                        aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="requestForm">
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Amount (MXN)</label>
+                            <input type="number" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Bank details</label>
+                            <textarea class="form-control" rows="2" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Reason / Description</label>
+                            <textarea class="form-control" rows="4" required></textarea>
+                        </div>
+                        <div class="d-grid gap-2 d-md-flex">
+                            <button class="btn btn-brand" type="submit">Publish request</button>
+                            <button type="button" class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- POLICIES & SAFEGUARDS -->
+<div class="offcanvas offcanvas-end policy-canvas" id="policiesCanvas" tabindex="-1">
+    <div class="offcanvas-header border-0">
+        <div>
+            <h5 class="offcanvas-title fw-bold">
+                <i class="bi bi-shield-check me-2 text-accent"></i>Policies & Safeguards
+            </h5>
+            <div class="small muted">Transparency • Protection • Accountability</div>
+        </div>
+        <!-- ✳️ Custom Close Button -->
+        <button type="button" class="btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="offcanvas"
+            aria-label="Close">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
+
+    <div class="offcanvas-body pt-0">
+        <div class="policy-list-wrap">
+            <ul class="policy-list">
+                <li><strong>No investment products</strong>; all contributions are gifts.</li>
+                <li><strong>No referral or multi-level payouts</strong> — we reject pyramid models.</li>
+                <li><strong>Contribution caps</strong> with cooling-off periods to protect donors.</li>
+                <li><strong>Dual approvals</strong> and layered anti-fraud verification.</li>
+                <li><strong>Privacy-first</strong> approach: anonymized public listings, explicit consent required.</li>
+                <li><strong>Transparent reporting</strong>: quarterly summaries, open ledgers, independent reviews.</li>
+            </ul>
+
+            <div class="policy-note mt-4">
+                <i class="bi bi-info-circle me-2 text-accent1"></i>
+                <span class="small muted">These policies evolve through community votes and audits.</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- AUTH MODAL (Sign In / Sign Up) -->
+    <div class="modal fade auth-modal" id="authModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content p-0">
+                <div class="row g-0">
+                    <!-- left visual column for larger screens -->
+                    <div class="col-md-5 d-none d-md-block"
+                        style="background-image:linear-gradient(180deg, rgba(102,224,255,.06), rgba(167,243,208,.03)), url('https://images.unsplash.com/photo-1520975911606-2c12c2e1e4c2?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=93d2d21d1e5c6f1'); background-size:cover; border-top-left-radius:14px; border-bottom-left-radius:14px;">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-3">
+                                <h5 class="m-0">Welcome to TPT</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+
+                            <ul class="nav nav-tabs auth-tabs mb-3" role="tablist">
+                                <li class="nav-item" role="presentation"><button class="nav-link active" id="signin-tab"
+                                        data-bs-toggle="tab" data-bs-target="#signin" type="button" role="tab">Sign
+                                        In</button></li>
+                                <li class="nav-item" role="presentation"><button class="nav-link" id="signup-tab"
+                                        data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab">Sign
+                                        Up</button></li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <!-- Sign In -->
+                                <div class="tab-pane fade show active" id="signin" role="tabpanel">
+                                    <form id="signInForm" class="needs-validation" novalidate>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input id="signInEmail" type="email" class="form-control" required>
+                                            <div class="invalid-feedback">Please enter your email.</div>
+                                        </div>
+                                        <div class="mb-3 position-relative">
+                                            <label class="form-label">Password</label>
+                                            <input id="signInPassword" type="password" class="form-control" required>
+                                            <button type="button" class="btn btn-sm btn-outline-light"
+                                                id="toggleSignInPwd"
+                                                style="position:absolute;right:8px;top:28px;">Show</button>
+                                            <div class="invalid-feedback">Enter your password.</div>
+                                        </div>
+
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="form-check">
+                                                <input id="rememberMe" class="form-check-input" type="checkbox">
+                                                <label class="form-check-label muted">Remember me</label>
+                                            </div>
+                                            <a href="#" id="forgotLink" class="small">Forgot password?</a>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-brand" type="submit"><i
+                                                    class="bi bi-box-arrow-in-right me-2"></i>Sign In</button>
+                                            <button class="btn btn-outline-light" type="button" id="toSignUp">Create an
+                                                account</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Sign Up -->
+                                <div class="tab-pane fade" id="signup" role="tabpanel">
+                                    <form id="signUpForm" class="needs-validation" novalidate>
+                                        <div class="mb-3">
+                                            <label class="form-label">Full name</label>
+                                            <input id="suName" type="text" class="form-control" required>
+                                            <div class="invalid-feedback">Your full name, please.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Email</label>
+                                            <input id="suEmail" type="email" class="form-control" required>
+                                            <div class="invalid-feedback">Enter a valid email.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Password</label>
+                                            <input id="suPassword" type="password" class="form-control" minlength="8"
+                                                required>
+                                            <div class="mutedmuted">Choose at least 8 characters.
+                                            </div>
+                                            <div class="invalid-feedback">Pick a secure password.</div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">I am here to</label>
+                                            <select id="suRole" class="form-select" required>
+                                                <option value="" disabled selected>Choose…</option>
+                                                <option>Request help</option>
+                                                <option>Provide help</option>
+                                                <option>Volunteer</option>
+                                            </select>
+                                            <div class="invalid-feedback">Select an option.</div>
+                                        </div>
+
+                                        <div class="d-grid gap-2">
+                                            <button class="btn btn-brand" type="submit"><i
+                                                    class="bi bi-person-plus me-2"></i>Create account</button>
+                                            <button class="btn btn-outline-light" type="button" id="toSignIn">Back to
+                                                sign in</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <div class="text-center muted small mt-3">By joining, you agree to follow our
+                                published
+                                policies and community rules.</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Dashboard Modal (sample) -->
-        <div class="modal fade" id="dashboardModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-centered">
-                <div class="modal-content shadow-lg border-0">
-                    <div class="modal-header border-0">
-                        <h5 class="modal-title">
-                            <i class="bi bi-bar-chart-line-fill text-primary me-2"></i>
-                            TPT Transparency Dashboard — Sample Overview
-                        </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
+    <!-- Dashboard Modal (sample) -->
+    <div class="modal fade" id="dashboardModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content shadow-lg border-0">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title">
+                        <i class="bi bi-bar-chart-line-fill text-primary me-2"></i>
+                        TPT Transparency Dashboard — Sample Overview
+                    </h5>
 
-                    <div class="modal-body">
-                        <div class="row g-4 text-center">
-                            <div class="col-md-4">
-                                <div class="cardx p-4 h-100 rounded-4 shadow-sm">
-                                    <div class="stat fw-bold fs-3 text-success" id="kpi1">₱0</div>
-                                    <div class="muted small text-uppercase">Total Donations This Month</div>
-                                    <div class="progress mt-3" style="height: 6px;">
-                                        <div class="progress-bar bg-success" style="width: 70%;"></div>
-                                    </div>
-                                </div>
-                            </div>
+                    <button type="button" class=" btn-close   btn btn-outline-light btn-sm rounded-circle" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
 
-                            <div class="col-md-4">
-                                <div class="cardx p-4 h-100 rounded-4 shadow-sm">
-                                    <div class="stat fw-bold fs-3 text-danger" id="kpi2">₱0</div>
-                                    <div class="muted small text-uppercase">Funds Distributed</div>
-                                    <div class="progress mt-3" style="height: 6px;">
-                                        <div class="progress-bar bg-danger" style="width: 60%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-4">
-                                <div class="cardx p-4 h-100 rounded-4 shadow-sm">
-                                    <div class="stat fw-bold fs-3 text-primary" id="kpi3">0%</div>
-                                    <div class="muted small text-uppercase">Fulfillment Rate</div>
-                                    <div class="progress mt-3" style="height: 6px;">
-                                        <div class="progress-bar bg-primary" style="width: 80%;"></div>
-                                    </div>
+                <div class="modal-body">
+                    <div class="row g-4 text-center">
+                        <div class="col-md-4">
+                            <div class="cardx p-4 h-100 rounded-4 shadow-sm">
+                                <div class="stat fw-bold fs-3 text-success" id="kpi1">₱0</div>
+                                <div class="muted small text-uppercase">Total Donations This Month</div>
+                                <div class="progress mt-3" style="height: 6px;">
+                                    <div class="progress-bar bg-success" style="width: 70%;"></div>
                                 </div>
                             </div>
                         </div>
 
+                        <div class="col-md-4">
+                            <div class="cardx p-4 h-100 rounded-4 shadow-sm">
+                                <div class="stat fw-bold fs-3 text-danger" id="kpi2">₱0</div>
+                                <div class="muted small text-uppercase">Funds Distributed</div>
+                                <div class="progress mt-3" style="height: 6px;">
+                                    <div class="progress-bar bg-danger" style="width: 60%;"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="cardx p-4 h-100 rounded-4 shadow-sm">
+                                <div class="stat fw-bold fs-3 text-primary" id="kpi3">0%</div>
+                                <div class="muted small text-uppercase">Fulfillment Rate</div>
+                                <div class="progress mt-3" style="height: 6px;">
+                                    <div class="progress-bar bg-primary" style="width: 80%;"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Floating CTA -->
-        <div style="position:fixed;right:20px;bottom:20px;z-index:1100">
-            <button class="btn btn-brand btn-lg shadow" data-bs-toggle="modal" data-bs-target="#registerModal"><i
-                    class="bi bi-chat-dots me-2"></i>Join / Request Help</button>
-        </div>
+    <!-- Floating CTA -->
+    <div style="position:fixed;right:20px;bottom:20px;z-index:1100">
+        <button class="btn btn-brand btn-lg shadow" data-bs-toggle="modal" data-bs-target="#registerModal"><i
+                class="bi bi-chat-dots me-2"></i>Join / Request Help</button>
+    </div>
 
 
     </main>

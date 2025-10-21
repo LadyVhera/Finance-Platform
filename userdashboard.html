@@ -24,6 +24,19 @@
             color: var(--ink);
         }
 
+        /* Make the Bootstrap close button white, then blue on hover */
+.btn-close-white {
+  filter: invert(1); /* keeps it white on dark backgrounds */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-close-white:hover {
+  filter: none; /* removes white inversion */
+  color: var(--accent1); /* use Bootstrap’s primary blue */
+  background-color: var(--accent1);
+  border-radius: 50%;
+}
+
         /* FIX: give sidebar a real background and its own stacking context */
         .sidebar {
             width: 280px;
@@ -863,8 +876,10 @@
                                         <button class="btn btn-sm btn-outline-light" data-bs-toggle="modal"
                                             data-bs-target="#modalSendHelp"><i
                                                 class="bi bi-arrow-up-right-circle me-1"></i>Send Help</button>
-                                        <a class="btn btn-sm btn-outline-light" href="./aboutus.html" target="_blank"><i
-                                                class="bi bi-graph-up-arrow me-1"></i>About & Transparency</a>
+                                        <button class="btn btn-sm btn-outline-light" id="openPoliciesBtn">
+                                            <i class="bi bi-graph-up-arrow me-1"></i>About & Transparency
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -1320,7 +1335,7 @@
                         </div>
                     </div>
                 </section>
-
+<!-- Policies -->
             <section class="tab-pane fade" id="tab-policies" role="tabpanel" aria-labelledby="tablink-policies">
                 <div class="policy-wrap">
                     <!-- Sidebar TOC -->
@@ -1510,7 +1525,6 @@
                     </main>
                 </div>
             </section>
-
                 <!-- SUPPORT -->
                 <section class="tab-pane fade" id="tab-support" role="tabpanel" aria-labelledby="tablink-support">
                     <div class="cardx sup-hero p-3 mb-3">
@@ -2468,9 +2482,9 @@
 
 
         // Run in console on the Major Admin device/page to approve someone
-        const k = 'tpt_admin_approvals', m = JSON.parse(localStorage.getItem(k) || '{}');
-        m['newadmin@example.com'] = true;
-        localStorage.setItem(k, JSON.stringify(m));
+        // const k = 'tpt_admin_approvals', m = JSON.parse(localStorage.getItem(k) || '{}');
+        // m['newadmin@example.com'] = true;
+        // localStorage.setItem(k, JSON.stringify(m));
 
 
         // --- Utilities & Seed ---
@@ -3141,10 +3155,10 @@
                     const remember = document.getElementById("rememberMe")?.checked;
 
                     // Basic client validation (swap for your real API if you have one)
-                    if (!email || !/^\S+@\S+\.\S+$/.test(email) || !pass) {
-                        alert("Please enter a valid admin email and password.");
-                        return;
-                    }
+                    // if (!email || !/^\S+@\S+\.\S+$/.test(email) || !pass) {
+                    //     alert("Please enter a valid admin email and password.");
+                    //     return;
+                    // }
 
                     // TODO: call your backend here. On success, set flags:
                     state.isAdmin = true;
@@ -3788,6 +3802,84 @@
   // Init
   loadDraft();
   updateCount();
+})();
+
+
+document.addEventListener("DOMContentLoaded", function() {
+  const openPoliciesBtn = document.getElementById("openPoliciesBtn");
+
+  openPoliciesBtn.addEventListener("click", function() {
+    // Trigger the policies tab
+    const policiesTab = document.querySelector('[data-bs-target="#tab-policies"]');
+    if (policiesTab) {
+      const tab = new bootstrap.Tab(policiesTab);
+      tab.show();
+    }
+
+    // Wait a moment for the tab to render, then scroll to the top
+    setTimeout(() => {
+      const policiesSection = document.querySelector('#tab-policies');
+      if (policiesSection) policiesSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  });
+});
+
+        (function () {
+  const qs = (s, r=document)=>r.querySelector(s);
+
+        // IDs/Selectors used below — adjust if yours differ
+        const navCollapse   = qs('#mainNav .navbar-collapse');   // Bootstrap collapse inside your #mainNav
+        const navToggler    = qs('#mainNav .navbar-toggler');     // Mobile toggler button
+        const sidebar       = qs('#sidebar');                     // Your aside nav
+        const sidebarToggle = qs('#btnToggleSidebar');            // Button that opens sidebar
+
+        function closeNavbar(){
+    if (!navCollapse) return;
+        // If using Bootstrap collapse:
+        if (navCollapse.classList.contains('show')) {
+      try {bootstrap.Collapse.getOrCreateInstance(navCollapse).hide(); } catch { }
+    }
+  }
+        function closeSidebar(){
+    if (sidebar?.classList.contains('open')) {
+            sidebar.classList.remove('open');
+    }
+  }
+
+        function clickedOutside(target, el, exceptBtn){
+    if (!el) return false;
+        if (el.contains(target)) return false;
+        if (exceptBtn && exceptBtn.contains(target)) return false;
+        return true;
+  }
+
+        function handleGlobalClose(e){
+    const t = e.target;
+
+        // Close navbar if click is outside collapse & toggler
+        if (navCollapse?.classList.contains('show') &&
+        clickedOutside(t, navCollapse, navToggler)) {
+            closeNavbar();
+    }
+
+        // Close sidebar if click is outside sidebar & its opener
+        if (sidebar?.classList.contains('open') &&
+        clickedOutside(t, sidebar, sidebarToggle)) {
+            closeSidebar();
+    }
+  }
+
+        // Mouse + touch
+        document.addEventListener('click', handleGlobalClose, true);
+        document.addEventListener('touchstart', handleGlobalClose, {passive: true, capture: true });
+
+  // Esc key closes whichever is open
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape'){
+            closeNavbar();
+        closeSidebar();
+    }
+  });
 })();
 
 

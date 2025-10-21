@@ -1,5 +1,57 @@
 
         AOS.init({ once: true, duration: 700, offset: 80 });
+  // ⭐ AOS
+  AOS.init({ once: true, duration: 700, offset: 80 });
+
+  // Navbar shadow on scroll
+  window.addEventListener("scroll", () => {
+    const nav = document.getElementById("mainNav");
+    if (nav) nav.classList.toggle("scrolled", window.scrollY > 10);
+  });
+
+  // ---- ScrollSpy with dynamic offset
+  (function () {
+    const nav = document.getElementById('mainNav');
+
+    function getOffset(){
+      // add a little breathing room
+      return (nav ? nav.offsetHeight : 0) + 16;
+    }
+    function applyOffsetVar(){
+      document.documentElement.style.setProperty('--nav-offset', getOffset() + 'px');
+    }
+
+    let spy;
+    function initSpy(){
+      if (spy) spy.dispose?.();
+      spy = new bootstrap.ScrollSpy(document.body, {
+        target: '#mainNav',
+        offset: getOffset()
+      });
+    }
+
+    // initial
+    applyOffsetVar();
+    initSpy();
+
+    // refresh on layout changes
+    const refresh = () => {
+      applyOffsetVar();
+      spy.refresh?.();
+    };
+
+    window.addEventListener('resize', refresh);
+    window.addEventListener('load', refresh);
+    document.addEventListener('aos:in', refresh);
+
+    // Optional: log which link activated
+    // document.body.addEventListener('activate.bs.scrollspy', (e) => {
+    //   console.log('Active:', e.target);
+    // });
+  })();
+
+  // ✅ Your smooth-scroll code is fine; no change needed
+  // (It already accounts for nav height and collapses the mobile menu.)
 
         // Navbar shadow on scroll
         window.addEventListener("scroll", () => {
@@ -366,3 +418,125 @@ document.getElementById("loginForm").addEventListener("submit", function (e) {
     alert("Please enter valid credentials");
   }
 });
+
+// ===== Set your redirect target here =====
+const DASHBOARD_URL = "userdashboard.html"; // change to "admindashboard.html" if that's your target
+
+// NOTE: We REUSE your existing helpers to avoid conflicts:
+//   const USERS_KEY = 'tpt_demo_users_v2';
+//   function getUsers() { ... }
+//   function saveUser(u) { ... }
+
+(function () {
+  const form = document.getElementById('registerForm');
+  if (!form) return;
+
+  // Ensure we don't double-bind if this script is evaluated more than once
+  form.replaceWith(form.cloneNode(true));
+  const freshForm = document.getElementById('registerForm');
+
+  freshForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    // HTML5 validation
+    if (!freshForm.checkValidity()) {
+      freshForm.classList.add('was-validated');
+      return;
+    }
+
+    const name = document.getElementById('suName').value.trim();
+    const email = document.getElementById('suEmail').value.trim().toLowerCase();
+    const password = document.getElementById('suPassword').value;
+    const iban = document.getElementById('suIban').value.trim();
+
+    // Check duplicates in demo store
+    const users = (typeof getUsers === 'function') ? getUsers() : [];
+    if (users.some(u => u.email === email)) {
+      alert('An account with that email already exists (demo).');
+      return;
+    }
+
+    // Save user (demo)
+    if (typeof saveUser === 'function') {
+      saveUser({ name, email, password, iban, role: 'member', created: Date.now() });
+    } else {
+      // Fallback if helpers were removed
+      try {
+        const key = (typeof USERS_KEY !== 'undefined') ? USERS_KEY : 'tpt_demo_users_v2';
+        const arr = JSON.parse(localStorage.getItem(key) || '[]');
+        arr.push({ name, email, password, iban, role: 'member', created: Date.now() });
+        localStorage.setItem(key, JSON.stringify(arr));
+      } catch {}
+    }
+
+    // Start demo session
+    localStorage.setItem('tpt_demo_session', JSON.stringify({ email, name, role: 'member' }));
+
+    // Close modal (non-blocking)
+    const modalEl = document.getElementById('registerModal');
+    if (modalEl) bootstrap.Modal.getOrCreateInstance(modalEl).hide();
+
+    // ✅ Redirect to dashboard
+    window.location.href = DASHBOARD_URL;
+  });
+})();
+
+
+(function () {
+  const qs = (s, r=document)=>r.querySelector(s);
+
+  // IDs/Selectors used below — adjust if yours differ
+  const navCollapse   = qs('#mainNav .navbar-collapse');   // Bootstrap collapse inside your #mainNav
+  const navToggler    = qs('#mainNav .navbar-toggler');     // Mobile toggler button
+  const sidebar       = qs('#sidebar');                     // Your aside nav
+  const sidebarToggle = qs('#btnToggleSidebar');            // Button that opens sidebar
+
+  function closeNavbar(){
+    if (!navCollapse) return;
+    // If using Bootstrap collapse:
+    if (navCollapse.classList.contains('show')) {
+      try { bootstrap.Collapse.getOrCreateInstance(navCollapse).hide(); } catch {}
+    }
+  }
+  function closeSidebar(){
+    if (sidebar?.classList.contains('open')) {
+      sidebar.classList.remove('open');
+    }
+  }
+
+  function clickedOutside(target, el, exceptBtn){
+    if (!el) return false;
+    if (el.contains(target)) return false;
+    if (exceptBtn && exceptBtn.contains(target)) return false;
+    return true;
+  }
+
+  function handleGlobalClose(e){
+    const t = e.target;
+
+    // Close navbar if click is outside collapse & toggler
+    if (navCollapse?.classList.contains('show') &&
+        clickedOutside(t, navCollapse, navToggler)) {
+      closeNavbar();
+    }
+
+    // Close sidebar if click is outside sidebar & its opener
+    if (sidebar?.classList.contains('open') &&
+        clickedOutside(t, sidebar, sidebarToggle)) {
+      closeSidebar();
+    }
+  }
+
+  // Mouse + touch
+  document.addEventListener('click', handleGlobalClose, true);
+  document.addEventListener('touchstart', handleGlobalClose, { passive: true, capture: true });
+
+  // Esc key closes whichever is open
+  document.addEventListener('keydown', (e)=>{
+    if (e.key === 'Escape'){
+      closeNavbar();
+      closeSidebar();
+    }
+  });
+})();
+

@@ -252,6 +252,13 @@
 </head>
 
 <body>
+
+    <script>
+        if (localStorage.getItem("isAdmin") !== "true") {
+            window.location.href = "./"; // or your user dashboard
+        }
+    </script>
+
     <div class="layout">
         <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
@@ -714,6 +721,14 @@
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+       
+  // simple front-end gate; replace with server auth in production
+                if (localStorage.getItem("isAdmin") !== "true") {
+                    window.location.href = "./"; // or wherever your user dashboard/login is
+  }
+        
+
         // ---------- Utilities ----------
         const fmt = v => '₱' + Number(v).toLocaleString();
         const uid = p => p + Math.random().toString(36).slice(2, 7).toUpperCase();

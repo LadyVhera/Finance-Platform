@@ -440,6 +440,159 @@
             background: var(--panel);
             /* …rest unchanged… */
         }
+
+        /* ========== Policies Layout ========== */
+.policy-wrap{display:grid;grid-template-columns:310px 1fr;gap:16px}
+.policy-card{background:var(--card);border:1px solid rgba(255,255,255,.06);border-radius:14px}
+.policy-hero{background:linear-gradient(135deg,rgba(0,224,255,.06),rgba(0,114,255,.05)) var(--card)}
+.policy-badge{border:1px solid rgba(102,224,255,.25);background:rgba(255,255,255,.06);color:#d5e9ff;border-radius:999px;padding:.15rem .5rem}
+.policy-toc{position:sticky;top:74px;height:max-content}
+.policy-nav .nav-link{display:flex;align-items:center;gap:.5rem;padding:.45rem .6rem;border-radius:10px;color:#cbd5e1}
+.policy-nav .nav-link:hover{background:rgba(255,255,255,.06);color:#fff}
+.policy-nav .nav-link.active{background:linear-gradient(90deg,rgba(0,114,255,.18),rgba(0,224,255,.18));border:1px solid rgba(0,224,255,.18);color:#fff}
+.policy-h{position:relative;margin:0 0 .5rem}
+.policy-h::after{content:"";display:block;height:2px;margin:.6rem 0 0;background:linear-gradient(90deg,transparent,var(--accent1),transparent);border-radius:6px}
+.policy-list{margin:0;padding-left:1.1rem}
+.policy-list li{margin:.25rem 0}
+.policy-steps{margin:0 0 .75rem;padding-left:1.2rem}
+.policy-callout{display:flex;gap:.6rem;align-items:flex-start;border:1px dashed rgba(255,255,255,.22);background:rgba(0,224,255,.05);border-radius:12px;padding:.75rem;margin:.6rem 0}
+.policy-callout.warn{background:rgba(255,153,0,.06);border-color:rgba(255,153,0,.28)}
+.policy-quote{border-left:3px solid var(--accent1);padding-left:.75rem;color:#cfe6ff}
+.policy-tip{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:12px}
+
+@media (max-width: 991.98px){
+  .policy-wrap{grid-template-columns:1fr}
+  .policy-toc{position:static}
+}
+
+/* Slim progress bar pinned to top of the policies content */
+.policy-progress{
+  position: sticky; top: 0; left: 0; right: 0; height: 3px;
+  background: rgba(255,255,255,.06); border-radius: 999px; overflow: hidden; z-index: 5;
+  margin: -6px 0 10px; /* visually tucked into card spacing */
+}
+.policy-progress__bar{
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg,var(--accent2),var(--accent1));
+  transition: width .15s linear;
+}
+
+/* Floating accept bar that appears mid-scroll */
+.policy-cta{
+  position: sticky; bottom: 12px; z-index: 6;
+  background: rgba(12,18,36,.75); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 12px; padding: .6rem .75rem; display:none;
+}
+.policy-cta.show{ display:block; }
+
+/* TOC polish: pill bullets and glow on active */
+.policy-nav .nav-link{
+  position: relative; padding-left: 2rem;
+}
+.policy-nav .nav-link::before{
+  content:""; position:absolute; left:.6rem; top:50%; transform:translateY(-50%);
+  width:.5rem; height:.5rem; border-radius:50%;
+  background: rgba(255,255,255,.25);
+  box-shadow: 0 0 0 0 rgba(0,224,255,.0);
+  transition: all .2s ease;
+}
+.policy-nav .nav-link.active::before{
+  background: var(--accent1);
+  box-shadow: 0 0 0 6px rgba(0,224,255,.12);
+}
+
+/* Lists with subtle check icons */
+.policy-list{ list-style: none; padding-left: 0; }
+.policy-list li{
+  position: relative; padding-left: 1.35rem; margin:.35rem 0;
+}
+.policy-list li::before{
+  content: "✓";
+  position: absolute; left:0; top:.05rem;
+  font-weight: 800; font-size: .9rem; color: #bff3ff;
+}
+
+/* Section cards: a little depth and border glow on hover */
+.policy-card{
+  box-shadow: 0 10px 30px rgba(1,9,26,.25);
+  transition: transform .16s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.policy-card:hover{
+  transform: translateY(-2px);
+  border-color: rgba(0,224,255,.18);
+  box-shadow: 0 16px 50px rgba(1,9,26,.45);
+}
+
+/* Mobile: tuck the CTA nicely */
+@media (max-width: 991.98px){
+  .policy-cta{ bottom: 8px; }
+}
+
+/* === Support page polish === */
+.sup-hero{
+  background: radial-gradient(800px 240px at 10% -30%, rgba(0,224,255,.08), transparent 60%) var(--card);
+  border: 1px solid rgba(255,255,255,.06);
+}
+.sup-dot{
+  width:10px;height:10px;border-radius:50%;
+  background: #30d158; box-shadow: 0 0 12px rgba(48,209,88,.55);
+  display:inline-block;
+}
+.sup-pill{
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.04);
+  color:#d5e9ff;border-radius:999px;padding:.2rem .6rem;font-size:.8rem;
+}
+.sup-quick .dropdown-item{ font-size:.9rem; }
+.sup-quick .dropdown-item i{ opacity:.9; }
+
+#formSupport .form-control, #formSupport .form-select{ background:#0b142b; }
+#supFileName{ opacity:.8; }
+
+.sup-faq .accordion-button{
+  background: rgba(255,255,255,.02);
+  color: var(--ink);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.sup-faq .accordion-button:not(.collapsed){
+  background: rgba(0,224,255,.06);
+  color:#e6f5ff;
+}
+
+/* “Still need help” card subtle lift */
+.sup-helpmore{ border:1px dashed rgba(255,255,255,.12); background: rgba(255,255,255,.03); }
+
+/* === Fix: FAQ text contrast & backgrounds === */
+.sup-faq .accordion-item { border: 1px solid rgba(255,255,255,.08); border-radius: 12px; overflow: hidden; }
+.sup-faq .accordion-item + .accordion-item { margin-top: .5rem; }
+
+.sup-faq .accordion-button{
+  background: #0b142b;           /* darker panel */
+  color: #e6f0ff;                /* high-contrast text */
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.sup-faq .accordion-button:not(.collapsed){
+  background: #0e1d3d;           /* active darker */
+  color: #eaf4ff;
+}
+
+/* Chevron icon visible on dark */
+.sup-faq .accordion-button::after{
+  filter: invert(1) opacity(.9); /* make the caret light */
+}
+
+/* Body text contrast */
+.sup-faq .accordion-body{
+  background: #0b142b;           /* match header bg */
+  color: #cfe6ff;                /* readable body copy */
+}
+
+/* Optional: remove bright focus ring on dark */
+.sup-faq .accordion-button:focus{
+  box-shadow: 0 0 0 .16rem rgba(0,224,255,.15);
+}
+
     </style>
 
 </head>
@@ -1168,204 +1321,408 @@
                     </div>
                 </section>
 
-                <!-- POLICIES (rich content from your materials) -->
-                <section class="tab-pane fade" id="tab-policies" role="tabpanel" aria-labelledby="tablink-policies">
-                    <div class="cardx p-3">
-                        <h5 class="section-title">Policies & Safeguards</h5>
-                        <p class="muted">TPT is a voluntary mutual-aid community — <strong>not</strong> an investment
-                            product. Contributions are gifts to meet verified needs. No guaranteed returns.</p>
-
-                        <div class="accordion accordion-flush" id="polAcc">
-                            <!-- Ideology -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pIdeology">Ideology</button></h2>
-                                <div id="pIdeology" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body muted">
-                                        TPT brings dignity-first help in a world where many feel left behind. We aim to
-                                        build an alternative rooted in equality, sincerity, transparency, and matching
-                                        recognition to real effort — so people can pursue education, business, travel,
-                                        and family life in abundance.
-                                    </div>
-                                </div>
+            <section class="tab-pane fade" id="tab-policies" role="tabpanel" aria-labelledby="tablink-policies">
+                <div class="policy-wrap">
+                    <!-- Sidebar TOC -->
+                    <aside class="policy-toc">
+                        <div class="policy-card p-3">
+                            <div class="d-flex align-items-center gap-2 mb-2">
+                                <i class="bi bi-shield-check fs-5"></i>
+                                <h6 class="mb-0">Policies & Safeguards</h6>
                             </div>
-                            <!-- What is Money -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pMoney">What is Money?</button></h2>
-                                <div id="pMoney" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body muted">
-                                        From the shared materials: money can become “shackles” when access is scarce.
-                                        TPT doesn’t sell money or returns — we coordinate <em>mutual aid</em> so members
-                                        can solve urgent, real problems quickly and accountably.
-                                    </div>
-                                </div>
+                            <div class="policy-meta small muted mb-2">
+                                <span class="badge policy-badge">V1.4</span>
+                                <span>Last updated: <span id="polLastUpdated">—</span></span>
                             </div>
-                            <!-- History -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pHistory">History (as shared by
-                                        TPT)</button></h2>
-                                <div id="pHistory" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body muted">
-                                        <ul>
-                                            <li><strong>2016:</strong> Initial community effort started abroad; later
-                                                reorganized.</li>
-                                            <li><strong>2019–2024:</strong> Online relaunch; cross-region participation
-                                                and community events; emphasis on transparency.</li>
-                                        </ul>
-                                        <div class="small muted">Narrative provided by the community; verify
-                                            independently before external citation.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Internal Unit / Bonuses -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pUnits">Internal Unit & Bonuses
-                                        (Illustrative Only)</button></h2>
-                                <div id="pUnits" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body">
-                                        <div class="alert alert-note small muted mb-2"><i
-                                                class="bi bi-exclamation-octagon me-1"></i>Any mentions of
-                                            <strong>FELICIDAD</strong> or “bonuses” are community-provided, illustrative
-                                            ideas — <strong>not</strong> guarantees, not investment returns, and not
-                                            promises.
-                                        </div>
-                                        <ul class="muted">
-                                            <li><strong>FELICIDAD:</strong> an internal recognition unit historically
-                                                mentioned to record contributions. Treat as symbolic, not a currency.
-                                            </li>
-                                            <li><strong>Registration/Testimonial/Referral recognitions:</strong> framed
-                                                as trust-building gestures with strict caps and transparency, never
-                                                pay-to-recruit.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Rules -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pRules">Rules</button></h2>
-                                <div id="pRules" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body muted">
-                                        <ul>
-                                            <li>Adults only.</li>
-                                            <li>Provide pledged help within 72 hours.</li>
-                                            <li>No multiple accounts or shared details.</li>
-                                            <li>Family referrals follow published caps.</li>
-                                            <li>Privacy-safe proofs; consent before publishing stories.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Stability -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pStability">Conditions of
-                                        Stability</button></h2>
-                                <div id="pStability" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body muted">
-                                        The community is stable when members act in good faith: verify needs, avoid
-                                        over-promising, diversify donations across categories, and invite responsibly.
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Risks & Legality -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pRiskLaw">Risks & Legality</button>
-                                </h2>
-                                <div id="pRiskLaw" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body">
-                                        <p class="muted">Participation carries risk. Contributions are gifts, not
-                                            investments; there are no guaranteed returns. Always follow your country’s
-                                            laws.</p>
-                                        <div class="alert alert-note small muted"><i
-                                                class="bi bi-shield-exclamation me-1"></i>Start small. Read all rules.
-                                            Ask questions in Messages or Support.</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Testimonials -->
-                            <div class="accordion-item">
-                                <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                        data-bs-toggle="collapse" data-bs-target="#pTestimonials">Testimonials
-                                        (Privacy-Safe)</button></h2>
-                                <div id="pTestimonials" class="accordion-collapse collapse" data-bs-parent="#polAcc">
-                                    <div class="accordion-body muted">
-                                        “I’m a construction worker… thanks to TPT I can provide for my family.” — Marcus
-                                        M. •
-                                        “I’m tired of being paid peanuts… I want to change the world.” — Lucas H.,
-                                        Jiquipilco •
-                                        “My father advised me to join, and he was right.” — Anonymous
-                                    </div>
+                            <nav class="nav flex-column gap-1 policy-nav" id="policyNav">
+                                <a class="nav-link" href="#pol-overview"><i class="bi bi-info-circle"></i> Overview</a>
+                                <a class="nav-link" href="#pol-eligibility"><i class="bi bi-person-check"></i> Eligibility</a>
+                                <a class="nav-link" href="#pol-conduct"><i class="bi bi-emoji-smile"></i> Code of Conduct</a>
+                                <a class="nav-link" href="#pol-contrib"><i class="bi bi-gift"></i> Contributions & Recognition</a>
+                                <a class="nav-link" href="#pol-privacy"><i class="bi bi-incognito"></i> Privacy & Data</a>
+                                <a class="nav-link" href="#pol-risk"><i class="bi bi-exclamation-octagon"></i> Risks & Law</a>
+                                <a class="nav-link" href="#pol-reporting"><i class="bi bi-flag"></i> Reporting & Disputes</a>
+                                <a class="nav-link" href="#pol-testimonials"><i class="bi bi-chat-quote"></i> Testimonials</a>
+                            </nav>
+            
+                            <div class="mt-3">
+                                <label class="d-flex align-items-center gap-2 small">
+                                    <input id="polAccept" type="checkbox" class="form-check-input" />
+                                    I’ve read & agree
+                                </label>
+                                <div class="d-grid gap-2 mt-2">
+                                    <button id="polPrintBtn" class="btn btn-ghost btn-sm"><i class="bi bi-printer me-1"></i>Print /
+                                        Save PDF</button>
+                                    <button id="polContinueBtn" class="btn btn-sm"><i class="bi bi-check2-circle me-1"></i>Accept &
+                                        Continue</button>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </section>
+            
+                        <div class="policy-tip policy-card p-3 mt-2">
+                            <div class="d-flex gap-2">
+                                <i class="bi bi-lightbulb"></i>
+                                <div class="small">
+                                    Tip: Use the <em>Accept & Continue</em> button once. We’ll remember it on this device.
+                                </div>
+                            </div>
+                        </div>
+                    </aside>
+            
+                    <!-- Main content -->
+                    <main class="policy-content" data-bs-spy="scroll" data-bs-target="#policyNav" data-bs-smooth-scroll="true"
+                        tabindex="0">
+                        <!-- Hero notice -->
+                        <div class="policy-hero policy-card p-4 mb-3">
+                            <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+                                <h4 class="mb-0">Read Before You Participate</h4>
+                                <div class="d-flex align-items-center gap-2 small">
+                                    <span class="badge policy-badge">Mutual Aid</span>
+                                    <span class="badge policy-badge">No Investment</span>
+                                    <span class="badge policy-badge">Transparency</span>
+                                </div>
+                            </div>
+                            <p class="muted mt-2 mb-0">
+                                TPT is a voluntary mutual-aid community. Contributions are <strong>gifts</strong> to meet verified
+                                needs.
+                                <u>Not</u> a bank, lender, or investment. <u>No guaranteed returns.</u> Always follow your local
+                                laws.
+                            </p>
+                        </div>
+            
+                        <!-- Sections -->
+                        <section id="pol-overview" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">1) Overview & Principles</h5>
+                            <p class="muted">
+                                We coordinate dignity-first help where access to resources is uneven. We value equality, sincerity,
+                                transparency,
+                                accountability, and recognition of real effort. TPT does <em>not</em> sell money or promise profits.
+                            </p>
+                            <div class="policy-callout">
+                                <i class="bi bi-cash-coin"></i>
+                                <div>
+                                    <strong>On “money”.</strong> Our materials describe scarcity as “shackles.” Our response is
+                                    mutual aid with
+                                    clear rules—<em>not</em> profit schemes.
+                                </div>
+                            </div>
+                            <ul class="small muted mb-0">
+                                <li><strong>2016:</strong> Early grassroots effort; later reorganized.</li>
+                                <li><strong>2019–2024:</strong> Online relaunch; cross-region participation; transparency focus.
+                                </li>
+                            </ul>
+                        </section>
+            
+                        <section id="pol-eligibility" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">2) Eligibility & Accounts</h5>
+                            <ul class="policy-list">
+                                <li>Adults only; real information when verification is required.</li>
+                                <li>One account per person; no shared accounts or recycled IDs.</li>
+                                <li>Referrals allowed within published caps and anti-abuse rules.</li>
+                                <li>Comply with your local laws and platform policies.</li>
+                            </ul>
+                        </section>
+            
+                        <section id="pol-conduct" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">3) Code of Conduct</h5>
+                            <ul class="policy-list">
+                                <li><strong>Respect & safety:</strong> no harassment, hate, threats, fraud, or scams.</li>
+                                <li><strong>Accuracy:</strong> represent needs truthfully; share proofs privately; get consent
+                                    before publication.</li>
+                                <li><strong>Timeliness:</strong> provide pledged help within 72 hours.</li>
+                                <li><strong>No returns:</strong> never promise profits, “doublers,” or guaranteed bonuses.</li>
+                                <li><strong>Transparency:</strong> keep receipts; cooperate with checks to prevent misuse.</li>
+                            </ul>
+                        </section>
+            
+                        <section id="pol-contrib" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">4) Contributions, Recognition & Stability</h5>
+                            <div class="policy-callout warn">
+                                <i class="bi bi-exclamation-octagon"></i>
+                                <div>
+                                    Mentions of <strong>FELICIDAD</strong> or “bonuses” are symbolic community recognition.
+                                    They are <strong>not</strong> guarantees, not currency, and have no cash-out value.
+                                </div>
+                            </div>
+                            <ul class="policy-list">
+                                <li><strong>Gifts only:</strong> contributions are voluntary and final.</li>
+                                <li><strong>Recognition units:</strong> symbolic acknowledgments; no resale or expectation of
+                                    return.</li>
+                                <li><strong>Healthy system:</strong> diversify help; avoid over-promising; invite responsibly.</li>
+                            </ul>
+                        </section>
+            
+                        <section id="pol-privacy" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">5) Privacy, Data & Media</h5>
+                            <ul class="policy-list">
+                                <li>Use privacy-safe proofs (blur/redact) when possible.</li>
+                                <li>Obtain explicit consent before publishing stories, images, or receipts.</li>
+                                <li>Collect the minimum data needed for verification and anti-abuse.</li>
+                                <li>We honor reasonable takedown requests for personal content shared on TPT channels.</li>
+                            </ul>
+                        </section>
+            
+                        <section id="pol-risk" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">6) Risks & Legal Notices</h5>
+                            <p class="muted">
+                                Participation carries risk. This is not an investment; there are no guaranteed returns. Follow your
+                                country’s laws
+                                (including tax rules) and platform policies.
+                            </p>
+                            <div class="policy-tip policy-card p-3 mb-0">
+                                <div class="d-flex gap-2">
+                                    <i class="bi bi-life-preserver"></i>
+                                    <div class="small">Start small. Read all rules. Ask in <strong>Messages</strong> or
+                                        <strong>Support</strong> if unsure.</div>
+                                </div>
+                            </div>
+                        </section>
+            
+                        <section id="pol-reporting" class="policy-card p-3 mb-3">
+                            <h5 class="policy-h">7) Reporting & Dispute Resolution</h5>
+                            <ol class="policy-steps">
+                                <li>Contact the other party first (if safe).</li>
+                                <li>Open a <strong>Support</strong> ticket with receipts/screenshots.</li>
+                                <li>Compliance review may warn, pause, or remove accounts to prevent abuse.</li>
+                            </ol>
+                            <div class="small muted">We may cooperate with lawful requests from authorities to prevent fraud or
+                                harm.</div>
+                        </section>
+            
+                        <section id="pol-testimonials" class="policy-card p-3">
+                            <h5 class="policy-h">8) Community Testimonials (Privacy-Safe)</h5>
+                            <blockquote class="policy-quote">
+                                “I’m a construction worker… thanks to TPT I can provide for my family.” — Marcus M.
+                            </blockquote>
+                            <blockquote class="policy-quote">
+                                “I’m tired of being paid peanuts… I want to change the world.” — Lucas H., Jiquipilco
+                            </blockquote>
+                            <blockquote class="policy-quote mb-0">
+                                “My father advised me to join, and he was right.” — Anonymous
+                            </blockquote>
+                        </section>
+            
+                        <!-- Footer line -->
+                        <div class="d-flex justify-content-between align-items-center mt-3 small muted">
+                            <span>Questions? Visit <a href="#" id="polGoSupport">Support</a> or send a message.</span>
+                            <span>&copy; <span id="polYear">—</span> TPT Community</span>
+                        </div>
+                    </main>
+                </div>
+            </section>
 
                 <!-- SUPPORT -->
                 <section class="tab-pane fade" id="tab-support" role="tabpanel" aria-labelledby="tablink-support">
-                    <div class="row g-3">
-                        <div class="col-lg-6">
-                            <div class="cardx p-3 h-100">
-                                <h6>Contact Support</h6>
-                                <form id="formSupport" class="mt-2">
-                                    <div class="mb-2"><label class="form-label small">Subject</label><input
-                                            class="form-control" id="supSub"></div>
-                                    <div class="mb-2"><label class="form-label small">Category</label>
-                                        <select class="form-select" id="supCat">
-                                            <option>General</option>
-                                            <option>Verification</option>
-                                            <option>Payments</option>
-                                            <option>Abuse/Report</option>
-                                        </select>
-                                    </div>
-                                    <div class="mb-2"><label class="form-label small">Message</label><textarea
-                                            class="form-control" id="supMsg" rows="4"></textarea></div>
-                                    <button class="btn btn-sm" type="submit"><i
-                                            class="bi bi-envelope me-1"></i>Send</button>
-                                </form>
+                    <div class="cardx sup-hero p-3 mb-3">
+                        <div class="d-flex flex-wrap align-items-center gap-3">
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="sup-dot"></span>
+                                <div>
+                                    <div class="small muted">Support Status</div>
+                                    <div class="fw-semibold">Online • Normal load</div>
+                                </div>
+                            </div>
+                            <div class="sup-pill">Avg. first response <strong>~2–6 hours</strong></div>
+                            <div class="sup-pill">Uptime <strong>99.94%</strong></div>
+                            <div class="ms-auto">
+                                <button class="btn btn-ghost btn-sm" id="supCopyEmail"><i
+                                        class="bi bi-envelope me-1"></i>support@tpt.example</button>
                             </div>
                         </div>
+                    </div>
+                
+                    <div class="row g-3">
+                        <!-- Contact Support -->
                         <div class="col-lg-6">
                             <div class="cardx p-3 h-100">
-                                <h6>Help Center</h6>
-                                <div class="accordion accordion-flush" id="helpFaq">
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                                data-bs-toggle="collapse" data-bs-target="#hf1">Is this an
-                                                investment?</button></h2>
-                                        <div id="hf1" class="accordion-collapse collapse">
-                                            <div class="accordion-body muted small">No — contributions are gifts to meet
-                                                verified needs. There are no guaranteed returns.</div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                                data-bs-toggle="collapse" data-bs-target="#hf2">How are requests
-                                                verified?</button></h2>
-                                        <div id="hf2" class="accordion-collapse collapse">
-                                            <div class="accordion-body muted small">Applicants submit documents;
-                                                reviewers validate details according to public criteria.</div>
-                                        </div>
-                                    </div>
-                                    <div class="accordion-item">
-                                        <h2 class="accordion-header"><button class="accordion-button collapsed"
-                                                data-bs-toggle="collapse" data-bs-target="#hf3">Are there fees?</button>
-                                        </h2>
-                                        <div id="hf3" class="accordion-collapse collapse">
-                                            <div class="accordion-body muted small">Only payment-processor and small
-                                                compliance costs. We publish summaries.</div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0">Contact Support</h6>
+                                    <div class="dropdown">
+                                        <button class="btn btn-ghost btn-sm dropdown-toggle" data-bs-toggle="dropdown"><i
+                                                class="bi bi-lightning-charge me-1"></i>Quick templates</button>
+                                        <div class="dropdown-menu dropdown-menu-end sup-quick">
+                                            <a class="dropdown-item" data-sup-template="verification"><i
+                                                    class="bi bi-shield-check me-2"></i>Verification issue</a>
+                                            <a class="dropdown-item" data-sup-template="payment"><i
+                                                    class="bi bi-credit-card me-2"></i>Payment/receipt help</a>
+                                            <a class="dropdown-item" data-sup-template="abuse"><i class="bi bi-flag me-2"></i>Abuse
+                                                report</a>
+                                            <a class="dropdown-item" data-sup-template="general"><i
+                                                    class="bi bi-chat-dots me-2"></i>General question</a>
                                         </div>
                                     </div>
                                 </div>
+                
+                                <form id="formSupport" class="mt-3">
+                                    <div class="row g-2">
+                                        <div class="col-12">
+                                            <label class="form-label small">Your email</label>
+                                            <input class="form-control" id="supEmail" type="email" placeholder="you@example.com"
+                                                required>
+                                        </div>
+                                        <div class="col-8">
+                                            <label class="form-label small">Subject</label>
+                                            <input class="form-control" id="supSub" maxlength="120" required>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="form-label small">Category</label>
+                                            <select class="form-select" id="supCat">
+                                                <option>General</option>
+                                                <option>Verification</option>
+                                                <option>Payments</option>
+                                                <option>Abuse/Report</option>
+                                                <option>Account</option>
+                                                <option>Technical</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                
+                                    <div class="row g-2 mt-1">
+                                        <div class="col-6">
+                                            <label class="form-label small">Priority</label>
+                                            <select class="form-select" id="supPri">
+                                                <option value="Normal" selected>Normal</option>
+                                                <option value="High">High</option>
+                                                <option value="Urgent">Urgent</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="form-label small">Attachment (optional)</label>
+                                            <input class="form-control" type="file" id="supFile"
+                                                accept=".png,.jpg,.jpeg,.pdf,.doc,.docx,.txt">
+                                            <div class="small muted mt-1" id="supFileName"></div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="mt-2">
+                                        <label class="form-label small d-flex justify-content-between">
+                                            <span>Message</span>
+                                            <span class="small muted"><span id="supCount">0</span>/1000</span>
+                                        </label>
+                                        <textarea class="form-control" id="supMsg" rows="5" maxlength="1000" required></textarea>
+                                    </div>
+                
+                                    <div class="d-flex gap-2 mt-3">
+                                        <button class="btn btn-sm" type="submit" id="supSendBtn">
+                                            <i class="bi bi-envelope me-1"></i><span>Send</span>
+                                        </button>
+                                        <button class="btn btn-ghost btn-sm" type="button" id="supResetDraft"><i
+                                                class="bi bi-eraser me-1"></i>Clear</button>
+                                    </div>
+                
+                                    <!-- Success mini-receipt -->
+                                    <div class="alert alert-note mt-3 d-none" id="supSuccess">
+                                        <i class="bi bi-check2-circle me-1"></i>
+                                        Ticket created: <strong id="supTicketId"></strong>. We emailed you a confirmation (demo).
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                
+                        <!-- Help Center / FAQ -->
+                        <div class="col-lg-6">
+                            <div class="cardx p-3 h-100">
+                                <div class="d-flex align-items-center gap-2 mb-2">
+                                    <h6 class="mb-0">Help Center</h6>
+                                    <span class="chip">FAQ</span>
+                                    <div class="ms-auto" style="width: 220px;">
+                                        <div class="input-group input-group-sm">
+                                            <span class="input-group-text bg-transparent text-light border-0"><i
+                                                    class="bi bi-search"></i></span>
+                                            <input class="form-control" id="faqSearch" placeholder="Search FAQ…">
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <div class="accordion accordion-flush sup-faq" id="helpFaq">
+                                    <!-- Each .accordion-item should have a data-tags attribute for search -->
+                                    <div class="accordion-item" data-tags="investment return profit guarantee">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#hf1">
+                                                Is this an investment?
+                                            </button>
+                                        </h2>
+                                        <div id="hf1" class="accordion-collapse collapse">
+                                            <div class="accordion-body muted small">
+                                                No — contributions are gifts to meet verified needs. There are no guaranteed returns.
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="accordion-item" data-tags="verify documents criteria review">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#hf2">
+                                                How are requests verified?
+                                            </button>
+                                        </h2>
+                                        <div id="hf2" class="accordion-collapse collapse">
+                                            <div class="accordion-body muted small">
+                                                Applicants submit documents; reviewers validate details according to public criteria.
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="accordion-item" data-tags="fees charges processor summary">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#hf3">
+                                                Are there fees?
+                                            </button>
+                                        </h2>
+                                        <div id="hf3" class="accordion-collapse collapse">
+                                            <div class="accordion-body muted small">
+                                                Only payment-processor and small compliance costs. We publish summaries.
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="accordion-item" data-tags="account login password reset 2fa">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#hf4">
+                                                I can’t log in — what should I try?
+                                            </button>
+                                        </h2>
+                                        <div id="hf4" class="accordion-collapse collapse">
+                                            <div class="accordion-body muted small">
+                                                Try password reset, ensure 2FA code time is correct, and check spam for emails. If still
+                                                blocked, contact Support with device details.
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="accordion-item" data-tags="payment receipt proof refund dispute">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#hf5">
+                                                Payment sent but not reflected — what now?
+                                            </button>
+                                        </h2>
+                                        <div id="hf5" class="accordion-collapse collapse">
+                                            <div class="accordion-body muted small">
+                                                Upload a receipt and the reference ID. Processing can take up to 24h depending on the
+                                                network/processor.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                                <!-- Still need help -->
+                                <div class="sup-helpmore cardx p-2 mt-3">
+                                    <div class="d-flex flex-wrap align-items-center gap-2">
+                                        <i class="bi bi-headset fs-5"></i>
+                                        <div class="small">
+                                            Still need help? Open a ticket above or message us via <a href="#"
+                                                id="openMessagesFromSupport">Messages</a>.
+                                        </div>
+                                        <div class="ms-auto">
+                                            <span class="sup-pill"><i class="bi bi-clock me-1"></i>7am–9pm (your time)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                
                             </div>
                         </div>
                     </div>
                 </section>
+
 
                 <!-- PROFILE TAB (drop-in) -->
                 <div class="tab-pane fade" id="tab-profile" role="tabpanel" aria-labelledby="tablink-profile"
@@ -1814,68 +2171,75 @@
                             <input class="form-check-input" type="checkbox" id="rememberMe">
                             <label class="form-check-label" for="rememberMe">Remember me</label>
                         </div>
-                        <button type="button" class="btn btn-link p-0 text-decoration-none" data-bs-toggle="modal"
-                            data-bs-target="#forgotModal" data-bs-dismiss="modal" style="color:#cfe6ff">Forgot
-                            password?</button>
+                        <a href="#" data-bs-toggle="modal" data-bs-target="#forgotModal" data-bs-dismiss="modal"
+                            style="color:#cfe6ff;">
+                            Forgot password?
+                        </a>
+
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer d-flex align-items-center justify-content-between">
                     <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
-                    <button class="btn btn-sm btn-primary" type="submit"><i
-                            class="bi bi-box-arrow-in-right me-1"></i>Login</button>
+
+                    <!-- add the slash link to open signup -->
+                    <span class="small me-auto ms-3">/
+                        <a href="#" id="linkOpenAdminSignup" class="text-decoration-none" style="color:#cfe6ff">Sign up
+                            as admin</a>
+                    </span>
+
+                    <button class="btn btn-sm btn-primary" type="submit">
+                        <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                    </button>
                 </div>
+
             </form>
         </div>
     </div>
 
-
-    <!-- Logged Out options -->
-    <div class="modal fade" id="modalLoggedOut" tabindex="-1" aria-hidden="true">
+    <!-- Admin Sign-Up -->
+    <div class="modal fade" id="modalAdminSignup" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="background: var(--card); color: var(--ink);">
+            <form class="modal-content" id="formAdminSignup" style="background: var(--card); color: var(--ink);">
                 <div class="modal-header">
-                    <h6 class="modal-title"><i class="bi bi-door-closed me-2"></i>You’re logged out</h6>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">Choose what you’d like to do next.</div>
-                <div class="modal-footer d-flex justify-content-between">
-                    <a href="login.html" class="btn btn-sm btn-primary"><i class="bi bi-box-arrow-in-right me-1"></i>Log
-                        back in</a>
-                    <a href="index.html" class="btn btn-sm btn-outline-light"><i class="bi bi-house-door me-1"></i>Home
-                        page</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Admin Login -->
-    <!-- <div class="modal fade" id="modalAdminLogin" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <form class="modal-content" id="formAdminLogin" style="background: var(--card); color: var(--ink);">
-                <div class="modal-header">
-                    <h6 class="modal-title"><i class="bi bi-person-lock me-2"></i>Admin Login</h6>
+                    <h6 class="modal-title"><i class="bi bi-shield-plus me-2"></i>Admin Sign-Up</h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <div class="mb-2">
+                        <label class="form-label small">Full name</label>
+                        <input type="text" class="form-control" id="suName" required>
+                    </div>
+                    <div class="mb-2">
                         <label class="form-label small">Admin Email</label>
-                        <input type="email" class="form-control" id="adminEmail" placeholder="admin@example.com"
-                            required>
+                        <input type="email" class="form-control" id="suEmail" placeholder="admin@example.com" required>
                     </div>
                     <div class="mb-2">
                         <label class="form-label small">Password</label>
-                        <input type="password" class="form-control" id="adminPassword" placeholder="••••••••" required>
+                        <input type="password" class="form-control" id="suPassword" minlength="6" required>
                     </div>
-                    <div class="form-text">Demo only: no real backend; we simulate success.</div>
+                    <div class="mb-2">
+                        <label class="form-label small">Reason / Role Scope</label>
+                        <textarea class="form-control" id="suReason" rows="2"
+                            placeholder="Why do you need admin access?" required></textarea>
+                    </div>
+                    <div class="mb-2">
+                        <label class="form-label small">Invitation / Approval Code (optional)</label>
+                        <input type="text" class="form-control" id="suInvite" placeholder="e.g. INVITE-ADMIN">
+                    </div>
+                    <div class="small muted">
+                        Your request may require approval by the Major Admin. You’ll be redirected automatically once
+                        approved.
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-sm btn-secondary" data-bs-dismiss="modal" type="button">Cancel</button>
-                    <button class="btn btn-sm btn-primary" type="submit"><i
-                            class="bi bi-box-arrow-in-right me-1"></i>Login</button>
+                    <button class="btn btn-sm btn-primary" type="submit">
+                        <i class="bi bi-person-check me-1"></i>Request Access
+                    </button>
                 </div>
             </form>
         </div>
-    </div> -->
+    </div>
 
     <!-- Forgot Password MODAL -->
     <div class="modal fade auth-modal" id="forgotModal" tabindex="-1" aria-hidden="true">
@@ -1990,6 +2354,125 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- <script src="generalscript.js"></script> -->
     <script>
+
+        // Redirect target after successful admin sign-in
+        const ADMIN_DASH_URL = "admindashboard.html";
+
+        // --- Admin approvals storage (demo) ---
+        const ADMIN_KEYS = {
+            APPS: 'tpt_admin_apps',         // Array of applications [{name,email,reason,at,status}]
+            APPROVALS: 'tpt_admin_approvals',// Map: { "email@x.com": true }
+            PENDING_EMAIL: 'tpt_admin_pending_email' // last email awaiting approval for this device
+        };
+
+        // Helper: check if an email is approved by Major Admin
+        function isAdminApproved(email) {
+            const map = JSON.parse(localStorage.getItem(ADMIN_KEYS.APPROVALS) || '{}');
+            return !!map[(email || '').toLowerCase()];
+        }
+
+        // Open Sign-Up from the slash link in the Login footer
+        document.getElementById('linkOpenAdminSignup')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            sessionStorage.setItem('pendingRole', 'Admin'); // remember intent to become admin
+            bootstrap.Modal.getInstance(document.getElementById('modalAdminLogin'))?.hide();
+            bootstrap.Modal.getOrCreateInstance(document.getElementById('modalAdminSignup')).show();
+        });
+
+        // Handle Admin Sign-Up submit
+        document.getElementById('formAdminSignup')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('suName').value.trim();
+            const email = document.getElementById('suEmail').value.trim();
+            const pass = document.getElementById('suPassword').value.trim();
+            const reason = document.getElementById('suReason').value.trim();
+            const invite = document.getElementById('suInvite').value.trim();
+
+            if (!name || !/^\S+@\S+\.\S+$/.test(email) || !pass || pass.length < 6 || !reason) {
+                alert('Please fill all required fields (valid email, 6+ char password).');
+                return;
+            }
+
+            // Save/append application
+            const apps = JSON.parse(localStorage.getItem(ADMIN_KEYS.APPS) || '[]');
+            apps.unshift({ name, email, reason, at: new Date().toISOString(), status: 'pending' });
+            localStorage.setItem(ADMIN_KEYS.APPS, JSON.stringify(apps));
+
+            // Optional instant-approval via invite code (you can remove this if not desired)
+            // Example: INVITE-ADMIN -> auto-approve:
+            if (invite === 'INVITE-ADMIN') {
+                const approvals = JSON.parse(localStorage.getItem(ADMIN_KEYS.APPROVALS) || '{}');
+                approvals[email.toLowerCase()] = true;
+                localStorage.setItem(ADMIN_KEYS.APPROVALS, JSON.stringify(approvals));
+            }
+
+            // If Major Admin has already approved this email, promote & redirect
+            if (isAdminApproved(email)) {
+                // Reuse your existing state model safely:
+                try {
+                    const state = {
+                        set isAdmin(v) { localStorage.setItem("isAdmin", v ? "true" : "false"); },
+                        set authed(v) { v ? localStorage.setItem("authToken", "demo-token") : localStorage.removeItem("authToken"); },
+                        set role(r) { localStorage.setItem("role", r); },
+                        get user() { try { return JSON.parse(localStorage.getItem("user")) || null; } catch { return null; } },
+                        set user(u) { localStorage.setItem("user", JSON.stringify(u)); },
+                    };
+                    state.isAdmin = true;
+                    state.authed = true;
+                    state.role = "Admin";
+                    state.user = { ...(state.user || {}), name, email };
+                } catch { }
+
+                // close modal then go
+                bootstrap.Modal.getInstance(document.getElementById('modalAdminSignup'))?.hide();
+                sessionStorage.removeItem('pendingRole');
+                window.location.href = ADMIN_DASH_URL;
+                return;
+            }
+
+            // Otherwise, mark as pending and inform the user
+            localStorage.setItem(ADMIN_KEYS.PENDING_EMAIL, email);
+            bootstrap.Modal.getInstance(document.getElementById('modalAdminSignup'))?.hide();
+            alert('Your admin request was submitted and is pending approval by the Major Admin.');
+        });
+
+        // On load, if a user has a pending signup and has since been approved, auto-promote
+        (function checkPendingApprovalOnLoad() {
+            const email = localStorage.getItem(ADMIN_KEYS.PENDING_EMAIL);
+            if (!email) return;
+            if (!isAdminApproved(email)) return;
+
+            // Promote now
+            try {
+                const state = {
+                    set isAdmin(v) { localStorage.setItem("isAdmin", v ? "true" : "false"); },
+                    set authed(v) { v ? localStorage.setItem("authToken", "demo-token") : localStorage.removeItem("authToken"); },
+                    set role(r) { localStorage.setItem("role", r); },
+                    get user() { try { return JSON.parse(localStorage.getItem("user")) || null; } catch { return null; } },
+                    set user(u) { localStorage.setItem("user", JSON.stringify(u)); },
+                };
+                state.isAdmin = true;
+                state.authed = true;
+                state.role = "Admin";
+                state.user = { ...(state.user || {}), name: (state.user?.name || "Administrator"), email };
+            } catch { }
+
+            localStorage.removeItem(ADMIN_KEYS.PENDING_EMAIL);
+            const pending = sessionStorage.getItem('pendingRole');
+            sessionStorage.removeItem('pendingRole');
+            if (pending === 'Admin') {
+                window.location.href = ADMIN_DASH_URL;
+            }
+        })();
+
+
+        // Run in console on the Major Admin device/page to approve someone
+        const k = 'tpt_admin_approvals', m = JSON.parse(localStorage.getItem(k) || '{}');
+        m['newadmin@example.com'] = true;
+        localStorage.setItem(k, JSON.stringify(m));
+
+
         // --- Utilities & Seed ---
         const fmtMoney = v => '₱' + Number(v).toLocaleString();
         const uid = p => p + Math.random().toString(36).slice(2, 7).toUpperCase();
@@ -2059,7 +2542,7 @@
 
         // Load profile
         const profile = JSON.parse(localStorage.getItem(LS.PROFILE));
-        document.getElementById('usernameTop').textContent = profile.name || 'Friend';
+        document.getElementById('usernameTop').textContent = profile.name || 'Dear Friend!';
         document.getElementById('badgeRank').textContent = 'Member';
 
         // KPIs from transactions
@@ -2615,17 +3098,25 @@
             }
 
             function wireRoleSwitcher() {
+                const qs = (s, r = document) => r.querySelector(s);
+                const qsa = (s, r = document) => [...r.querySelectorAll(s)];
+
                 qsa(".role-option").forEach(a => {
                     a.addEventListener("click", (e) => {
                         e.preventDefault();
-                        const newRole = a.dataset.role;
+                        const newRole = a.dataset.role; // "Member" or "Admin"
                         state.role = newRole;
+
                         if (newRole === "Admin" && !state.isAdmin) {
-                            // Require admin login first
+                            // Remember the user intended to switch to Admin, then show your existing modal
+                            sessionStorage.setItem("pendingRole", "Admin");
                             bootstrap.Modal.getOrCreateInstance(qs("#modalAdminLogin")).show();
                             return;
                         }
-                        renderUserBits();
+
+                        // If already admin or switching back to Member, just update UI
+                        const badge = qs("#badgeRank");
+                        if (badge) badge.textContent = newRole;
                     });
                 });
             }
@@ -2641,19 +3132,38 @@
                     bootstrap.Modal.getOrCreateInstance(adminLoginModal).show();
                 });
 
-                // Fake admin login submit (demo)
-                formAdminLogin?.addEventListener("submit", (e) => {
+                // Fake/real admin login submit (replace this block in wireAvatarMenu)
+                formAdminLogin?.addEventListener("submit", async (e) => {
                     e.preventDefault();
-                    // In real app: validate against backend
-                    const email = qs("#adminEmail").value.trim();
-                    const pass = qs("#adminPassword").value.trim();
-                    if (email && pass) {
-                        state.isAdmin = true;
-                        state.authed = true;
-                        state.role = "Admin";
-                        state.user = { ...(state.user || {}), name: state.user?.name || "Administrator", email };
-                        bootstrap.Modal.getInstance(adminLoginModal).hide();
-                        renderUserBits();
+
+                    const email = document.getElementById("adminEmail")?.value.trim();
+                    const pass = document.getElementById("adminPassword")?.value.trim();
+                    const remember = document.getElementById("rememberMe")?.checked;
+
+                    // Basic client validation (swap for your real API if you have one)
+                    if (!email || !/^\S+@\S+\.\S+$/.test(email) || !pass) {
+                        alert("Please enter a valid admin email and password.");
+                        return;
+                    }
+
+                    // TODO: call your backend here. On success, set flags:
+                    state.isAdmin = true;
+                    state.authed = true;
+                    state.role = "Admin";
+                    state.user = { ...(state.user || {}), name: state.user?.name || "Administrator", email };
+
+                    if (remember) localStorage.setItem("adminEmailRemember", email);
+                    else localStorage.removeItem("adminEmailRemember");
+
+                    // Close modal & refresh UI bits
+                    bootstrap.Modal.getInstance(adminLoginModal)?.hide();
+                    renderUserBits();
+
+                    // If the modal was opened by choosing Admin, redirect now
+                    const pending = sessionStorage.getItem("pendingRole");
+                    sessionStorage.removeItem("pendingRole");
+                    if (pending === "Admin") {
+                        window.location.href = ADMIN_DASH_URL; // -> admindashboard.html
                     }
                 });
 
@@ -2683,13 +3193,28 @@
             document.addEventListener("DOMContentLoaded", () => {
                 // Seed demo user if none
                 if (!state.user) state.user = { name: "Friend", email: "friend@example.com" };
-                // If authed not set, assume authed in dashboard view (demo); set to true to keep Logout flow consistent
+
+                // If authed not set, assume authed in dashboard view (demo)
                 if (state.authed === false) state.authed = true;
+
+                // ✅ Normalize role on every load/login:
+                // If the user is NOT an approved admin, force role back to "Member"
+                if (localStorage.getItem("isAdmin") !== "true") {
+                    state.role = "Member";
+                }
+
+                // Also make sure the top badge shows Member unless explicitly admin
+                const badge = document.querySelector("#badgeRank");
+                if (badge && localStorage.getItem("isAdmin") !== "true") {
+                    badge.textContent = "Member";
+                }
 
                 renderUserBits();
                 wireRoleSwitcher();
                 wireAvatarMenu();
             });
+
+
         })();
 
 
@@ -2791,6 +3316,479 @@
                 resetModal.show();
             }
         })();
+
+        // ===== PROFILE TAB: Edit / Cancel / Save (with outside-form selects) =====
+        (function () {
+            const pane = document.getElementById('tab-profile');
+            if (!pane) return;
+
+            // Buttons
+            const btnEdit = pane.querySelector('#btnEditProfile');
+            const btnCancel = pane.querySelector('#btnCancelEdit');
+            const btnSave = pane.querySelector('#btnSaveProfile');
+
+            // Form + fields
+            const form = pane.querySelector('#profileForm');
+            const avatarInput = pane.querySelector('#avatarInput');
+            const avatarPrev = pane.querySelector('#avatarPreview');
+            const switch2FA = pane.querySelector('#switch2FA');
+            const switchEmail = pane.querySelector('#switchEmailNotif');
+            const toastEl = document.getElementById('profileToast');
+
+            // ---------- helpers (UPDATED) ----------
+            // Find any control by name whether it's inside the form OR linked via form="profileForm"
+            function findField(name) {
+                return (
+                    pane.querySelector(`#profileForm [name="${name}"]`) ||
+                    pane.querySelector(`[form="profileForm"][name="${name}"]`)
+                );
+            }
+
+            // All editable controls: inside the form OR associated via form="profileForm"
+            const $allEditable = () =>
+                Array.from(
+                    pane.querySelectorAll(
+                        '#profileForm input, #profileForm select, #profileForm textarea, [form="profileForm"]'
+                    )
+                )
+                    .concat([switch2FA, switchEmail, avatarInput])
+                    .filter(Boolean);
+
+            // Snapshot for Cancel
+            let snapshot = null;
+
+            function readForm() {
+                // FormData includes associated controls with form="profileForm"
+                const data = Object.fromEntries(new FormData(form).entries());
+                data.twofa = !!(switch2FA && switch2FA.checked);
+                data.emailNotif = !!(switchEmail && switchEmail.checked);
+                data.avatar = avatarPrev?.src || '';
+                return data;
+            }
+
+            function writeForm(data) {
+                for (const [k, v] of Object.entries(data)) {
+                    const el = findField(k);
+                    if (el) {
+                        // only set if option exists (avoids blanking selects with unexpected values)
+                        if (el.tagName === 'SELECT') {
+                            const has = [...el.options].some(o => o.value === v || o.text === v);
+                            el.value = has ? v : el.value;
+                        } else {
+                            el.value = v;
+                        }
+                    }
+                }
+                if (typeof data.twofa !== 'undefined' && switch2FA) switch2FA.checked = !!data.twofa;
+                if (typeof data.emailNotif !== 'undefined' && switchEmail) switchEmail.checked = !!data.emailNotif;
+                if (data.avatar && avatarPrev) avatarPrev.src = data.avatar;
+            }
+
+            function loadFromStorage() {
+                const LS_PROFILE = JSON.parse(localStorage.getItem('tpt_demo_profile') || '{}');
+                const LS_PREFS = JSON.parse(localStorage.getItem('tpt_demo_prefs') || '{}');
+
+                const [firstName = '', ...rest] = (LS_PROFILE.name || 'Friend').split(' ');
+                const lastName = rest.join(' ') || 'User';
+
+                const data = {
+                    firstName, lastName,
+                    email: LS_PROFILE.email || 'friend@example.com',
+                    phone: LS_PROFILE.phone || '',
+                    country: LS_PROFILE.country || 'Nigeria',
+                    city: LS_PROFILE.city || 'Lagos',
+                    bio: LS_PROFILE.bio || 'Member at TPT México',
+                    // these three are the ones outside the form:
+                    lang: LS_PREFS.lang || 'English',
+                    tz: LS_PROFILE.tz || 'Africa/Lagos (GMT+1)',
+                    theme: LS_PROFILE.theme || 'System',
+                    twofa: !!LS_PROFILE.twofa,
+                    emailNotif: LS_PREFS.email !== undefined ? !!LS_PREFS.email : true,
+                    avatar: LS_PROFILE.avatar || avatarPrev?.src || ''
+                };
+                writeForm(data);
+                return data;
+            }
+
+            function saveToStorage(data) {
+                const profile = {
+                    name: [data.firstName, data.lastName].filter(Boolean).join(' ') || 'Friend',
+                    email: data.email,
+                    phone: data.phone,
+                    city: data.city,
+                    country: data.country,
+                    bio: data.bio,
+                    tz: data.tz,           // save time zone
+                    theme: data.theme,     // save theme
+                    twofa: !!data.twofa,
+                    avatar: data.avatar || avatarPrev?.src || ''
+                };
+                const prefs = {
+                    ...(JSON.parse(localStorage.getItem('tpt_demo_prefs') || '{}')),
+                    email: !!data.emailNotif,
+                    lang: data.lang || 'English' // save language
+                };
+
+                localStorage.setItem('tpt_demo_profile', JSON.stringify(profile));
+                localStorage.setItem('tpt_demo_prefs', JSON.stringify(prefs));
+
+                const usernameTop = document.getElementById('usernameTop');
+                if (usernameTop) usernameTop.textContent = profile.name || 'Friend';
+            }
+
+            function setEditMode(on) {
+                $allEditable().forEach(el => {
+                    if (!el) return;
+                    if (on) el.removeAttribute('disabled');
+                    else el.setAttribute('disabled', 'disabled');
+                });
+
+                if (on) {
+                    btnEdit?.classList.add('d-none');
+                    btnCancel?.classList.remove('d-none');
+                    btnSave?.classList.remove('d-none');
+                } else {
+                    btnEdit?.classList.remove('d-none');
+                    btnCancel?.classList.add('d-none');
+                    btnSave?.classList.add('d-none');
+                }
+            }
+
+            // Avatar preview
+            avatarInput?.addEventListener('change', (e) => {
+                const f = e.target.files?.[0];
+                if (!f) return;
+                const reader = new FileReader();
+                reader.onload = () => { if (avatarPrev) avatarPrev.src = reader.result; };
+                reader.readAsDataURL(f);
+            });
+
+            // Wire buttons
+            btnEdit?.addEventListener('click', () => {
+                snapshot = readForm();
+                setEditMode(true);
+            });
+
+            btnCancel?.addEventListener('click', () => {
+                if (snapshot) writeForm(snapshot);
+                setEditMode(false);
+            });
+
+            btnSave?.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (!form.checkValidity()) { form.classList.add('was-validated'); return; }
+                const data = readForm();
+                saveToStorage(data);
+                setEditMode(false);
+                if (toastEl) bootstrap.Toast.getOrCreateInstance(toastEl).show();
+            });
+
+            // Init
+            loadFromStorage();
+            setEditMode(false);
+        })();
+
+        // ===== CHANGE PASSWORD BUTTON -> OPEN SETTINGS TAB =====
+        document.getElementById("btnChangePassword")?.addEventListener("click", e => {
+            e.preventDefault();
+
+            // Target the sidebar/tab link that opens the Settings tab
+            const tabLink = document.querySelector('#tablink-settings');
+            if (tabLink) {
+                // use Bootstrap Tab API to show it
+                const tab = new bootstrap.Tab(tabLink);
+                tab.show();
+
+                // optional: scroll into view / focus Security section
+                setTimeout(() => {
+                    const secForm = document.getElementById('formSecurity');
+                    secForm?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    secForm?.querySelector('input')?.focus();
+                }, 250);
+            }
+        });
+
+
+        (function(){
+  const ACK_KEY = 'tpt_policy_ack_v1';
+        const lastUpdated = '2025-01-15'; // set your real date here
+
+        // Stamps
+        document.getElementById('polYear')?.replaceChildren(new Date().getFullYear());
+        document.getElementById('polLastUpdated')?.replaceChildren(new Date(lastUpdated).toLocaleDateString());
+
+        // Restore acceptance
+        const accept = document.getElementById('polAccept');
+        if (accept) accept.checked = localStorage.getItem(ACK_KEY) === 'true';
+
+  // Accept & Continue
+  document.getElementById('polContinueBtn')?.addEventListener('click', () => {
+    const c = document.getElementById('polAccept');
+        if (!c?.checked) {alert('Please read and tick “I’ve read & agree”.'); return; }
+        localStorage.setItem(ACK_KEY, 'true');
+
+        // Optional: jump to Support or back to where user came from
+        // new bootstrap.Tab(document.querySelector('#tablink-overview')).show();
+        alert('Thanks! Your acceptance was saved for this device.');
+  });
+
+  // Print / Save
+  document.getElementById('polPrintBtn')?.addEventListener('click', () => window.print());
+
+  // Go to Support tab
+  document.getElementById('polGoSupport')?.addEventListener('click', (e) => {
+            e.preventDefault();
+        const link = document.querySelector('#tablink-support');
+        if (link) new bootstrap.Tab(link).show();
+  });
+
+        // Enable Bootstrap scrollspy (needs container with data-bs-spy)
+        const cont = document.querySelector('.policy-content');
+        if (cont) {
+            bootstrap.ScrollSpy.getInstance(cont) || new bootstrap.ScrollSpy(cont, {
+                target: '#policyNav', rootMargin: '0px 0px -60%'
+            });
+  }
+})();
+
+   
+        (function(){
+  const ACK_KEY = 'tpt_policy_ack_v1';
+
+        // === Reading progress ===
+        const content = document.querySelector('.policy-content');
+        const bar = document.getElementById('polProgressBar');
+        function updateProgress(){
+    if(!content || !bar) return;
+        const s = content.scrollTop;
+        const h = content.scrollHeight - content.clientHeight;
+        const pct = Math.max(0, Math.min(1, h ? s / h : 0));
+        bar.style.width = (pct * 100) + '%';
+        // Show CTA after ~40% read if not yet accepted
+        if (!localStorage.getItem(ACK_KEY)) {
+            document.getElementById('polCta')?.classList.toggle('show', pct > .4);
+    }
+  }
+        content?.addEventListener('scroll', updateProgress);
+        updateProgress();
+
+        // === Mirror checkbox & accept from floating CTA ===
+        const acceptTop = document.getElementById('polAccept');
+        const acceptFloat = document.getElementById('polAccept2');
+        const btnFloat = document.getElementById('polContinueBtn2');
+
+        // Sync initial state
+        if (acceptTop && acceptFloat) acceptFloat.checked = acceptTop.checked;
+
+        function acceptAndStore(){
+    const checked = (acceptTop?.checked || acceptFloat?.checked);
+        if(!checked){alert('Please tick “I agree” first.'); return; }
+        localStorage.setItem(ACK_KEY, 'true');
+        document.getElementById('polCta')?.classList.remove('show');
+        alert('Thanks! Your acceptance was saved on this device.');
+  }
+
+  acceptTop?.addEventListener('change', () => {
+    if (acceptFloat) acceptFloat.checked = acceptTop.checked;
+  });
+  acceptFloat?.addEventListener('change', () => {
+    if (acceptTop) acceptTop.checked = acceptFloat.checked;
+  });
+
+        document.getElementById('polContinueBtn')?.addEventListener('click', acceptAndStore);
+        btnFloat?.addEventListener('click', acceptAndStore);
+})();
+
+        (function(){
+  // ====== Support draft + submit (demo) ======
+  const LS_SUPPORT_TICKETS = 'tpt_support_tickets';
+        const LS_SUPPORT_DRAFT   = 'tpt_support_draft';
+
+  const $ = (s, r=document)=>r.querySelector(s);
+        const emailEl = $('#supEmail');
+        const subEl   = $('#supSub');
+        const catEl   = $('#supCat');
+        const priEl   = $('#supPri');
+        const msgEl   = $('#supMsg');
+        const fileEl  = $('#supFile');
+        const fileNameEl = $('#supFileName');
+        const countEl = $('#supCount');
+        const form    = $('#formSupport');
+        const sendBtn = $('#supSendBtn');
+        const success = $('#supSuccess');
+        const ticketIdEl = $('#supTicketId');
+        const copyBtn = $('#supCopyEmail');
+
+        // Prefill user email if you store it in profile
+        try {
+    const prof = JSON.parse(localStorage.getItem('tpt_demo_profile')||'{ }');
+        if (prof.email && emailEl) emailEl.value = prof.email;
+  } catch { }
+
+  // Autosave draft
+        function saveDraft(){
+    const draft = {
+            email: emailEl?.value || '',
+        sub: subEl?.value || '',
+        cat: catEl?.value || 'General',
+        pri: priEl?.value || 'Normal',
+        msg: msgEl?.value || ''
+    };
+        localStorage.setItem(LS_SUPPORT_DRAFT, JSON.stringify(draft));
+  }
+        function loadDraft(){
+    const d = JSON.parse(localStorage.getItem(LS_SUPPORT_DRAFT) || 'null');
+        if (!d) return;
+        if (emailEl) emailEl.value = d.email || emailEl.value;
+        if (subEl) subEl.value = d.sub || '';
+        if (catEl) catEl.value = d.cat || 'General';
+        if (priEl) priEl.value = d.pri || 'Normal';
+        if (msgEl) msgEl.value = d.msg || '';
+        updateCount();
+  }
+        function clearDraft(){
+            localStorage.removeItem(LS_SUPPORT_DRAFT);
+  }
+
+        function updateCount(){
+    if (!msgEl || !countEl) return;
+        countEl.textContent = String(msgEl.value.length);
+  }
+
+  msgEl?.addEventListener('input', ()=>{updateCount(); saveDraft(); });
+  [emailEl, subEl, catEl, priEl].forEach(el => el?.addEventListener('input', saveDraft));
+  fileEl?.addEventListener('change', ()=>{
+            fileNameEl.textContent = fileEl.files?.[0]?.name ? `Attached: ${fileEl.files[0].name}` : '';
+  });
+
+  // Quick templates
+  document.querySelectorAll('[data-sup-template]').forEach(a=>{
+            a.addEventListener('click', (e) => {
+                const t = a.getAttribute('data-sup-template');
+                if (t === 'verification') {
+                    subEl.value = 'Verification help';
+                    catEl.value = 'Verification';
+                    msgEl.value = 'Hello Support, my verification is pending. I uploaded documents on [date]. Please advise on next steps.';
+                } else if (t === 'payment') {
+                    subEl.value = 'Payment/receipt assistance';
+                    catEl.value = 'Payments';
+                    msgEl.value = 'Hi, I sent a payment for request [ID] on [date]. Attached is the receipt. Could you confirm processing?';
+                } else if (t === 'abuse') {
+                    subEl.value = 'Abuse report';
+                    catEl.value = 'Abuse/Report';
+                    msgEl.value = 'I would like to report a policy violation. Details: [who/what/when]. I consent to share the info privately with reviewers.';
+                } else {
+                    subEl.value = 'Question about my account';
+                    catEl.value = 'Account';
+                    msgEl.value = 'Hello, I have a question about my account settings…';
+                }
+                priEl.value = 'Normal';
+                updateCount(); saveDraft();
+            });
+  });
+
+  // Copy support email
+  copyBtn?.addEventListener('click', async ()=>{
+    try{
+            await navigator.clipboard.writeText('support@tpt.example');
+        const old = copyBtn.innerHTML;
+        copyBtn.innerHTML = '<i class="bi bi-clipboard-check me-1"></i>Copied!';
+      setTimeout(()=> copyBtn.innerHTML = old, 1200);
+    }catch{ }
+  });
+
+  // Submit -> store local "ticket" (demo)
+  form?.addEventListener('submit', async (e)=>{
+            e.preventDefault();
+        if (!form.checkValidity()){form.classList.add('was-validated'); return; }
+
+        // Loading state
+        sendBtn.disabled = true;
+        sendBtn.querySelector('span').textContent = 'Sending…';
+
+    // Simulate network
+    await new Promise(r=>setTimeout(r, 650));
+
+        const id = 'ST-' + Math.random().toString(36).slice(2,7).toUpperCase();
+        const payload = {
+            id,
+            at: new Date().toISOString(),
+        email: emailEl.value.trim(),
+        subject: subEl.value.trim(),
+        category: catEl.value,
+        priority: priEl.value,
+        message: msgEl.value.trim(),
+        file: fileEl.files?.[0]?.name || ''
+    };
+
+        // Save ticket list
+        const all = JSON.parse(localStorage.getItem(LS_SUPPORT_TICKETS) || '[]');
+        all.unshift(payload);
+        localStorage.setItem(LS_SUPPORT_TICKETS, JSON.stringify(all));
+
+        // Show success
+        ticketIdEl.textContent = id;
+        success.classList.remove('d-none');
+
+        // Optionally, also open the Messages tab and start a thread (demo-friendly)
+        try{
+      const MSG = 'tpt_demo_messages';
+        const list = JSON.parse(localStorage.getItem(MSG) || '[]');
+        list.unshift({
+            id, title: `Support: ${payload.subject}`, with: 'Support',
+        last: payload.at, thread: [
+          { me: true, text: payload.message.slice(0,200), at: payload.at }
+        ]
+      });
+      localStorage.setItem(MSG, JSON.stringify(list));
+    }catch{}
+
+    // Reset UI
+    form.reset();
+    fileNameEl.textContent = '';
+    updateCount();
+    clearDraft();
+
+    sendBtn.disabled = false;
+    sendBtn.querySelector('span').textContent = 'Send';
+  });
+
+  // Clear draft button
+  $('#supResetDraft')?.addEventListener('click', ()=>{
+    form.reset();
+    fileNameEl.textContent = '';
+    updateCount();
+    clearDraft();
+  });
+
+  // FAQ search (by text + data-tags)
+  const faqSearch = $('#faqSearch');
+  const faqItems = [...document.querySelectorAll('#helpFaq .accordion-item')];
+  faqSearch?.addEventListener('input', ()=>{
+    const q = faqSearch.value.toLowerCase().trim();
+    faqItems.forEach(item=>{
+      const text = item.textContent.toLowerCase();
+      const tags = (item.getAttribute('data-tags') || '').toLowerCase();
+      const hit = !q || text.includes(q) || tags.includes(q);
+      item.style.display = hit ? '' : 'none';
+    });
+  });
+
+  // Link to Messages tab
+  $('#openMessagesFromSupport')?.addEventListener('click', (e)=>{
+    e.preventDefault();
+    const link = document.querySelector('#tablink-messages');
+    if (link){
+      const tab = new bootstrap.Tab(link);
+      tab.show();
+      setTimeout(()=> document.getElementById('msgList')?.scrollIntoView({behavior:'smooth'}), 250);
+    }
+  });
+
+  // Init
+  loadDraft();
+  updateCount();
+})();
 
 
     </script>

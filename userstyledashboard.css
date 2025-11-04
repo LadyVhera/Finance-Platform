@@ -1,0 +1,792 @@
+/* layout */
+.layout {
+  display: flex;
+  min-height: 100dvh;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.btn-close-white {
+  filter: invert(1);
+  /* keeps it white on dark backgrounds */
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-close-white:hover {
+  filter: none;
+  /* removes white inversion */
+  color: var(--accent1);
+  /* use Bootstrap’s primary blue */
+  background-color: rgba(var(--accent1), 0.15);
+  border-radius: 50%;
+}
+
+.sidebar {
+  width: 280px;
+  flex: 0 0 280px;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 48, 0.98) 0%,
+    rgba(10, 16, 34, 0.98) 100%
+  );
+
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  position: sticky;
+  top: 0;
+  height: 100dvh;
+  z-index: 100;
+  /* sit above content shadows */
+}
+
+/* main content area */
+.content {
+  flex: 1 1 auto;
+  background: radial-gradient(
+      1200px 600px at 20% -10%,
+      rgba(0, 224, 255, 0.06),
+      transparent 60%
+    )
+    var(--bg);
+}
+
+/* helpful visuals for cards/panels if you use them elsewhere */
+.cardx,
+.panel {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+}
+
+/* nav-pills inside the sidebar */
+.sidebar .nav-link {
+  color: var(--muted);
+  border-radius: 10px;
+}
+
+.sidebar .nav-link.active {
+  color: var(--ink);
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  box-shadow: 0 8px 26px rgba(0, 224, 255, 0.15);
+}
+
+.sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--ink);
+}
+
+/* brand area in sidebar */
+.sidebar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 12px;
+}
+
+.sidebar .brand .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent2), var(--accent1));
+  color: #001425;
+}
+
+/* avatars, chips, etc. */
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.badge-soft {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--ink);
+  border-radius: 999px;
+}
+
+/* progress bars on dark */
+.progress {
+  background: rgba(255, 255, 255, 0.08);
+  height: 8px;
+  border-radius: 999px;
+}
+
+.progress .progress-bar {
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+}
+
+.btn {
+  border: none;
+  font-weight: 700;
+  border-radius: 12px;
+  transition: transform 0.18s ease, box-shadow 0.28s ease, filter 0.2s ease,
+    background 0.28s ease, color 0.28s ease;
+}
+
+.btn,
+.btn-primary,
+.btn-success,
+.btn-danger,
+.btn-warning,
+.btn-info {
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  color: var(--btn-text);
+  box-shadow: 0 6px 20px rgba(0, 112, 255, 0.12);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 224, 255, 0.18);
+}
+
+.btn-outline-light {
+  background: transparent !important;
+  color: #e6f0ff !important;
+  border: 1px solid rgba(255, 255, 255, 0.18) !important;
+  box-shadow: none !important;
+}
+
+.btn-outline-light:hover {
+  background: linear-gradient(90deg, var(--accent2), var(--accent1)) !important;
+  color: var(--btn-text) !important;
+  border-color: transparent !important;
+  box-shadow: 0 12px 40px rgba(0, 224, 255, 0.18) !important;
+}
+
+.cardx {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  transition: transform 0.18s ease, box-shadow 0.28s ease;
+}
+
+.cardx:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 50px rgba(1, 9, 26, 0.6);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.badge-soft {
+  background: black;
+  color: #bff3ff;
+  border: 1px solid rgba(102, 224, 255, 0.25);
+}
+
+.progress {
+  background: rgba(255, 255, 255, 0.06);
+  height: 8px;
+  border-radius: 999px;
+}
+
+.progress-bar {
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: var(--sidebar);
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  padding: 14px;
+  overflow: auto;
+}
+
+.brand {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px 8px;
+}
+
+.brand .logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  color: #fff;
+  font-weight: 800;
+}
+
+.nav-link {
+  color: #cbd5e1;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.nav-link.active {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 114, 255, 0.18),
+    rgba(0, 224, 255, 0.18)
+  );
+  color: #fff;
+  border: 1px solid rgba(0, 224, 255, 0.18);
+  text-shadow: 0 0 10px rgba(0, 224, 255, 0.35);
+}
+
+.content {
+  padding: 16px;
+}
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(12, 18, 36, 0.6);
+  /* backdrop-filter: blur(1px); */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 10px 16px;
+  border-radius: 14px;
+}
+
+.section-title {
+  position: relative;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.section-title::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin: 12px 0 0;
+  background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+  border-radius: 6px;
+}
+
+.kpi {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.kpi .stat {
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 800;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.18);
+}
+
+.table-dark {
+  --bs-table-bg: #0e1731;
+  --bs-table-striped-bg: #111d3b;
+  --bs-table-hover-bg: #0f1a35;
+}
+
+.form-control,
+.form-select {
+  background: #0c1328;
+  color: var(--ink);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--accent1);
+  box-shadow: 0 0 0 0.16rem rgba(0, 224, 255, 0.15);
+}
+
+.kanban {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.kanban-col {
+  background: #0d1731;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 10px;
+}
+
+.kanban-col h6 {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 8px;
+}
+
+.req-card {
+  background: #0f1833;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.req-card .title {
+  font-weight: 600;
+}
+
+.req-card .meta {
+  font-size: 0.8rem;
+  color: #9fb0c9;
+}
+
+.alert-note {
+  border: 1px dashed rgba(255, 255, 255, 0.2);
+  background: rgba(0, 224, 255, 0.05);
+}
+
+/* --- TPT School extras (uses your palette) --- */
+.panel {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+}
+
+.chip {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d5e9ff;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  margin-bottom: 60px;
+}
+
+.side-rail {
+  position: sticky;
+  top: 74px;
+}
+
+.footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: #e6f0ff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.btn-ghost:hover {
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  color: var(--btn-text);
+  border-color: transparent;
+  box-shadow: 0 12px 40px rgba(0, 224, 255, 0.18);
+}
+
+@media (max-width: 991.98px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -100%;
+    top: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 1050;
+    transition: left 0.25s ease;
+    background: linear-gradient(
+      180deg,
+      rgba(15, 23, 48, 0.98) 0%,
+      rgba(10, 16, 34, 0.98) 100%
+    ) !important;
+    backdrop-filter: blur(12px);
+    border-right: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .sidebar.open {
+    left: 0;
+  }
+
+  .content {
+    padding: 10px;
+  }
+
+  .topbar {
+    border-radius: 10px;
+  }
+
+  .kanban {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Make the role "badge" feel like a pill toggle */
+.badge-soft.dropdown-toggle {
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid rgba(102, 224, 255, 0.25);
+}
+
+/* Remove focus ring around avatar button */
+.dropdown > .btn.bg-transparent:focus {
+  box-shadow: none;
+}
+
+.sidebar {
+  background: var(--panel);
+  /* …rest unchanged… */
+}
+
+/* ========== Policies Layout ========== */
+.policy-wrap {
+  display: grid;
+  grid-template-columns: 310px 1fr;
+  gap: 16px;
+}
+
+.policy-card {
+  background: var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+}
+
+.policy-hero {
+  background: linear-gradient(
+      135deg,
+      rgba(0, 224, 255, 0.06),
+      rgba(0, 114, 255, 0.05)
+    )
+    var(--card);
+}
+
+.policy-badge {
+  border: 1px solid rgba(102, 224, 255, 0.25);
+  background: rgba(255, 255, 255, 0.06);
+  color: #d5e9ff;
+  border-radius: 999px;
+  padding: 0.15rem 0.5rem;
+}
+
+.policy-toc {
+  position: sticky;
+  top: 74px;
+  height: max-content;
+}
+
+.policy-nav .nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.6rem;
+  border-radius: 10px;
+  color: #cbd5e1;
+}
+
+.policy-nav .nav-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+.policy-nav .nav-link.active {
+  background: linear-gradient(
+    90deg,
+    rgba(0, 114, 255, 0.18),
+    rgba(0, 224, 255, 0.18)
+  );
+  border: 1px solid rgba(0, 224, 255, 0.18);
+  color: #fff;
+}
+
+.policy-h {
+  position: relative;
+  margin: 0 0 0.5rem;
+}
+
+.policy-h::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin: 0.6rem 0 0;
+  background: linear-gradient(90deg, transparent, var(--accent1), transparent);
+  border-radius: 6px;
+}
+
+.policy-list {
+  margin: 0;
+  padding-left: 1.1rem;
+}
+
+.policy-list li {
+  margin: 0.25rem 0;
+}
+
+.policy-steps {
+  margin: 0 0 0.75rem;
+  padding-left: 1.2rem;
+}
+
+.policy-callout {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  border: 1px dashed rgba(255, 255, 255, 0.22);
+  background: rgba(0, 224, 255, 0.05);
+  border-radius: 12px;
+  padding: 0.75rem;
+  margin: 0.6rem 0;
+}
+
+.policy-callout.warn {
+  background: rgba(255, 153, 0, 0.06);
+  border-color: rgba(255, 153, 0, 0.28);
+}
+
+.policy-quote {
+  border-left: 3px solid var(--accent1);
+  padding-left: 0.75rem;
+  color: #cfe6ff;
+}
+
+.policy-tip {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+}
+
+@media (max-width: 991.98px) {
+  .policy-wrap {
+    grid-template-columns: 1fr;
+  }
+
+  .policy-toc {
+    position: static;
+  }
+}
+
+/* Slim progress bar pinned to top of the policies content */
+.policy-progress {
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 999px;
+  overflow: hidden;
+  z-index: 5;
+  margin: -6px 0 10px;
+  /* visually tucked into card spacing */
+}
+
+.policy-progress__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent2), var(--accent1));
+  transition: width 0.15s linear;
+}
+
+/* Floating accept bar that appears mid-scroll */
+.policy-cta {
+  position: sticky;
+  bottom: 12px;
+  z-index: 6;
+  background: rgba(12, 18, 36, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.6rem 0.75rem;
+  display: none;
+}
+
+.policy-cta.show {
+  display: block;
+}
+
+/* TOC polish: pill bullets and glow on active */
+.policy-nav .nav-link {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.policy-nav .nav-link::before {
+  content: "";
+  position: absolute;
+  left: 0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  box-shadow: 0 0 0 0 rgba(0, 224, 255, 0);
+  transition: all 0.2s ease;
+}
+
+.policy-nav .nav-link.active::before {
+  background: var(--accent1);
+  box-shadow: 0 0 0 6px rgba(0, 224, 255, 0.12);
+}
+
+/* Lists with subtle check icons */
+.policy-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+.policy-list li {
+  position: relative;
+  padding-left: 1.35rem;
+  margin: 0.35rem 0;
+}
+
+.policy-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #bff3ff;
+}
+
+/* Section cards: a little depth and border glow on hover */
+.policy-card {
+  box-shadow: 0 10px 30px rgba(1, 9, 26, 0.25);
+  transition: transform 0.16s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.policy-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(0, 224, 255, 0.18);
+  box-shadow: 0 16px 50px rgba(1, 9, 26, 0.45);
+}
+
+/* Mobile: tuck the CTA nicely */
+@media (max-width: 991.98px) {
+  .policy-cta {
+    bottom: 8px;
+  }
+}
+
+/* === Support page polish === */
+.sup-hero {
+  background: radial-gradient(
+      800px 240px at 10% -30%,
+      rgba(0, 224, 255, 0.08),
+      transparent 60%
+    )
+    var(--card);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sup-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #30d158;
+  box-shadow: 0 0 12px rgba(48, 209, 88, 0.55);
+  display: inline-block;
+}
+
+.sup-pill {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  color: #d5e9ff;
+  border-radius: 999px;
+  padding: 0.2rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+.sup-quick .dropdown-item {
+  font-size: 0.9rem;
+}
+
+.sup-quick .dropdown-item i {
+  opacity: 0.9;
+}
+
+#formSupport .form-control,
+#formSupport .form-select {
+  background: #0b142b;
+}
+
+#supFileName {
+  opacity: 0.8;
+}
+
+.sup-faq .accordion-button {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--ink);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sup-faq .accordion-button:not(.collapsed) {
+  background: rgba(0, 224, 255, 0.06);
+  color: #e6f5ff;
+}
+
+/* “Still need help” card subtle lift */
+.sup-helpmore {
+  border: 1px dashed rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* === Fix: FAQ text contrast & backgrounds === */
+.sup-faq .accordion-item {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sup-faq .accordion-item + .accordion-item {
+  margin-top: 0.5rem;
+}
+
+.sup-faq .accordion-button {
+  background: #0b142b;
+  /* darker panel */
+  color: #e6f0ff;
+  /* high-contrast text */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.sup-faq .accordion-button:not(.collapsed) {
+  background: #0e1d3d;
+  /* active darker */
+  color: #eaf4ff;
+}
+
+/* Chevron icon visible on dark */
+.sup-faq .accordion-button::after {
+  filter: invert(1) opacity(0.9);
+  /* make the caret light */
+}
+
+/* Body text contrast */
+.sup-faq .accordion-body {
+  background: #0b142b;
+  /* match header bg */
+  color: #cfe6ff;
+  /* readable body copy */
+}
+
+/* Optional: remove bright focus ring on dark */
+.sup-faq .accordion-button:focus {
+  box-shadow: 0 0 0 0.16rem rgba(0, 224, 255, 0.15);
+}

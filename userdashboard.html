@@ -110,29 +110,21 @@
                     <button class="btn btn-outline-light btn-sm d-lg-none" id="btnToggleSidebar">
                         <i class="bi bi-list"></i>
                     </button>
-                    <div class="fw-semibold">Welcome back, <span id="usernameTop">Friend</span> 👋</div>
+                    <div class="fw-semibold">Welcome back, <span id="usernameTop">Friend</span>👋</div>
                 </div>
 
                 <div class="d-flex align-items-center gap-3">
                     <!-- Role (Member/Admin) as dropdown -->
                     <div class="dropdown">
-                        <button class="btn btn-sm badge-soft dropdown-toggle d-inline-flex align-items-center"
-                            id="roleDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        <button class=" btn-sm badge-soft  d-inline-flex align-items-center" aria-expanded="false">
                             <i class="bi bi-person-badge me-1"></i><span id="badgeRank">Member</span>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark" aria-labelledby="roleDropdown">
-                            <li class="dropdown-header">Switch role</li>
-                            <li><a class="dropdown-item role-option" data-role="Member" href="#">
-                                    <i class="bi bi-people me-2"></i>Member</a></li>
-                            <li><a class="dropdown-item role-option" data-role="Admin" href="#">
-                                    <i class="bi bi-shield-lock me-2"></i>Admin</a></li>
-                        </ul>
                     </div>
-
                     <!-- Notifications (unchanged) -->
-                    <div class="position-relative">
-                        <button class="btn btn-outline-light btn-sm" data-bs-toggle="dropdown"><i
-                                class="bi bi-bell"></i></button>
+                    <div class="position-relative d-flex align-items-center gap-2">
+                        <button class="btn btn-outline-light btn-sm" data-bs-toggle="dropdown">
+                            <i class="bi bi-bell"></i>
+                        </button>
                         <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
                             <li class="dropdown-header">Notifications</li>
                             <li><a class="dropdown-item small" href="#">Your request #R-1201 was verified.</a></li>
@@ -140,12 +132,24 @@
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
-                            <li><a class="dropdown-item" href="#" id="openMessagesTab">
-                                    <i class="bi bi-chat-dots me-2"></i>Messages</a></li>
+                            <li>
+                                <a class="dropdown-item" href="#" id="openMessagesTab">
+                                    <i class="bi bi-chat-dots me-2"></i>Messages
+                                </a>
+                            </li>
                         </ul>
+                    
+                        <!-- Rank button (opens rank offcanvas) -->
+                        <button class="btn btn-outline-warning btn-sm" data-bs-toggle="offcanvas" data-bs-target="#rankCanvas">
+                            <i class="bi bi-award me-1"></i> Rank
+                        </button>
                     </div>
 
+
                     <!-- Avatar button opens user menu -->
+
+                    <!-- Avatar link -->
+
                     <div class="dropdown">
                         <button class="btn p-0 border-0 bg-transparent" data-bs-toggle="dropdown" aria-expanded="false"
                             aria-label="User menu">
@@ -259,7 +263,7 @@
                             <div class="cardx p-3 h-100">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <h6 class="m-0">30-Day Activity</h6>
-                                    <span class="badge-soft px-2 py-1 small">Demo</span>
+                                    <span class="badge-soft px-2 py-1 small">Updated</span>
                                 </div>
                                 <canvas id="chartActivity" height="120"></canvas>
                             </div>
@@ -295,6 +299,257 @@
                     </div>
                 </section>
 
+                <!-- PROFILE TAB (updated with editable Account Details) -->
+                <div class="tab-pane fade" id="tab-profile" role="tabpanel" aria-labelledby="tablink-profile"
+                    tabindex="0">
+                    <!-- Topbar -->
+                    <div class="d-flex align-items-center justify-content-between mb-3 topbar relative"
+                        style="position:relative; overflow:visible; z-index:1;">
+                        <div>
+                            <h5 class="m-0">My Profile</h5>
+                            <small class="">Manage your private info, security and preferences</small>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <button class="btn btn-sm btn-ghost" id="btnEditProfile"><i
+                                    class="bi bi-pencil-square me-1"></i>Edit</button>
+                            <button class="btn btn-sm btn-secondary d-none" id="btnCancelEdit"><i
+                                    class="bi bi-x-circle me-1"></i>Cancel</button>
+                            <button class="btn btn-sm btn-primary d-none" id="btnSaveProfile"><i
+                                    class="bi bi-check2-circle me-1"></i>Save</button>
+                        </div>
+                    </div>
+
+                    <div class="row g-3">
+                        <!-- LEFT: Avatar + Private Info -->
+                        <div class="col-lg-8">
+                            <div class="panel p-3">
+                                <div class="row g-3 align-items-center">
+                                    <div class="col-md-3 text-center">
+                                        <label for="avatarInput" class="d-inline-block position-relative">
+                                            <img id="avatarPreview"
+                                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=240&auto=format&fit=crop"
+                                                class="rounded-circle mb-2 object-fit-cover" width="120" height="120"
+                                                alt="Avatar">
+                                            <input id="avatarInput" type="file" accept="image/*" class="visually-hidden"
+                                                disabled>
+                                            <span
+                                                class="badge rounded-pill bg-dark-subtle text-body-secondary small position-absolute bottom-0 start-50 translate-middle-x">
+                                                <i class="bi bi-camera"></i> Change
+                                            </span>
+                                        </label>
+                                        <div class="small text-secondary">PNG, JPG up to 2MB</div>
+                                    </div>
+
+                                    <div class="col-md-9">
+                                        <form id="profileForm" novalidate>
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label class="form-label small">First name</label>
+                                                    <input name="firstName" type="text"
+                                                        class="form-control form-control-sm" value="Friend" disabled
+                                                        required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label small">Last name</label>
+                                                    <input name="lastName" type="text"
+                                                        class="form-control form-control-sm" value="User" disabled
+                                                        required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label small">Email</label>
+                                                    <input name="email" type="email"
+                                                        class="form-control form-control-sm" value="friend@example.com"
+                                                        disabled required>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label class="form-label small">Phone</label>
+                                                    <input name="phone" type="tel" class="form-control form-control-sm"
+                                                        value="+234 800 000 0000" disabled>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label small">Country</label>
+                                                    <select name="country" class="form-select form-select-sm" disabled>
+                                                        <option>Nigeria</option>
+                                                        <option>Ghana</option>
+                                                        <option>Kenya</option>
+                                                        <option>South Africa</option>
+                                                        <option>Other</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label class="form-label small">City</label>
+                                                    <input name="city" type="text" class="form-control form-control-sm"
+                                                        value="Lagos" disabled>
+                                                </div>
+
+                                                <div class="col-12">
+                                                    <label class="form-label small">Bio</label>
+                                                    <textarea name="bio" rows="3" class="form-control form-control-sm"
+                                                        disabled>Member at TPT México</textarea>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+
+                                <hr>
+
+                                <!-- Preferences -->
+                                <div class="row g-3">
+                                    <div class="col-md-4">
+                                        <label class="form-label small">Language</label>
+                                        <select name="lang" class="form-select form-select-sm" form="profileForm"
+                                            disabled>
+                                            <option>English</option>
+                                            <option>Español</option>
+                                            <option>Français</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label small">Time zone</label>
+                                        <select name="tz" class="form-select form-select-sm" form="profileForm"
+                                            disabled>
+                                            <option>Africa/Lagos (GMT+1)</option>
+                                            <option>Africa/Nairobi (GMT+3)</option>
+                                            <option>UTC</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label class="form-label small">Theme</label>
+                                        <select name="theme" class="form-select form-select-sm" form="profileForm"
+                                            disabled>
+                                            <option>System</option>
+                                            <option>Dark</option>
+                                            <option>Light</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- RIGHT COLUMN -->
+                        <div class="col-lg-4">
+
+                            <!-- Account & Security -->
+                            <div class="panel p-3 mb-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h6 class="m-0">Account & Security</h6>
+                                </div>
+
+                                <div class="vstack gap-2">
+                                    <button class="btn btn-sm btn-outline-light w-100" id="btnChangePassword">
+                                        <i class="bi bi-shield-lock me-2"></i>Change Password
+                                    </button>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="switch2FA"
+                                            disabled>
+                                        <label class="form-check-label small" for="switch2FA">Two-factor
+                                            authentication</label>
+                                    </div>
+
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch"
+                                            id="switchEmailNotif" disabled checked>
+                                        <label class="form-check-label small" for="switchEmailNotif">Email
+                                            notifications</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- ACCOUNT DETAILS (NOW EDITABLE) -->
+                            <div class="panel p-3 mb-3">
+                                <h6 class="m-0 mb-2">Account Details</h6>
+
+                                <div class="vstack gap-2 small">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-secondary">Username</span>
+                                        <input id="accUsername" name="accUsername" type="text"
+                                            class="form-control form-control-sm w-50" value="friend_user"
+                                            form="profileForm" disabled>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-secondary">Account ID</span>
+                                        <input id="accID" name="accID" type="text"
+                                            class="form-control form-control-sm w-50" value="TPT-9837421"
+                                            form="profileForm" disabled>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-secondary">Joined</span>
+                                        <input id="accJoinDate" name="accJoinDate" type="date"
+                                            class="form-control form-control-sm w-50" value="2024-06-12"
+                                            form="profileForm" disabled>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-secondary">Status</span>
+                                        <select id="accStatus" name="accStatus" class="form-select form-select-sm w-50"
+                                            form="profileForm" disabled>
+                                            <option value="Active">Active</option>
+                                            <option value="Suspended">Suspended</option>
+                                            <option value="Closed">Closed</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-secondary">Membership</span>
+                                        <select id="accMembership" name="accMembership"
+                                            class="form-select form-select-sm w-50" form="profileForm" disabled>
+                                            <option value="Standard">Standard</option>
+                                            <option value="Premium">Premium</option>
+                                            <option value="VIP">VIP</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Recent Activity -->
+                            <div class="panel p-3">
+                                <div class="d-flex align-items-center justify-content-between mb-2">
+                                    <h6 class="m-0">Recent Activity</h6>
+                                    <span class="">Last 7 days</span>
+                                </div>
+                                <ul class="list-unstyled m-0 small">
+                                    <li class="d-flex align-items-start gap-2 py-1">
+                                        <i class="bi bi-box-arrow-in-right mt-1"></i>
+                                        <div>Signed in — Lagos, NG <div class="text-secondary">Today, 12:02</div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex align-items-start gap-2 py-1">
+                                        <i class="bi bi-pencil-square mt-1"></i>
+                                        <div>Updated profile <div class="text-secondary">Yesterday</div>
+                                        </div>
+                                    </li>
+                                    <li class="d-flex align-items-start gap-2 py-1">
+                                        <i class="bi bi-envelope mt-1"></i>
+                                        <div>Enabled email notifications <div class="text-secondary">3 days ago</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Toast -->
+                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
+                        <div id="profileToast" class="toast align-items-center text-bg-dark border-0" role="status"
+                            aria-live="polite" aria-atomic="true">
+                            <div class="d-flex">
+                                <div class="toast-body">
+                                    <i class="bi bi-check2-circle me-2"></i>Profile updated successfully.
+                                </div>
+                                <button type="button" class="btn-close btn-close-white me-2 m-auto"
+                                    data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- MY REQUESTS -->
                 <section class="tab-pane fade" id="tab-requests" role="tabpanel" aria-labelledby="tablink-requests">
                     <div class="d-flex justify-content-between align-items-center mb-2">
@@ -352,34 +607,62 @@
                 </section>
 
                 <!-- PROVIDE HELP -->
-                <section class="tab-pane fade" id="tab-provide" role="tabpanel" aria-labelledb y="tablink-provide">
-                    <div class="d-flex justify-content-between align-items-center mb-2">
-                        <h5 class="m-0">Provide Help</h5>
-                        <div class="d-flex gap-2">
-                            <input type="search" class="form-control form-control-sm" id="phSearch"
-                                placeholder="Search requests…" />
-                            <select class="form-select form-select-sm" id="phFilter">
-                                <option value="">All categories</option>
-                                <option>Medical</option>
-                                <option>Education</option>
-                                <option>Housing</option>
-                            </select>
-                            <select class="form-select form-select-sm" id="phSort">
-                                <option value="latest">Latest</option>
-                                <option value="amount">Amount (High)</option>
-                            </select>
+                <section class="tab-pane fade" id="tab-provide" role="tabpanel" aria-labelledby="tablink-provide">
+
+                    <!-- Step 1: Enter Amount -->
+                    <div id="phStep1">
+                        <h5 class="mb-2">Provide Help</h5>
+
+                        <label class="form-label fw-semibold">Amount of Help to Provide</label>
+                        <input type="number" class="form-control mb-3" id="phAmount" placeholder="Enter amount…">
+
+                        <div class="alert alert-warning small">
+                            <i class="bi bi-exclamation-triangle me-1"></i>
+                            You will be merged to a user who has requested help within <b>24 – 48 hours</b>.
+                            Make sure you have the of help you provided handy
+                            Failure to provide help after being merged will result in <b>account blockage</b> and
+                            <b>loss of
+                                bonuses</b>.
                         </div>
+
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="phAccept">
+                            <label class="form-check-label small" for="phAccept">
+                                I understand and accept the terms.
+                            </label>
+                        </div>
+
+                        <button class="btn btn-primary w-100" id="phContinue">Continue</button>
                     </div>
-                    <div class="row g-3" id="provideGrid"></div>
-                    <div class="d-flex justify-content-center gap-2 mt-3">
-                        <button class="btn btn-outline-light btn-sm" id="phPrev">Prev</button>
-                        <button class="btn btn-outline-light btn-sm" id="phNext">Next</button>
+
+                    <!-- Step 2: Processing -->
+                    <div id="phStep2" class="text-center" style="display:none;">
+                        <div class="spinner-border text-light mb-3"></div>
+                        <p class="muted small">Processing your request…<br>You'll be merged shortly.</p>
                     </div>
-                    <div class="alert alert-note muted small mt-3">
-                        <i class="bi bi-info-circle me-1"></i>Transfers are direct member-to-member. Always confirm and
-                        Keep receipts.
+
+                    <!-- Step 3: After Merging – Upload Proof -->
+                    <div id="phStep3" style="display:none;">
+                        <div class="alert alert-info small">
+                            You have been merged. Please send your proof of payment.
+                        </div>
+
+                        <label class="form-label fw-semibold">Upload Screenshot of Payment</label>
+                        <input type="file" class="form-control mb-2" id="phProof" accept="image/*">
+
+                        <button class="btn btn-success w-100" id="phUploadProof">Send Proof</button>
                     </div>
+
+                    <!-- Step 4: Receiver Confirms -->
+                    <div id="phReceiver" style="display:none;">
+                        <div class="alert alert-success small">
+                            The sender has uploaded proof. Please confirm receipt.
+                        </div>
+                        <button class="btn btn-primary w-100" id="phConfirmReceived">Confirm Fund Received</button>
+                    </div>
+
                 </section>
+
 
                 <!-- WALLET & TRANSACTIONS -->
                 <section class="tab-pane fade" id="tab-wallet" role="tabpanel" aria-labelledby="tablink-wallet">
@@ -501,7 +784,7 @@
                         </div>
                         <div class="col-lg-6">
                             <div class="cardx p-3 h-100">
-                                <h6>Referral Stats (demo)</h6>
+                                <h6>Referral Stats </h6>
                                 <div class="row g-2 text-center">
                                     <div class="col-4">
                                         <div class="display-6 fw-bold" id="refCount">0</div>
@@ -649,11 +932,12 @@
                     <div class="d-flex align-items-center justify-content-between mb-3 topbar">
                         <div class="d-flex align-items-center gap-2">
                             <h5 class="m-0">TPT School — Modules</h5>
-                            <span class="" id="modProgress">0/6 complete</span>
+                            <span id="modProgress">0/6 complete</span>
                         </div>
-                        <button class="btn btn-sm btn-ghost" data-bs-toggle="offcanvas" data-bs-target="#walletCanvas">
-                            <i class="bi bi-wallet2 me-1"></i> Wallet
+                        <button class="btn btn-sm btn-ghost" data-bs-toggle="offcanvas" data-bs-target="#rankCanvas">
+                            <i class="bi bi-award me-1"></i> Rank
                         </button>
+
                     </div>
 
                     <div class="row g-3">
@@ -670,15 +954,12 @@
                                 <div class="panel p-3 mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
                                         <h6 class="m-0">Upload “Letter of Happiness”</h6>
-                                        <br>
                                         <span class="chip">Optional</span>
                                     </div>
                                     <p class="small muted mb-2 policy-quote">
-                                        Having received help, you must send a "letter of happiness" If you attach a
-                                        video to your letter, you will be granted a bonus. The bonus is
-                                        granted for a video attached to each "letter of happiness". 10% of help you have
-                                        received will be granted for
-                                        a super video.
+                                        Having received help, you must send a "letter of happiness". Attaching a video
+                                        gives you a
+                                        bonus: 10% of help received for a “super video”.
                                     </p>
                                     <div class="d-grid gap-2">
                                         <button class="btn btn-ghost" data-bs-toggle="modal"
@@ -690,43 +971,35 @@
 
                                 <div class="panel p-3 mb-3">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <h6 class="m-0">Eligibility for video bonus</h6><span class="chip">Read</span>
+                                        <h6 class="m-0">Eligibility for video bonus</h6>
+                                        <span class="chip">Read</span>
                                     </div>
                                     <ul class="small muted m-0">
                                         <li>Make an interesting story where you are the main character.</li>
-                                        <li>. It should be as close as possible to a professional video: with fine
-                                            quality and well edited.</li>
-                                        <li>Talk about how you will spend (have spent),the money, which impact the
-                                            Community ideology has had on you, how the
-                                            Community has been changing your life, and invite everyone to Join TPT.
-                                        </li>
-                                        <li>It is important that your story should be
-                                            interesting and creative.</li>
-                                        <li>The minimum resolution is 640x480. The minimum
-                                            duration is 1 min. 30 sec.</li>
-                                        <li>5% of help you have recelved will be granted, if the video has your face and
-                                            voice in It.</li>
-                                        <li>You need
-                                            to share your TPT's Personal Office in the video and provide evidence of
-                                            help you have received in the form of Bank Statement from your bank account
-                                            or from your internet banking system.
-                                        </li>
+                                        <li>Video should be professional quality and well edited.</li>
+                                        <li>Talk about how you spent the money, community impact, and invite others to
+                                            join TPT.</li>
+                                        <li>Video must be creative and engaging.</li>
+                                        <li>Minimum resolution: 640x480. Minimum duration: 1m30s.</li>
+                                        <li>5% bonus if video has your face and voice.</li>
+                                        <li>Include your TPT Private Office and evidence of help received (bank
+                                            statement or online
+                                            banking).</li>
                                     </ul>
                                 </div>
 
                                 <div class="panel p-3">
                                     <h6 class="mb-2">Tips</h6>
-                                    <div class="policy-quote">The video bonus is calculated at a rate of FELICIDAD 30%
-                                        and is "frozen" for 1 month. </div>
+                                    <div class="policy-quote">Video bonus is calculated at 30% FEL and frozen for 1
+                                        month.</div>
                                     <br>
-                                    <div class="policy-quote">If you delete the video during
-                                        this month, the bonus will be forfeited. However, you will receive a bonus for
-                                        each of your yideos about getting help. </div>
+                                    <div class="policy-quote">Deleting video within 1 month forfeits bonus. Each “help
+                                        received” video
+                                        counts separately.</div>
                                     <br>
-                                    <div class="policy-quote">In addition, you can make a video about providing help and
-                                        get another bonus: 1% or 0.5% of help provided, depending on
-                                        whether you can be seen in the video.
-                                    </div>
+                                    <div class="policy-quote">You can also upload “providing help” videos for additional
+                                        bonus: 1% or
+                                        0.5%, depending on whether you are seen.</div>
                                 </div>
                             </aside>
                         </div>
@@ -734,10 +1007,9 @@
 
                     <div class="footer small muted mt-4 py-2">
                         <div class="d-flex justify-content-between align-items-center mt-3 small muted">
-                            <span>Questions? Visit <a href="#" id="polGoSupport">Support</a> or send a
-                                message.</span>
+                            <span>Questions? Visit <a href="#" id="polGoSupport">Support</a> or send a message.</span>
                             <span>&copy; <span id="polYear">—</span> TPT Community</span>
-                        </div></span>
+                        </div>
                     </div>
                 </div>
 
@@ -925,10 +1197,10 @@
                                 <h5 class="policy-h">3) To Get Help</h5>
                                 <ul class="policy-list">
                                     <li>Create an appropriate request</li>
-                                    <li>enter your bank details and the desired amount.</li>
+                                    <li>Enter your bank details and the desired amount.</li>
                                     <li>Another participant of TPT will transfer money to your account
                                     <li>
-                                    <li>. Confirm the receipt of funds.</li>
+                                    <li>Confirm the receipt of funds.</li>
                                 </ul>
                             </section>
 
@@ -1023,7 +1295,7 @@
                             <section id="pol-reporting" class="policy-card p-3 mb-3">
                                 <h5 class="policy-h">7) Referal & TPT School</h5>
                                 <ol class="policy-steps">
-                                    <li>You can find a referral link In your Personal Office.</li>
+                                    <li>You can find a referral link In your Private Office.</li>
                                     <li>Users who click it to reglster in the Community become your referrals
                                         automatically</li>
                                     <li>. Send the link to your friends or relatives and on the Internet to invite
@@ -1047,7 +1319,7 @@
                                         convey information about TPT and deal
                                         with objections.</li>
                                     <li>Graduates of TPT School are assigned ranks within the Community which are
-                                        displayed in Personal Offices as icons.</li>
+                                        displayed in Private Offices as icons.</li>
                                     <li>Your <strong>rank</strong> grows with the expansion of your structure.</li>
                                     <li>The bigger the structure, the higher the rank.</li>
                                 </ul>
@@ -1183,7 +1455,7 @@
                                     <div class="alert alert-note mt-3 d-none" id="supSuccess">
                                         <i class="bi bi-check2-circle me-1"></i>
                                         Ticket created: <strong id="supTicketId"></strong>. We emailed you a
-                                        confirmation (demo).
+                                        confirmation .
                                     </div>
                                 </form>
                             </div>
@@ -1285,206 +1557,6 @@
                         </div>
                     </div>
                 </section>
-
-
-                <!-- PROFILE TAB (drop-in) -->
-                <div class="tab-pane fade" id="tab-profile" role="tabpanel" aria-labelledby="tablink-profile"
-                    tabindex="0">
-                    <!-- Topbar -->
-                    <div class="d-flex align-items-center justify-content-between mb-3 topbar relative"
-                        style="position:relative; overflow:visible; z-index:1;">
-
-                        <div>
-                            <h5 class="m-0">My Profile</h5>
-                            <small class="">Manage your personal info, security and preferences</small>
-                        </div>
-                        <div class="d-flex gap-2">
-                            <button class="btn btn-sm btn-ghost" id="btnEditProfile"><i
-                                    class="bi bi-pencil-square me-1"></i>Edit</button>
-                            <button class="btn btn-sm btn-secondary d-none" id="btnCancelEdit"><i
-                                    class="bi bi-x-circle me-1"></i>Cancel</button>
-                            <button class="btn btn-sm btn-primary d-none" id="btnSaveProfile"><i
-                                    class="bi bi-check2-circle me-1"></i>Save</button>
-                        </div>
-                    </div>
-
-                    <div class="row g-3">
-                        <!-- LEFT: Avatar + Personal Info -->
-                        <div class="col-lg-8">
-                            <div class="panel p-3">
-                                <div class="row g-3 align-items-center">
-                                    <div class="col-md-3 text-center">
-                                        <label for="avatarInput" class="d-inline-block position-relative">
-                                            <img id="avatarPreview"
-                                                src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=240&auto=format&fit=crop"
-                                                class="rounded-circle mb-2 object-fit-cover" width="120" height="120"
-                                                alt="Avatar">
-                                            <input id="avatarInput" type="file" accept="image/*" class="visually-hidden"
-                                                disabled>
-                                            <span
-                                                class="badge rounded-pill bg-dark-subtle text-body-secondary small position-absolute bottom-0 start-50 translate-middle-x">
-                                                <i class="bi bi-camera"></i> Change
-                                            </span>
-                                        </label>
-                                        <div class="small text-secondary">PNG, JPG up to 2MB</div>
-                                    </div>
-
-                                    <div class="col-md-9">
-                                        <form id="profileForm" novalidate>
-                                            <div class="row g-3">
-                                                <div class="col-md-6">
-                                                    <label class="form-label small">First name</label>
-                                                    <input name="firstName" type="text"
-                                                        class="form-control form-control-sm" value="Friend" disabled
-                                                        required>
-                                                    <div class="invalid-feedback">Please enter your first name.</div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label small">Last name</label>
-                                                    <input name="lastName" type="text"
-                                                        class="form-control form-control-sm" value="User" disabled
-                                                        required>
-                                                    <div class="invalid-feedback">Please enter your last name.</div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label small">Email</label>
-                                                    <input name="email" type="email"
-                                                        class="form-control form-control-sm" value="friend@example.com"
-                                                        disabled required>
-                                                    <div class="invalid-feedback">Enter a valid email.</div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label small">Phone</label>
-                                                    <input name="phone" type="tel" class="form-control form-control-sm"
-                                                        value="+234 800 000 0000" disabled>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label small">Country</label>
-                                                    <select name="country" class="form-select form-select-sm" disabled>
-                                                        <option>Nigeria</option>
-                                                        <option>Ghana</option>
-                                                        <option>Kenya</option>
-                                                        <option>South Africa</option>
-                                                        <option>Other</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <label class="form-label small">City</label>
-                                                    <input name="city" type="text" class="form-control form-control-sm"
-                                                        value="Lagos" disabled>
-                                                </div>
-                                                <div class="col-12">
-                                                    <label class="form-label small">Bio</label>
-                                                    <textarea name="bio" rows="3" class="form-control form-control-sm"
-                                                        placeholder="Tell people a bit about you…"
-                                                        disabled>Member at TPT México</textarea>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <hr>
-                                <!-- Preferences -->
-                                <div class="row g-3">
-                                    <div class="col-md-4">
-                                        <label class="form-label small">Language</label>
-                                        <select name="lang" class="form-select form-select-sm" form="profileForm"
-                                            disabled>
-                                            <option>English</option>
-                                            <option>Español</option>
-                                            <option>Français</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label small">Time zone</label>
-                                        <select name="tz" class="form-select form-select-sm" form="profileForm"
-                                            disabled>
-                                            <option>Africa/Lagos (GMT+1)</option>
-                                            <option>Africa/Nairobi (GMT+3)</option>
-                                            <option>UTC</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label class="form-label small">Theme</label>
-                                        <select name="theme" class="form-select form-select-sm" form="profileForm"
-                                            disabled>
-                                            <option>System</option>
-                                            <option>Dark</option>
-                                            <option>Light</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- RIGHT: Account & Security / Activity -->
-                        <div class="col-lg-4">
-                            <!-- Account & Security -->
-                            <div class="panel p-3 mb-3">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="m-0">Account & Security</h6>
-                                </div>
-                                <div class="vstack gap-2">
-                                    <button class="btn btn-sm btn-outline-light w-100" id="btnChangePassword">
-                                        <i class="bi bi-shield-lock me-2"></i>Change Password
-                                    </button>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch" id="switch2FA"
-                                            disabled>
-                                        <label class="form-check-label small" for="switch2FA">Two-factor
-                                            authentication</label>
-                                    </div>
-                                    <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" role="switch"
-                                            id="switchEmailNotif" disabled checked>
-                                        <label class="form-check-label small" for="switchEmailNotif">Email
-                                            notifications</label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Recent Activity -->
-                            <div class="panel p-3">
-                                <div class="d-flex align-items-center justify-content-between mb-2">
-                                    <h6 class="m-0">Recent Activity</h6>
-                                    <span class="">Last 7 days</span>
-                                </div>
-                                <ul class="list-unstyled m-0 small">
-                                    <li class="d-flex align-items-start gap-2 py-1">
-                                        <i class="bi bi-box-arrow-in-right mt-1"></i>
-                                        <div>Signed in — Lagos, NG <div class="text-secondary">Today, 12:02</div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start gap-2 py-1">
-                                        <i class="bi bi-pencil-square mt-1"></i>
-                                        <div>Updated profile <div class="text-secondary">Yesterday</div>
-                                        </div>
-                                    </li>
-                                    <li class="d-flex align-items-start gap-2 py-1">
-                                        <i class="bi bi-envelope mt-1"></i>
-                                        <div>Enabled email notifications <div class="text-secondary">3 days ago</div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Toast -->
-                    <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1080;">
-                        <div id="profileToast" class="toast align-items-center text-bg-dark border-0" role="status"
-                            aria-live="polite" aria-atomic="true">
-                            <div class="d-flex">
-                                <div class="toast-body">
-                                    <i class="bi bi-check2-circle me-2"></i>Profile updated successfully.
-                                </div>
-                                <button type="button" class="btn-close btn-close-white me-2 m-auto"
-                                    data-bs-dismiss="toast" aria-label="Close"></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
 
             </div>
         </main>
@@ -1624,27 +1696,85 @@
         </div>
     </div>
 
-    <!-- Wallet Offcanvas -->
-    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="walletCanvas">
+    <!-- TPT RANK COLUMN (Hybrid: Manual admin upgrades + Automatic rank growth) -->
+    <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="rankCanvas">
         <div class="offcanvas-header">
-            <h5 class="offcanvas-title"><i class="bi bi-wallet2 me-2"></i>Wallet — FELICIDAD</h5>
+            <h5 class="offcanvas-title"><i class="bi bi-award me-2"></i>TPT Ranks & Bonuses</h5>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
         </div>
+
         <div class="offcanvas-body">
+            <!-- Summary panel -->
             <div class="panel p-3 mb-3">
-                <div class="d-flex justify-content-between align-items-center">
-                    <div class="small muted text-uppercase">Current Balance</div><span class="chip">Demo</span>
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <div>
+                        <div class="small muted text-uppercase">Your Rank</div>
+                        <div class="fw-bold" id="rankLabel">Leader</div>
+                        <div class="small" id="rankSub">1 - 9 participants</div>
+                    </div>
+                    <div class="text-end">
+                        <div class="small muted">Referrals</div>
+                        <div class="fw-bold" id="refCount">0</div>
+                        <div class="small ">Invite: <span id="inviteCode">-</span></div>
+                    </div>
                 </div>
-                <div class="fw-bold" id="wBalance">FEL 0</div>
+
+                <div class="mb-2">
+                    <div class="small ">Progress to next rank</div>
+                    <div class="progress" style="height:10px;">
+                        <div id="rankProgress" class="progress-bar" role="progressbar" style="width: 0%"></div>
+                    </div>
+                    <div class="small mt-1" id="toNext">Need 0 more referrals</div>
+                </div>
+
                 <div class="d-flex gap-2 mt-2">
-                    <button class="btn btn-sm" id="convertCash">Convert to MXN</button>
-                    <button class="btn btn-ghost btn-sm" id="addFeliz">Add Demo FEL</button>
+                    <button class="btn btn-sm btn-primary" id="copyInvite">Copy Invite Link</button>
                 </div>
             </div>
-            <div class="panel p-3">
-                <h6>Wallet History</h6>
-                <ul class="list-group list-group-flush small" id="walletList"></ul>
+
+
+            <!-- Bonuses panel -->
+            <div class="panel p-3 mb-3">
+                <h6>TPT Bonuses</h6>
+                <div class="small  mb-2">Referral & leader bonuses are calculated automatically.</div>
             </div>
+
+            <!-- Admin controls (manual upgrade) -->
+            <div class=" panel p-3 mb-3 d-none">
+                <h6>Admin Controls</h6>
+                <div class="small  mb-2">Manual overrides for rank (admins only). Hybrid: auto-calculated rank
+                    will still suggest upgrades but admin can force set.</div>
+
+                <div class="mb-2">
+                    <label class="form-label small">Force set rank</label>
+                    <select id="adminSetRank" class="form-select form-select-sm">
+                        <option value="auto">-- (leave on Auto) --</option>
+                        <option value="leader">Leader (1-9)</option>
+                        <option value="10+">10+ leader</option>
+                        <option value="100+">100+ leader</option>
+                        <option value="1K+">1K+ leader</option>
+                        <option value="10K+">10K+ leader</option>
+                        <option value="100K+">100K+ leader</option>
+                        <option value="1M+">1M+ leader</option>
+                    </select>
+                </div>
+
+                <div class="form-check form-switch mb-2">
+                    <input class="form-check-input" type="checkbox" id="autoRankToggle" checked />
+                    <label class="form-check-label">Enable automatic rank updates</label>
+                </div>
+
+                <button class="btn btn-sm btn-warning" id="applyAdmin">Apply</button>
+            </div>
+
+            <!-- Referral & TPT School -->
+            <div class="panel p-3">
+                <h6>Invites </h6>
+                <div class="small  mb-2">Share your invite code or referral link — track referrals and signups
+                    here.</div>
+                <div class="small mb-2">Referral Link: <span id="refLink">-</span></div>
+            </div>
+
         </div>
     </div>
 
@@ -1916,6 +2046,7 @@
     </div>
 
     <!-- SCRIPTS -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="./userdashboard.js"></script>
     <!-- <script src="generalscript.js"></script> -->

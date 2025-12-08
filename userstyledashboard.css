@@ -790,3 +790,15 @@
 .sup-faq .accordion-button:focus {
   box-shadow: 0 0 0 0.16rem rgba(0, 224, 255, 0.15);
 }
+
+.avatar-link {
+    display: inline-block;
+    border-radius: 50%;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.avatar-link:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+}

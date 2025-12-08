@@ -1,7 +1,7 @@
 // Redirect target after successful admin sign-in
 const ADMIN_DASH_URL = "admindashboard.html";
 
-// --- Admin approvals storage (demo) ---
+// --- Admin approvals storage () ---
 const ADMIN_KEYS = {
   APPS: "tpt_admin_apps", // Array of applications [{name,email,reason,at,status}]
   APPROVALS: "tpt_admin_approvals", // Map: { "email@x.com": true }
@@ -80,7 +80,7 @@ document.getElementById("formAdminSignup")?.addEventListener("submit", (e) => {
         },
         set authed(v) {
           v
-            ? localStorage.setItem("authToken", "demo-token")
+            ? localStorage.setItem("authToken", "-token")
             : localStorage.removeItem("authToken");
         },
         set role(r) {
@@ -136,7 +136,7 @@ document.getElementById("formAdminSignup")?.addEventListener("submit", (e) => {
       },
       set authed(v) {
         v
-          ? localStorage.setItem("authToken", "demo-token")
+          ? localStorage.setItem("authToken", "-token")
           : localStorage.removeItem("authToken");
       },
       set role(r) {
@@ -178,7 +178,7 @@ m["newadmin@example.com"] = true;
 localStorage.setItem(k, JSON.stringify(m));
 
 // --- Utilities & Seed ---
-const fmtMoney = (v) => "₱" + Number(v).toLocaleString();
+const fmtMoney = (v) => "₣" + Number(v).toLocaleString();
 const uid = (p) => p + Math.random().toString(36).slice(2, 7).toUpperCase();
 const nowISO = () => new Date().toISOString().slice(0, 10);
 
@@ -287,7 +287,7 @@ function seed() {
           thread: [
             {
               me: false,
-              text: "I sent ₱6,000 for R-1201. Receipt attached.",
+              text: "I sent ₣6,000 for R-1201. Receipt attached.",
               at: "2025-10-14 07:20",
             },
             { me: true, text: "Confirmed, thank you!", at: "2025-10-14 07:35" },
@@ -355,12 +355,17 @@ document.getElementById("badgeRank").textContent = "Member";
 // KPIs from transactions
 function refreshKPIs() {
   const tx = JSON.parse(localStorage.getItem(LS.TX) || "[]");
+
+  // Calculate totals
   const received = tx
     .filter((t) => t.type === "Received")
-    .reduce((a, b) => a + b.amount, 0);
+    .reduce((a, b) => a + Number(b.amount || 0), 0);
+
   const provided = tx
     .filter((t) => t.type === "Provided")
-    .reduce((a, b) => a + b.amount, 0);
+    .reduce((a, b) => a + Number(b.amount || 0), 0);
+
+  // Wallet Balance
   const balance = tx.reduce(
     (a, b) =>
       a +
@@ -369,25 +374,37 @@ function refreshKPIs() {
       (b.type === "Provided" ? b.amount : 0),
     0
   );
-  const fulfillment = Math.min(
-    100,
-    Math.round((received / Math.max(received + provided, 1)) * 100)
-  );
 
+  // Fulfillment Rate should be EXACTLY same as Wallet Balance
+  const fulfillment = balance;
+
+  // Display values
   document.getElementById("kpiBalance").textContent = fmtMoney(balance);
   document.getElementById("kpiReceived").textContent = fmtMoney(received);
   document.getElementById("kpiProvided").textContent = fmtMoney(provided);
-  document.getElementById("kpiFulfillment").textContent = fulfillment + "%";
+
+  // Fulfillment shows MONEY not %
+  document.getElementById("kpiFulfillment").textContent = fmtMoney(fulfillment);
+
+  // Progress bars
   document.getElementById("pbBalance").style.width =
     Math.min(100, balance % 100) + "%";
+
   document.getElementById("pbReceived").style.width =
     Math.min(100, received % 100) + "%";
+
   document.getElementById("pbProvided").style.width =
     Math.min(100, provided % 100) + "%";
-  document.getElementById("pbFulfillment").style.width = fulfillment + "%";
+
+  document.getElementById("pbFulfillment").style.width =
+    Math.min(100, fulfillment % 100) + "%";
+
+  // Update wallet area if used elsewhere
   document.getElementById("walletBalance").textContent = fmtMoney(balance);
 }
+
 refreshKPIs();
+
 
 // Charts
 const chartActivity = new Chart(document.getElementById("chartActivity"), {
@@ -424,7 +441,7 @@ const chartActivity = new Chart(document.getElementById("chartActivity"), {
 new Chart(document.getElementById("chartSplit"), {
   type: "doughnut",
   data: {
-    labels: ["Medical", "Education", "Housing"],
+    labels: ["Medical", "Education", "others"],
     datasets: [{ data: [45, 35, 20] }],
   },
   options: { plugins: { legend: { labels: { color: "#cbd5e1" } } } },
@@ -536,162 +553,45 @@ document.getElementById("rqSearch").addEventListener("input", refreshRequests);
 document.getElementById("rqFilter").addEventListener("change", refreshRequests);
 
 // Provide Help grid
-let phPage = 0,
-  phPageSize = 6;
-function refreshProvide() {
-  const grid = document.getElementById("provideGrid");
-  const reqs = JSON.parse(localStorage.getItem(LS.REQ) || "[]").filter(
-    (r) => r.status !== "Fulfilled"
-  );
-  const term = (document.getElementById("phSearch").value || "").toLowerCase();
-  const filter = document.getElementById("phFilter").value || "";
-  const sort = document.getElementById("phSort").value || "latest";
-  let arr = reqs.filter(
-    (r) =>
-      (!filter || r.cat === filter) &&
-      (!term ||
-        r.title.toLowerCase().includes(term) ||
-        r.id.toLowerCase().includes(term))
-  );
-  if (sort === "amount") arr.sort((a, b) => b.amount - a.amount);
-  else arr.sort((a, b) => b.created.localeCompare(a.created));
-  const start = phPage * phPageSize;
-  const pageItems = arr.slice(start, start + phPageSize);
 
-  grid.innerHTML = "";
-  pageItems.forEach((r) => {
-    const col = document.createElement("div");
-    col.className = "col-md-6 col-xl-4";
-    col.innerHTML = `
-        <div class="cardx p-3 h-100">
-          <div class="d-flex justify-content-between align-items-start">
-            <div><div class="fw-semibold">${
-              r.title
-            }</div><div class="small muted">${r.id} • ${r.cat}</div></div>
-            <span class="badge ${
-              r.status === "Verified" ? "text-bg-info" : "text-bg-warning"
-            }">${r.status}</span>
-          </div>
-          <div class="display-6 fw-bold mt-2">${fmtMoney(r.amount)}</div>
-          <div class="muted small">Created: ${r.created}</div>
-          <button class="btn btn-sm mt-2" data-bs-toggle="modal" data-bs-target="#modalSendHelp" data-prefref="${
-            r.id
-          }"><i class="bi bi-arrow-up-right-circle me-1"></i>Send Help</button>
-        </div>`;
-    grid.appendChild(col);
-  });
-}
-refreshProvide();
-["phSearch", "phFilter", "phSort"].forEach((id) =>
-  document.getElementById(id).addEventListener("input", () => {
-    phPage = 0;
-    refreshProvide();
-  })
-);
-document.getElementById("phPrev").addEventListener("click", () => {
-  phPage = Math.max(0, phPage - 1);
-  refreshProvide();
-});
-document.getElementById("phNext").addEventListener("click", () => {
-  phPage = phPage + 1;
-  refreshProvide();
-});
-document
-  .getElementById("modalSendHelp")
-  .addEventListener("show.bs.modal", (ev) => {
-    const btn = ev.relatedTarget;
-    if (btn?.dataset.prefref)
-      document.getElementById("shRef").value = btn.dataset.prefref;
-  });
+document.getElementById("phContinue").addEventListener("click", () => {
+    const amt = Number(document.getElementById("phAmount").value);
+    const accept = document.getElementById("phAccept").checked;
 
-// Requests actions
-function getReqById(id) {
-  return JSON.parse(localStorage.getItem(LS.REQ) || "[]").find(
-    (x) => x.id === id
-  );
-}
-document.getElementById("tblRequests").addEventListener("click", onReqAction);
-document.getElementById("colPending").addEventListener("click", onReqAction);
-document.getElementById("colVerified").addEventListener("click", onReqAction);
-document.getElementById("colFulfilled").addEventListener("click", onReqAction);
-function onReqAction(e) {
-  const btn = e.target.closest("button[data-action]");
-  if (!btn) return;
-  const id = btn.dataset.id;
-  const action = btn.dataset.action;
-  const reqs = JSON.parse(localStorage.getItem(LS.REQ) || "[]");
-  if (action === "del") {
-    localStorage.setItem(
-      LS.REQ,
-      JSON.stringify(reqs.filter((r) => r.id !== id))
-    );
-    refreshRequests();
-    refreshProvide();
-    return;
-  }
-  if (action === "edit") {
-    const r = reqs.find((x) => x.id === id);
-    const m = new bootstrap.Modal(document.getElementById("modalNewRequest"));
-    document.getElementById("rqTitle").value = r.title;
-    document.getElementById("rqCat").value = r.cat;
-    document.getElementById("rqAmt").value = r.amount;
-    document.getElementById("rqDesc").value = "Edit description…";
-    document.getElementById("rqBank").value = "Edit bank…";
-    m.show();
-    return;
-  }
-  if (action === "view") {
-    alert(
-      `${id}\n${getReqById(id).title}\n${getReqById(id).cat} • ${fmtMoney(
-        getReqById(id).amount
-      )} • ${getReqById(id).status}`
-    );
-  }
-}
+    if (!amt || amt <= 0) {
+        return alert("Enter a valid amount.");
+    }
+    if (!accept) {
+        return alert("You must accept the terms before continuing.");
+    }
 
-// New Request submit
-document.getElementById("formNewRequest").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const reqs = JSON.parse(localStorage.getItem(LS.REQ) || "[]");
-  const r = {
-    id: uid("R-"),
-    title: document.getElementById("rqTitle").value.trim(),
-    cat: document.getElementById("rqCat").value,
-    amount: Number(document.getElementById("rqAmt").value),
-    status: "Pending",
-    created: nowISO(),
-  };
-  reqs.unshift(r);
-  localStorage.setItem(LS.REQ, JSON.stringify(reqs));
-  refreshRequests();
-  refreshProvide();
-  bootstrap.Modal.getInstance(
-    document.getElementById("modalNewRequest")
-  )?.hide();
-  e.target.reset();
-  alert("Request published (demo).");
+    // Simulate merging process
+    document.getElementById("phStep1").style.display = "none";
+    document.getElementById("phStep2").style.display = "block";
+
+    setTimeout(() => {
+        document.getElementById("phStep2").style.display = "none";
+        document.getElementById("phStep3").style.display = "block";
+    }, 3000); // 3 seconds processing ()
 });
 
-// Send Help
-document.getElementById("formSendHelp").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const ref = document.getElementById("shRef").value.trim();
-  const amt = Number(document.getElementById("shAmt").value);
-  const tx = JSON.parse(localStorage.getItem(LS.TX) || "[]");
-  tx.unshift({
-    date: nowISO(),
-    type: "Provided",
-    ref,
-    amount: amt,
-    status: "Completed",
-  });
-  localStorage.setItem(LS.TX, JSON.stringify(tx));
-  refreshTx();
-  refreshKPIs();
-  bootstrap.Modal.getInstance(document.getElementById("modalSendHelp"))?.hide();
-  e.target.reset();
-  alert("Help sent (demo). Keep receipts.");
+// Upload proof of help sent
+document.getElementById("phUploadProof").addEventListener("click", () => {
+    const file = document.getElementById("phProof").files[0];
+    if (!file) return alert("Please upload proof of payment.");
+
+    alert("Proof submitted to admin ().");
+
+    document.getElementById("phStep3").style.display = "none";
+    document.getElementById("phReceiver").style.display = "block";
 });
+
+// Receiver confirms
+document.getElementById("phConfirmReceived").addEventListener("click", () => {
+    alert("Fund confirmed received (). Transaction completed.");
+    document.getElementById("phReceiver").style.display = "none";
+});
+
 
 // Wallet & Transactions
 function refreshTx() {
@@ -913,7 +813,7 @@ document.getElementById("formProfile").addEventListener("submit", (e) => {
   };
   localStorage.setItem(LS.PROFILE, JSON.stringify(p));
   usernameTop.textContent = p.name || "Friend";
-  alert("Profile saved (demo).");
+  alert("Profile saved ().");
 });
 const kyc = JSON.parse(localStorage.getItem(LS.KYC) || "{}");
 document.getElementById("kycStatus").textContent =
@@ -925,7 +825,7 @@ document.getElementById("formKyc").addEventListener("submit", (e) => {
     JSON.stringify({ status: "Submitted " + nowISO() })
   );
   document.getElementById("kycStatus").textContent = "Submitted " + nowISO();
-  alert("KYC submitted (demo).");
+  alert("KYC submitted ().");
 });
 
 // Preferences & Security
@@ -943,12 +843,12 @@ formPrefs.addEventListener("submit", (e) => {
     lang: prefLang.value,
   };
   localStorage.setItem(LS.PREFS, JSON.stringify(p));
-  alert("Preferences saved (demo).");
+  alert("Preferences saved ().");
 });
 formSecurity.addEventListener("submit", (e) => {
   e.preventDefault();
   if (secNew.value && secNew.value === secNew2.value) {
-    alert("Security updated (demo).");
+    alert("Security updated ().");
     e.target.reset();
   } else {
     alert("Passwords do not match.");
@@ -971,12 +871,13 @@ document.querySelectorAll('[data-bs-toggle="tab"]').forEach((el) => {
   });
 });
 
-/* ===== Add/extend localStorage keys (non-breaking) ===== */
-LS.MOD = LS.MOD || "tpt_modules_v1"; // School modules
-LS.WAL = LS.WAL || "tpt_wallet_v1"; // Demo FEL wallet (separate from TX)
-LS.ACT = LS.ACT || "tpt_activity_v1"; // Lightweight activity log
+/* ===== LocalStorage keys ===== */
+LS.MOD = LS.MOD || "tpt_modules_v2";
+LS.WAL = LS.WAL || "tpt_wallet_v1";
+LS.ACT = LS.ACT || "tpt_activity_v1";
+LS.REF = LS.REF || "tpt_referrals_v1"; // Track student referrals
 
-/* ===== School seed ===== */
+/* ===== Seed School Modules ===== */
 function seedSchool() {
   if (!localStorage.getItem(LS.MOD)) {
     localStorage.setItem(
@@ -984,35 +885,41 @@ function seedSchool() {
       JSON.stringify([
         { id: 1, title: "Community policies", done: false },
         { id: 2, title: "How verification works", done: false },
-        { id: 3, title: "Writing a clear request", done: false },
+        { 
+          id: 3, 
+          title: "Referral Submission Stage", 
+          done: false,
+          desc: "Provide at least 15 referral links, with 10 who have provided help. Complete a quiz after a short lesson before rank upgrade." 
+        },
         { id: 4, title: "Responsible inviting", done: false },
         { id: 5, title: "Privacy & consent", done: false },
-        { id: 6, title: "Receipts & reporting", done: false },
-      ])
-    );
-  }
-  if (!localStorage.getItem(LS.WAL)) {
-    localStorage.setItem(
-      LS.WAL,
-      JSON.stringify([
-        {
-          type: "credit",
-          val: 2000,
-          note: "Welcome bonus (demo)",
-          at: new Date().toISOString(),
+        { 
+          id: 6, 
+          title: "Referral Expansion Stage", 
+          done: false,
+          desc: "Reach at least 100 direct and indirect referrals. Complete quiz after lesson before promotion. Admin upgrades ranks automatically, bonuses rise with rank." 
         },
       ])
     );
   }
-  if (!localStorage.getItem(LS.ACT)) {
+
+  if (!localStorage.getItem(LS.WAL)) {
     localStorage.setItem(
-      LS.ACT,
-      JSON.stringify([{ t: "Opened TPT School", at: new Date().toISOString() }])
+      LS.WAL,
+      JSON.stringify([{ type: "credit", val: 2000, note: "Welcome bonus", at: new Date().toISOString() }])
     );
+  }
+
+  if (!localStorage.getItem(LS.ACT)) {
+    localStorage.setItem(LS.ACT, JSON.stringify([{ t: "Opened TPT School", at: new Date().toISOString() }]));
+  }
+
+  if (!localStorage.getItem(LS.REF)) {
+    localStorage.setItem(LS.REF, JSON.stringify([]));
   }
 }
 
-/* ===== School renderers ===== */
+/* ===== Render Modules ===== */
 function renderModules() {
   const holder = document.getElementById("modules");
   if (!holder) return;
@@ -1025,24 +932,105 @@ function renderModules() {
   mods.forEach((m) => {
     const col = document.createElement("div");
     col.className = "col-12";
+
+    // Custom layout for module 3
+    if (m.id === 3) {
+      const refs = JSON.parse(localStorage.getItem(LS.REF) || "[]");
+      const userRefs = refs.slice(0, 15); // show only first 15
+      col.innerHTML = `
+        <div class="panel p-3 d-flex flex-column gap-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-1">${m.title}</h6>
+            <span class="chip">Module ${m.id}</span>
+          </div>
+          <p class="small muted">${m.desc}</p>
+          <form id="refForm">
+            <label class="small">Add Referral Link:</label>
+            <input type="url" class="form-control mb-1" placeholder="Paste referral link" required>
+            <div class="form-check mb-2">
+              <input class="form-check-input" type="checkbox" id="helpedCheck">
+              <label class="form-check-label">This referral has provided help</label>
+            </div>
+            <button class="btn btn-sm btn-primary mb-2" type="submit">Add Referral</button>
+          </form>
+          <div class="small muted">Referrals added: ${userRefs.length}/15</div>
+          <button class="btn btn-sm btn-success mt-2" ${checkReferralRequirements(3) ? "" : "disabled"} id="quizBtn3">
+            Take Quiz & Complete Module
+          </button>
+        </div>
+      `;
+      holder.appendChild(col);
+
+      // Bind form submit for module 3
+      const form3 = col.querySelector("#refForm");
+      form3?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const link = form3.querySelector("input").value.trim();
+        const helped = form3.querySelector("#helpedCheck").checked;
+        if (!link) return;
+        addReferral(link, helped);
+        form3.reset();
+        renderModules(); // re-render to update count
+      });
+
+      // Quiz button
+      col.querySelector("#quizBtn3")?.addEventListener("click", () => {
+        const modsArr = JSON.parse(localStorage.getItem(LS.MOD) || "[]");
+        const mod = modsArr.find(x => x.id === 3);
+        mod.done = true;
+        localStorage.setItem(LS.MOD, JSON.stringify(modsArr));
+        addActivity("Completed Module 3 after quiz");
+        renderModules();
+      });
+
+      return; // Skip default rendering for module 3
+    }
+
+    // Custom layout for module 6
+    if (m.id === 6) {
+      const refs = JSON.parse(localStorage.getItem(LS.REF) || "[]");
+      const totalRefs = refs.length; // direct + indirect
+      col.innerHTML = `
+        <div class="panel p-3 d-flex flex-column gap-2">
+          <div class="d-flex justify-content-between align-items-center">
+            <h6 class="mb-1">${m.title}</h6>
+            <span class="chip">Module ${m.id}</span>
+          </div>
+          <p class="small muted">${m.desc}</p>
+          <div class="small mb-2">Total referrals: ${totalRefs}/100</div>
+          <button class="btn btn-sm btn-success mt-2" ${checkReferralRequirements(6) ? "" : "disabled"} id="quizBtn6">
+            Take Quiz & Complete Module
+          </button>
+        </div>
+      `;
+      holder.appendChild(col);
+
+      // Quiz button
+      col.querySelector("#quizBtn6")?.addEventListener("click", () => {
+        const modsArr = JSON.parse(localStorage.getItem(LS.MOD) || "[]");
+        const mod = modsArr.find(x => x.id === 6);
+        mod.done = true;
+        localStorage.setItem(LS.MOD, JSON.stringify(modsArr));
+        addActivity("Completed Module 6 after quiz");
+        renderModules();
+      });
+
+      return; // Skip default rendering for module 6
+    }
+
+    // Default rendering for modules 1,2,4,5
     col.innerHTML = `
       <div class="panel p-3 d-flex flex-column gap-2">
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <h6 class="mb-1">${m.title}</h6>
-            <p class="small muted mb-0">Short lesson with a quiz.</p>
+            <p class="small muted mb-0">${m.desc || "Short lesson with a quiz."}</p>
           </div>
           <span class="chip">Module ${m.id}</span>
         </div>
         <div class="d-flex justify-content-end">
-          <button class="btn btn-sm ${m.done ? "" : ""}" style="${
-      m.done ? "" : ""
-    }" data-mod="${m.id}">
-            ${
-              m.done
-                ? "Completed"
-                : '<i class="bi bi-play-circle me-1"></i>Start'
-            }
+          <button class="btn btn-sm ${m.done ? "" : ""}" data-mod="${m.id}">
+            ${m.done ? "Completed" : '<i class="bi bi-play-circle me-1"></i>Start'}
           </button>
         </div>
       </div>`;
@@ -1050,6 +1038,33 @@ function renderModules() {
   });
 }
 
+/* ===== Referral helper ===== */
+function addReferral(link, helped = false) {
+  const refs = JSON.parse(localStorage.getItem(LS.REF) || "[]");
+  refs.push({ link, helped });
+  localStorage.setItem(LS.REF, JSON.stringify(refs));
+}
+
+function checkReferralRequirements(modId) {
+  const refs = JSON.parse(localStorage.getItem(LS.REF) || "[]");
+  if(modId === 3){
+    const helpedCount = refs.filter(r => r.helped).length;
+    return refs.length >= 15 && helpedCount >= 10;
+  }
+  if(modId === 6){
+    return refs.length >= 100; // Direct + indirect
+  }
+  return true;
+}
+
+/* ===== School Activity ===== */
+function addActivity(t) {
+  const arr = JSON.parse(localStorage.getItem(LS.ACT) || "[]");
+  arr.push({ t, at: new Date().toISOString() });
+  localStorage.setItem(LS.ACT, JSON.stringify(arr));
+}
+
+/* ===== Wallet Rendering ===== */
 function renderWallet() {
   const ul = document.getElementById("walletList");
   if (!ul) return;
@@ -1059,49 +1074,21 @@ function renderWallet() {
     .reverse()
     .forEach((w) => {
       const li = document.createElement("li");
-      li.className =
-        "list-group-item bg-transparent text-light d-flex justify-content-between";
-      li.innerHTML = `<span>${w.type === "credit" ? "+" : "-"} FEL ${w.val} — ${
-        w.note || ""
-      }</span>
-                    <span class="small muted">${new Date(
-                      w.at
-                    ).toLocaleDateString()}</span>`;
+      li.className = "list-group-item bg-transparent text-light d-flex justify-content-between";
+      li.innerHTML = `<span>${w.type === "credit" ? "+" : "-"} FEL ${w.val} — ${w.note || ""}</span>
+                      <span class="small muted">${new Date(w.at).toLocaleDateString()}</span>`;
       ul.appendChild(li);
     });
-  const bal = JSON.parse(localStorage.getItem(LS.WAL) || "[]").reduce(
-    (a, x) => a + (x.type === "credit" ? x.val : -x.val),
-    0
-  );
+  const bal = JSON.parse(localStorage.getItem(LS.WAL) || "[]").reduce((a, x) => a + (x.type === "credit" ? x.val : -x.val), 0);
   const wBal = document.getElementById("wBalance");
   if (wBal) wBal.textContent = "FEL " + bal.toLocaleString();
 }
 
-function renderTips() {
-  const tips = [
-    "Complete modules to unlock request guidance.",
-    "Keep captions respectful and concise when uploading videos.",
-    "Never promise returns — donations only.",
-  ];
-  const el = document.getElementById("tips");
-  if (el)
-    el.innerHTML = tips.map((t) => `<div class="mb-1">• ${t}</div>`).join("");
-}
-
-/* ===== Activity helper ===== */
-function addActivity(t) {
-  const arr = JSON.parse(localStorage.getItem(LS.ACT) || "[]");
-  arr.push({ t, at: new Date().toISOString() });
-  localStorage.setItem(LS.ACT, JSON.stringify(arr));
-}
-
-/* ===== Bind School tab behaviors ===== */
+/* ===== Bind School Tab Behaviors ===== */
 function bindSchool() {
-  // Year (shared)
-  const yr = document.getElementById("year");
+  const yr = document.getElementById("polYear");
   if (yr) yr.textContent = new Date().getFullYear();
 
-  // Toggle module completed
   document.getElementById("tab-school")?.addEventListener("click", (e) => {
     const b = e.target.closest("button[data-mod]");
     if (!b) return;
@@ -1109,6 +1096,11 @@ function bindSchool() {
     const mods = JSON.parse(localStorage.getItem(LS.MOD) || "[]");
     const m = mods.find((x) => x.id === id);
     if (!m) return;
+
+    if (!checkReferralRequirements(id)) {
+      return alert("You do not meet the referral requirements for this module yet.");
+    }
+
     m.done = !m.done;
     localStorage.setItem(LS.MOD, JSON.stringify(mods));
     addActivity((m.done ? "Completed: " : "Reopened: ") + m.title);
@@ -1128,57 +1120,44 @@ function bindSchool() {
     f.reset();
   });
 
-  // Wallet demo
+  // Wallet buttons
   document.getElementById("addFeliz")?.addEventListener("click", () => {
     const w = JSON.parse(localStorage.getItem(LS.WAL) || "[]");
-    w.push({
-      type: "credit",
-      val: 500,
-      note: "Demo top-up",
-      at: new Date().toISOString(),
-    });
+    w.push({ type: "credit", val: 500, note: " top-up", at: new Date().toISOString() });
     localStorage.setItem(LS.WAL, JSON.stringify(w));
     renderWallet();
   });
+
   document.getElementById("convertCash")?.addEventListener("click", () => {
     const w = JSON.parse(localStorage.getItem(LS.WAL) || "[]");
-    const bal = w.reduce(
-      (a, x) => a + (x.type === "credit" ? x.val : -x.val),
-      0
-    );
+    const bal = w.reduce((a, x) => a + (x.type === "credit" ? x.val : -x.val), 0);
     if (bal <= 0) return alert("No balance");
-    alert(
-      `Demo convert: FEL ${bal.toLocaleString()} → MX$${bal.toLocaleString()}`
-    );
-    addActivity("Converted FEL to MXN (demo)");
+    alert(`Convert: FEL ${bal.toLocaleString()} → MX$${bal.toLocaleString()}`);
+    addActivity("Converted FEL to MXN");
   });
 }
 
-/* ===== Boot when tab opens and on load ===== */
+/* ===== Boot School ===== */
 function bootSchool() {
   seedSchool();
   renderModules();
   renderWallet();
-  renderTips();
   bindSchool();
 }
 
-// If page loads on School or user navigates to it, ensure render
 bootSchool();
-document
-  .querySelector("#tablink-school")
-  ?.addEventListener("shown.bs.tab", () => {
-    renderModules();
-    renderWallet();
-    renderTips();
-  });
+document.querySelector("#tablink-school")?.addEventListener("shown.bs.tab", () => {
+  renderModules();
+  renderWallet();
+});
 
-// ----- User role switcher & avatar menu (demo) -----
+
+// ----- User role switcher & avatar menu () -----
 (function () {
   const qs = (s, r = document) => r.querySelector(s);
   const qsa = (s, r = document) => [...r.querySelectorAll(s)];
 
-  // ---- State helpers (demo) ----
+  // ---- State helpers () ----
   const state = {
     get user() {
       try {
@@ -1203,7 +1182,7 @@ document
     },
     set authed(v) {
       v
-        ? localStorage.setItem("authToken", "demo-token")
+        ? localStorage.setItem("authToken", "-token")
         : localStorage.removeItem("authToken");
     },
 
@@ -1300,13 +1279,13 @@ document
         return;
       }
 
-      // ---- Approval + (optional) demo password gate ----
+      // ---- Approval + (optional)  password gate ----
       const approved =
         typeof isAdminApproved === "function" ? isAdminApproved(email) : false;
       const demoOk = pass === "12345"; // replace with real API result later
 
       if (!approved && !demoOk) {
-        // Not approved and demo pass not used -> go to Sign-Up
+        // Not approved and  pass not used -> go to Sign-Up
         localStorage.setItem(ADMIN_KEYS.PENDING_EMAIL, email);
         bootstrap.Modal.getInstance(
           document.getElementById("modalAdminLogin")
@@ -1321,7 +1300,7 @@ document
 
       // ✅ Promote to Admin
       localStorage.setItem("isAdmin", "true");
-      localStorage.setItem("authToken", "demo-token");
+      localStorage.setItem("authToken", "-token");
       localStorage.setItem("role", "Admin");
 
       try {
@@ -1364,7 +1343,7 @@ document
     });
 
     qs("#confirmLogout")?.addEventListener("click", () => {
-      // Clear demo auth
+      // Clear  auth
       ["authToken", "isAdmin"].forEach((k) => localStorage.removeItem(k));
       // Keep user profile, but reset role to Member
       state.role = "Member";
@@ -1375,11 +1354,11 @@ document
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    // Seed demo user if none
+    // Seed  user if none
     if (!state.user)
       state.user = { name: "Friend", email: "friend@example.com" };
 
-    // If authed not set, assume authed in dashboard view (demo)
+    // If authed not set, assume authed in dashboard view ()
     if (state.authed === false) state.authed = true;
 
     // ✅ Normalize role on every load/login (authoritative)
@@ -1473,7 +1452,7 @@ $("#forgotForm")?.addEventListener("submit", async (e) => {
   try {
     // TODO: replace with your API call:
     // await fetch('/api/auth/request-reset', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email}) });
-    await new Promise((r) => setTimeout(r, 600)); // demo
+    await new Promise((r) => setTimeout(r, 600)); // 
     show($("#fpAlertSuccess"));
   } catch (err) {
     show($("#fpAlertError"));
@@ -1506,10 +1485,10 @@ $("#resetForm")?.addEventListener("submit", async (e) => {
 
   try {
     const token =
-      new URLSearchParams(location.search).get("token") || "demo-token";
+      new URLSearchParams(location.search).get("token") || "-token";
     // TODO: replace with your API call:
     // await fetch('/api/auth/reset-password', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({token, password:p1}) });
-    await new Promise((r) => setTimeout(r, 650)); // demo
+    await new Promise((r) => setTimeout(r, 650)); // 
     show($("#rpAlertSuccess"));
   } catch (err) {
     show($("#rpAlertError"));
@@ -1835,7 +1814,7 @@ document.getElementById("btnChangePassword")?.addEventListener("click", (e) => {
 })();
 
 (function () {
-  // ====== Support draft + submit (demo) ======
+  // ====== Support draft + submit () ======
   const LS_SUPPORT_TICKETS = "tpt_support_tickets";
   const LS_SUPPORT_DRAFT = "tpt_support_draft";
 
@@ -1943,7 +1922,7 @@ document.getElementById("btnChangePassword")?.addEventListener("click", (e) => {
     } catch {}
   });
 
-  // Submit -> store local "ticket" (demo)
+  // Submit -> store local "ticket" ()
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!form.checkValidity()) {
@@ -1979,7 +1958,7 @@ document.getElementById("btnChangePassword")?.addEventListener("click", (e) => {
     ticketIdEl.textContent = id;
     success.classList.remove("d-none");
 
-    // Optionally, also open the Messages tab and start a thread (demo-friendly)
+    // Optionally, also open the Messages tab and start a thread (-friendly)
     try {
       const MSG = "tpt_demo_messages";
       const list = JSON.parse(localStorage.getItem(MSG) || "[]");
@@ -2069,3 +2048,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 300);
   });
 });
+
+
+
